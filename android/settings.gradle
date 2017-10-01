@@ -1,0 +1,3 @@
+rootProject.name = 'solarNews_App'
+
+include ':app'
