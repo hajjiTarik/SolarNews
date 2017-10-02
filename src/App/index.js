@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  openMenu  from '../store/actions';
+
 import {
   StyleSheet,
   Text,
@@ -11,7 +15,7 @@ import Menu from './components/menu';
 import TopBar from './components/topBar';
 import MainContent from './components/mainContent';
 
-export default class extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
@@ -24,9 +28,7 @@ export default class extends Component {
   }
 
   toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
+    this.props.openMenu(true);
   }
 
   updateMenuState(isOpen) {
@@ -54,3 +56,17 @@ export default class extends Component {
   );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isOpen: state.menuReducer.isOpen,
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    openMenu: bindActionCreators(openMenu, dispatch),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
