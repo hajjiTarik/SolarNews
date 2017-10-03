@@ -9,7 +9,15 @@ export default class extends Component {
   render() {
     return (
       <View style={styles.topBar}>
-        <Text onPress={()=>this.props.toggle()}>toto</Text>
+        <View>
+          <Text style={styles.menuBurger} onPress={()=>this.props.toggle()}>Menu</Text>
+        </View>
+        <View>
+          <Text style={styles.title}>toto</Text>
+        </View>
+        <View>
+
+        </View>
       </View>
     )
   }
@@ -17,8 +25,6 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   topBar: {
-    justifyContent: 'center',
-    alignItems: 'center',
     position: 'absolute',
     top: 0,
     flex: 1,
@@ -29,6 +35,16 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     width: '100%',
-    paddingTop: 10
+    paddingTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  menuBurger: {
+    paddingTop:20,
+    alignItems: 'flex-end',
+  },
+
+  title: {
+    alignItems: 'center',
   }
 });

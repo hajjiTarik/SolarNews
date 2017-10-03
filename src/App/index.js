@@ -1,38 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import  openMenu  from '../store/actions';
-
+import { AppState, Text } from 'react-native';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import SideMenu from 'react-native-side-menu';
+import PushNotification from 'react-native-push-notification';
+
 import Menu from './components/menu';
 import TopBar from './components/topBar';
 import MainContent from './components/mainContent';
+import { PushNotif } from './components/pushNotifications';
+import  openMenu  from '../store/actions';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this._handleAppStateChange = this._handleAppStateChange.bind(this);
 
     this.state = {
       isOpen: false,
-      selectedItem: 'About',
+      appState: AppState.currentState
     };
   }
 
-  toggle() {
-    this.props.openMenu(true);
+  componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange);
   }
 
-  updateMenuState(isOpen) {
-    this.setState({ isOpen });
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  toggle() {
+    this.props.openMenu(this.props.isOpen);
   }
 
   onMenuItemSelected = (item = '') =>
@@ -41,23 +45,37 @@ class App extends Component {
       selectedItem: item,
   });
 
+  _handleAppStateChange = (appState) => {
+    if (appState === 'background') {
+
+      let date = new Date(Date.now() + (6 * 1000));
+
+      PushNotification.localNotificationSchedule({
+        message: "My Notification Message", // (required)
+        date: date // in 60 secs
+      })
+    }
+  }
+
   render() {
     const menu = <Menu onItemSelected={this.onMenuItemSelected} />;
-
     return (
       <SideMenu
         menu={menu}
-        isOpen={this.state.isOpen}
-        onChange={isOpen => this.updateMenuState(isOpen)}
+        isOpen={this.props.isOpen}
+        disableGestures = {true}
       >
+        <StatusBar hidden={true} />
         <TopBar toggle={this.toggle} />
         <MainContent />
+        <PushNotif />
       </SideMenu>
   );
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log(state.menuReducer.isOpen);
   return {
     isOpen: state.menuReducer.isOpen,
   }
