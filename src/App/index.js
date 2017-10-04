@@ -12,7 +12,7 @@ import Menu from './components/menu';
 import TopBar from './components/topBar';
 import MainContent from './components/mainContent';
 import { PushNotif } from './components/pushNotifications';
-import  openMenu  from '../store/actions';
+import { openMenu } from '../store/actions';
 
 class App extends Component {
   constructor(props) {

@@ -3,7 +3,6 @@ export default (state = {
   } , action) => {
   switch (action.type){
     case 'OPEN_MENU' :
-      console.log('tototo', action.isOpen);
       return {
         ...state,
         isOpen: !action.isOpen
