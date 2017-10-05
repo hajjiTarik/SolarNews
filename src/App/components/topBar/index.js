@@ -2,21 +2,25 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Text
+  Text,
+  Image,
+  TouchableHighlight
 } from 'react-native';
 
-import colors from '../../../../../design';
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import colors from '../../../design';
+
 
 export default class extends Component {
   render() {
-    console.log(Icon);
     return (
       <View style={styles.topBar}>
         <View style={styles.leftContainer}>
-          <Text onPress={this.props.toggle()} style={[styles.text, {textAlign: 'left'}]}>
-            {'<'}
-          </Text>
+          <TouchableHighlight onPress={this.props.toggle}>
+            <Image
+              style={{marginTop:3, marginLeft:15, width: 40, height: 40}}
+              source={require('../../../assets/menu-icon.png')}
+            />
+          </TouchableHighlight>
         </View>
         <Text style={styles.text}>
           News

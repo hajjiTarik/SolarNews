@@ -58,7 +58,7 @@ class App extends Component {
   }
 
   render() {
-    const menu = <Menu onItemSelected={this.onMenuItemSelected} />;
+    const menu = <Menu isOpen={this.props.isOpen} onItemSelected={this.onMenuItemSelected} />;
     return (
       <SideMenu
         menu={menu}
@@ -74,12 +74,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state.menuReducer.isOpen);
-  return {
-    isOpen: state.menuReducer.isOpen,
-  }
-}
+const mapStateToProps = (state) => ({
+  isOpen: state.menuReducer.isOpen,
+});
 
 const mapDispatchToProps = (dispatch) =>{
   return {

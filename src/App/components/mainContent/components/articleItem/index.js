@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
-import { View, Image, Text, ListView, StyleSheet } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import colors from '../../../../../design';
-export default class ArticleList extends Component {
+export default class ArticleItem extends Component {
 
   constructor(props) {
     super(props);
-    this.renderArticle = this.renderArticle.bind(this);
   }
-
-  renderArticle() {
-    if(!this.props.articles) return;
-    const result = this.props.articles;
-    return result.map((article, index) =>
-      <View style={styles.article}>
-        <Text style={styles.title}>{article.title}</Text>
-      </View>
-    );
-  }
-
 
   render() {
-    return <View style={styles.articleContainer}>
-      {this.renderArticle()}
-    </View>
+    return (
+      <View style={styles.articleContainer}>
+        <Image
+          source={{uri: this.props.article.image.normal}}
+        />
+        <Text>{this.props.article.title}</Text>
+      </View>
+    )
 
   }
 }

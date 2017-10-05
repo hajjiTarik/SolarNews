@@ -1,43 +1,43 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import colors from '../../../../../design';
-import { RefreshControl, ScrollView, StyleSheet, Text } from 'react-native';
+import colors from '../../../design';
+import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import ArticleItem from './components/articleItem';
 
-import { fetchApi } from '../../../../../store/actions';
+import { fetchApi } from '../../../store/actions';
 
 class MainContent extends Component {
 
   constructor(props) {
     super(props);
-    this.props.fetchApi('echojs', 'popular', '2');
+    this.props.fetchApi('behance', 'popular', '1');
     // local state
     this.state = {
       refreshing: false,
     }
   }
 
+
   _onRefresh() {
-    this.setState({refreshing: true});
-    this.props.fetchApi('echojs', 'latest', '2').then(()=>{
-      this.setState({refreshing: false});
+    this.setState({ refreshing: true });
+    this.props.fetchApi('behance', 'latest', '1').then(() => {
+      this.setState({ refreshing: false });
     });
   }
 
   render() {
     if (!this.props.result) return null;
 
+    console.log(this.props.result);
     return (
-      <ScrollView
-        contentContainerStyle={styles.contentContainer}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh.bind(this)}
-          />
-        }
-      >
-        <Text>{this.props.result[0].title}</Text>
+      <ScrollView style={styles.contentContainer}>
+        <FlatList
+          data={this.props.result}
+          renderItem={({ item }) => (
+            <ArticleItem article={item} />
+          )}
+        />
       </ScrollView>
     )
   }
@@ -45,11 +45,8 @@ class MainContent extends Component {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: colors.backgroundDarkColor,
-  },
+  }
 });
 
 const mapStateToProps = (state) => {

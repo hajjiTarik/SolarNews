@@ -1,4 +1,4 @@
-import { ERROR_API, OPEN_MENU, REQUEST_API, SUCCESS_API } from '../constants';
+import { ERROR_API, OPEN_MENU, REQUEST_API, SUCCESS_API, IS_REFRESHING } from '../constants';
 import request from '../../api';
 
 export const openMenu = (payload) => ({
@@ -21,7 +21,7 @@ export const successApi = result => ({
 export const errorApi = error => ({
   type: ERROR_API,
   error
-})
+});
 
 export const fetchApi = (site, typeOfResult, pageNumber) => {
 
@@ -30,10 +30,8 @@ export const fetchApi = (site, typeOfResult, pageNumber) => {
     dispatch(requestApi(site, typeOfResult, pageNumber));
 
     return request(site, typeOfResult, pageNumber)
-      .then(response => {
-        return response.data;
-      })
+      .then(response => response.data)
       .then(json => dispatch(successApi(json)))
       .catch(err => dispatch(errorApi(err)))
   }
-}
+};

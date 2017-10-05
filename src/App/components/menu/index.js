@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Dimensions,
@@ -8,6 +8,7 @@ import {
   Image,
   Text,
 } from 'react-native';
+import { connect } from 'react-redux';
 
 const window = Dimensions.get('window');
 
@@ -18,21 +19,7 @@ const styles = StyleSheet.create({
     height: window.height,
     backgroundColor: '#f5f5f5',
     padding: 20,
-  },
-  avatarContainer: {
-    marginBottom: 20,
-    marginTop: 20,
-  },
-  avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    flex: 1,
-  },
-  name: {
-    position: 'absolute',
-    left: 70,
-    top: 20,
+    zIndex: 0
   },
   item: {
     fontSize: 14,
@@ -41,47 +28,61 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Menu({ onItemSelected }) {
-  return (
-    <ScrollView scrollsToTop={false} style={styles.menu}>
-      <Text
-        onPress={() => onItemSelected('About')}
-        style={styles.item}
-      >
-        Last News
-      </Text>
+class Menu extends Component {
 
-      <Text
-        onPress={() => onItemSelected('Contacts')}
-        style={styles.item}
-      >
-        Best News
-      </Text>
+  constructor(props) {
+    super(props)
+  }
 
-      <Text
-        onPress={() => onItemSelected('Contacts')}
-        style={styles.item}
-      >
-        Best News
-      </Text>
+  render() {
+    if(!this.props.isOpen) return null;
 
-      <Text
-        onPress={() => onItemSelected('Contacts')}
-        style={styles.item}
-      >
-        Best News
-      </Text>
+    return (
+      <ScrollView scrollsToTop={false} style={styles.menu}>
+        <Text
+          onPress={() => onItemSelected('About')}
+          style={styles.item}
+        >
+          Last News
+        </Text>
 
-      <Text
-        onPress={() => onItemSelected('Contacts')}
-        style={styles.item}
-      >
-        Best News
-      </Text>
-    </ScrollView>
-  );
+        <Text
+          onPress={() => onItemSelected('Contacts')}
+          style={styles.item}
+        >
+          Best News
+        </Text>
+
+        <Text
+          onPress={() => onItemSelected('Contacts')}
+          style={styles.item}
+        >
+          Best News
+        </Text>
+
+        <Text
+          onPress={() => onItemSelected('Contacts')}
+          style={styles.item}
+        >
+          Best News
+        </Text>
+
+        <Text
+          onPress={() => onItemSelected('Contacts')}
+          style={styles.item}
+        >
+          Best News
+        </Text>
+      </ScrollView>);
+  }
 }
 
 Menu.propTypes = {
-  onItemSelected: PropTypes.func.isRequired,
+  onItemSelected: PropTypes.func.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  isOpen: state.menuReducer.isOpen,
+});
+
+export default connect(mapStateToProps, null)(Menu)
