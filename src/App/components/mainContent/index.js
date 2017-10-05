@@ -1,38 +1,54 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {
-  StyleSheet,
-  View,
-  Text
-} from 'react-native';
+import colors from '../../../../../design';
+import { RefreshControl, ScrollView, StyleSheet, Text } from 'react-native';
 
-import { fetchApi } from '../../../store/actions';
+import { fetchApi } from '../../../../../store/actions';
 
 class MainContent extends Component {
 
   constructor(props) {
     super(props);
-    this.props.fetchApi('echojs','popular', '2');
+    this.props.fetchApi('echojs', 'popular', '2');
+    // local state
+    this.state = {
+      refreshing: false,
+    }
+  }
+
+  _onRefresh() {
+    this.setState({refreshing: true});
+    this.props.fetchApi('echojs', 'latest', '2').then(()=>{
+      this.setState({refreshing: false});
+    });
   }
 
   render() {
-    if(!this.props.result) return null;
+    if (!this.props.result) return null;
 
     return (
-      <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />
+        }
+      >
         <Text>{this.props.result[0].title}</Text>
-      </View>
+      </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contentContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8fffa',
+    backgroundColor: colors.backgroundDarkColor,
   },
 });
 
@@ -43,7 +59,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
   return {
     fetchApi: bindActionCreators(fetchApi, dispatch),
   }

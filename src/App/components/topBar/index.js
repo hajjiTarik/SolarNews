@@ -5,18 +5,23 @@ import {
   Text
 } from 'react-native';
 
+import colors from '../../../../../design';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
+
 export default class extends Component {
   render() {
+    console.log(Icon);
     return (
       <View style={styles.topBar}>
-        <View>
-          <Text style={styles.menuBurger} onPress={()=>this.props.toggle()}>Menu</Text>
+        <View style={styles.leftContainer}>
+          <Text onPress={this.props.toggle()} style={[styles.text, {textAlign: 'left'}]}>
+            {'<'}
+          </Text>
         </View>
-        <View>
-          <Text style={styles.title}>toto</Text>
-        </View>
-        <View>
-
+        <Text style={styles.text}>
+          News
+        </Text>
+        <View style={styles.rightContainer}>
         </View>
       </View>
     )
@@ -25,26 +30,36 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   topBar: {
-    position: 'absolute',
-    top: 0,
-    flex: 1,
-    zIndex: 10,
-    alignSelf: 'stretch',
-    backgroundColor: '#fff',
-    height:'10%',
-    right: 0,
-    left: 0,
-    width: '100%',
-    paddingTop: 10,
+    height: 60,
     flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  menuBurger: {
-    paddingTop:20,
-    alignItems: 'flex-end',
-  },
-
-  title: {
+    justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: colors.backgroundDarkColor,
+    shadowOpacity: 0.75,
+    shadowRadius: 3,
+    shadowColor: 'black',
+    shadowOffset: { height: 0, width: 0 },
+    zIndex: 99,
+  },
+  text: {
+    color: colors.backgroundLightColor,
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  leftContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  rightContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  rightIcon: {
+    height: 10,
+    width: 10,
+    backgroundColor: 'white',
   }
 });
