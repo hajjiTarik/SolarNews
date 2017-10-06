@@ -9,6 +9,7 @@ import {
   Text,
 } from 'react-native';
 import { connect } from 'react-redux';
+import colors from '../../../design';
 
 const window = Dimensions.get('window');
 
@@ -17,14 +18,18 @@ const styles = StyleSheet.create({
     flex: 1,
     width: window.width,
     height: window.height,
-    backgroundColor: '#f5f5f5',
-    padding: 20,
-    zIndex: 0
+    backgroundColor: colors.backgroundDarkColor,
+    padding: 10,
+    paddingLeft: 20,
+    zIndex: 0,
   },
   item: {
-    fontSize: 14,
-    fontWeight: '300',
-    paddingTop: 5,
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingTop: 15,
+    color: colors.iconColor,
+    borderBottomColor: colors.iconColor,
+    borderBottomWidth: 1,
   },
 });
 
@@ -35,44 +40,37 @@ class Menu extends Component {
   }
 
   render() {
-    if(!this.props.isOpen) return null;
-
     return (
       <ScrollView scrollsToTop={false} style={styles.menu}>
-        <Text
-          onPress={() => onItemSelected('About')}
-          style={styles.item}
-        >
-          Last News
-        </Text>
+        <View style={{opacity: this.props.isOpen ? 1 : 0}}>
+          <Text
+            onPress={() => onItemSelected('About')}
+            style={styles.item}
+          >
+            Home
+          </Text>
 
-        <Text
-          onPress={() => onItemSelected('Contacts')}
-          style={styles.item}
-        >
-          Best News
-        </Text>
+          <Text
+            onPress={() => onItemSelected('Contacts')}
+            style={styles.item}
+          >
+            Favoris
+          </Text>
 
-        <Text
-          onPress={() => onItemSelected('Contacts')}
-          style={styles.item}
-        >
-          Best News
-        </Text>
+          <Text
+            onPress={() => onItemSelected('Contacts')}
+            style={styles.item}
+          >
+            Settings
+          </Text>
 
-        <Text
-          onPress={() => onItemSelected('Contacts')}
-          style={styles.item}
-        >
-          Best News
-        </Text>
-
-        <Text
-          onPress={() => onItemSelected('Contacts')}
-          style={styles.item}
-        >
-          Best News
-        </Text>
+          <Text
+            onPress={() => onItemSelected('Contacts')}
+            style={styles.item}
+          >
+            About Us
+          </Text>
+        </View>
       </ScrollView>);
   }
 }
@@ -84,5 +82,6 @@ Menu.propTypes = {
 const mapStateToProps = (state) => ({
   isOpen: state.menuReducer.isOpen,
 });
+
 
 export default connect(mapStateToProps, null)(Menu)

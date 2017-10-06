@@ -26,6 +26,9 @@ class MainContent extends Component {
     });
   }
 
+  getMoreArticlesHandler = ()=> {
+  }
+
   render() {
     if (!this.props.result) return null;
 
@@ -37,6 +40,7 @@ class MainContent extends Component {
           renderItem={({ item }) => (
             <ArticleItem article={item} />
           )}
+          onEndReached = {this.getMoreArticlesHandler}
         />
       </ScrollView>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { AppState, Text } from 'react-native';
+import { AppState, Text, StyleSheet } from 'react-native';
 import {
   StatusBar,
 } from 'react-native';
@@ -13,6 +13,7 @@ import TopBar from './components/topBar';
 import MainContent from './components/mainContent';
 import { PushNotif } from './components/pushNotifications';
 import { openMenu } from '../store/actions';
+import colors from '../design';
 
 class App extends Component {
   constructor(props) {
@@ -51,8 +52,8 @@ class App extends Component {
       let date = new Date(Date.now() + (6 * 1000));
 
       PushNotification.localNotificationSchedule({
-        message: "My Notification Message", // (required)
-        date: date // in 60 secs
+        message: "New Article ",
+        date // in 60 secs
       })
     }
   }
@@ -64,6 +65,7 @@ class App extends Component {
         menu={menu}
         isOpen={this.props.isOpen}
         disableGestures = {true}
+        style={styles.app}
       >
         <StatusBar hidden={true} />
         <TopBar toggle={this.toggle} />
@@ -83,5 +85,11 @@ const mapDispatchToProps = (dispatch) =>{
     openMenu: bindActionCreators(openMenu, dispatch),
   }
 }
+
+const styles = StyleSheet.create({
+  app: {
+    backgroundColor: colors.backgroundDarkColor
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
