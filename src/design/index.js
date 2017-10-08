@@ -1,5 +1,5 @@
 export default {
   backgroundDarkColor: '#37363B',
-  backgroundLightColor: '#fdfdfd',
-  iconColor: '#da5b27',
+  backgroundLightColor: '#f9f9f9',
+  iconColor: '#32a1da',
 }

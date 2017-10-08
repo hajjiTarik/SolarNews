@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import colors from '../../../../../design';
 
@@ -17,7 +17,7 @@ export default class ArticleItem extends Component {
             style={styles.icon}
             name='heart'
             type='evilicon'
-            color={colors.iconColor}
+            color={"#ff232f"}
           />
           <Text style={styles.textListArticle}>{this.props.data.likesCount}</Text>
         </View>
@@ -46,7 +46,7 @@ export default class ArticleItem extends Component {
             type='evilicon'
             color={colors.iconColor}
           />
-          <Text style={styles.textListArticle}>Read More</Text>
+          <Text style={styles.textListArticle}>Read Me</Text>
         </View>
       </View>)
   }
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderTopColor: '#F0F0F0',
+    borderTopColor: '#d1d1d1',
     marginTop: 10,
     paddingTop: 10
   },

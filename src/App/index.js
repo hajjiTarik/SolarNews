@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { AppState, Text, StyleSheet } from 'react-native';
-import {
-  StatusBar,
-} from 'react-native';
-import SideMenu from 'react-native-side-menu';
+import { AppState, StatusBar, StyleSheet, TabBarIOS } from 'react-native';
 import PushNotification from 'react-native-push-notification';
-
-import Menu from './components/menu';
-import TopBar from './components/topBar';
-import MainContent from './components/mainContent';
+import Home from './views/Home';
 import { PushNotif } from './components/pushNotifications';
 import { openMenu } from '../store/actions';
-import colors from '../design';
+import icons from '../assets/imageBase64';
+import Profile from './views/Profile';
+import Saved from './views/Saved';
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +19,8 @@ class App extends Component {
 
     this.state = {
       isOpen: false,
-      appState: AppState.currentState
+      appState: AppState.currentState,
+      selectedTab: 'Home'
     };
   }
 
@@ -40,16 +36,10 @@ class App extends Component {
     this.props.openMenu(this.props.isOpen);
   }
 
-  onMenuItemSelected = (item = '') =>
-    this.setState({
-      isOpen: false,
-      selectedItem: item,
-  });
-
   _handleAppStateChange = (appState) => {
     if (appState === 'background') {
 
-      let date = new Date(Date.now() + (6 * 1000));
+      let date = new Date(Date.now() + (6 * 1000 * 60 * 24));
 
       PushNotification.localNotificationSchedule({
         message: "New Article ",
@@ -59,20 +49,51 @@ class App extends Component {
   }
 
   render() {
-    const menu = <Menu isOpen={this.props.isOpen} onItemSelected={this.onMenuItemSelected} />;
     return (
-      <SideMenu
-        menu={menu}
-        isOpen={this.props.isOpen}
-        disableGestures = {true}
-        style={styles.app}
-      >
-        <StatusBar hidden={true} />
-        <TopBar toggle={this.toggle} />
-        <MainContent />
+      <TabBarIOS selectedTab={this.state.selectedTab}>
+        <StatusBar hidden={true}/>
+        <TabBarIOS.Item
+          selected={this.state.selectedTab === 'Home'}
+          title="Home"
+          icon={{uri: icons.homeIcon, scale:9}}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'Home'
+            })
+          }}
+        >
+          <Home />
+        </TabBarIOS.Item>
+
+
+        <TabBarIOS.Item
+          selected={this.state.selectedTab === 'Saved'}
+          title="Saved"
+          icon={{uri: icons.heartIcon, scale:7}}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'Saved'
+            })
+          }}
+        >
+          <Profile />
+        </TabBarIOS.Item>
+
+        <TabBarIOS.Item
+          selected={this.state.selectedTab === 'Profile'}
+          title="Profile"
+          icon={{uri: icons.profileIcon, scale:5}}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'Profile'
+            })
+          }}
+        >
+          <Profile />
+        </TabBarIOS.Item>
         <PushNotif />
-      </SideMenu>
-  );
+      </TabBarIOS>
+    );
   }
 }
 
@@ -80,7 +101,7 @@ const mapStateToProps = (state) => ({
   isOpen: state.menuReducer.isOpen,
 });
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
   return {
     openMenu: bindActionCreators(openMenu, dispatch),
   }
@@ -88,7 +109,7 @@ const mapDispatchToProps = (dispatch) =>{
 
 const styles = StyleSheet.create({
   app: {
-    backgroundColor: colors.backgroundDarkColor
+    backgroundColor: '#FFF'
   },
 });
 

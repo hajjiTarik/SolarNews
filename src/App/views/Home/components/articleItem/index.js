@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { Icon } from 'react-native-elements';
 
 import colors from '../../../../../design';
 import SubListArticle from '../subListArticle';
@@ -14,7 +13,7 @@ export default class ArticleItem extends Component {
     return (
       <View style={styles.articleContainer}>
         <View style={styles.header}>
-          <Text style={styles.headerContent}>{this.props.article.source.name}</Text>
+          <Text>{this.props.article.source.name}</Text>
         </View>
         <Image
           resizeMode='cover'
@@ -23,7 +22,7 @@ export default class ArticleItem extends Component {
         />
         <View style={styles.description}>
           <Text style={styles.descriptionTitle}>{this.props.article.title}</Text>
-          <SubListArticle data={this.props.article.source} />
+          <SubListArticle data={this.props.article.source}/>
         </View>
       </View>
     )
@@ -32,18 +31,19 @@ export default class ArticleItem extends Component {
 }
 
 const styles = StyleSheet.create({
+  articleContainer: {
+    margin: 5,
+    backgroundColor: '#fff',
+    padding: 5,
+    borderBottomWidth: 3,
+    borderBottomColor: colors.iconColor,
+  },
   header: {
     paddingTop: 10,
     paddingBottom: 10,
     marginBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-  },
-  articleContainer: {
-    margin: 5,
-    backgroundColor: colors.backgroundLightColor,
-    padding: 5,
-    borderRadius: 4
+    borderBottomColor: '#d1d1d1',
   },
   article: {
     flex: 1,

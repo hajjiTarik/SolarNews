@@ -2,45 +2,42 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import colors from '../../../design';
-import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet } from 'react-native';
 import ArticleItem from './components/articleItem';
 
 import { fetchApi } from '../../../store/actions';
 
-class MainContent extends Component {
+class Home extends Component {
 
   constructor(props) {
     super(props);
-    this.props.fetchApi('behance', 'popular', '1');
-    // local state
     this.state = {
       refreshing: false,
+      siteSource: 'behance',
+      type: 'popular',
+      page: 1,
     }
+    this.props.fetchApi(this.state.siteSource, this.state.type, this.state.page);
   }
 
 
   _onRefresh() {
     this.setState({ refreshing: true });
-    this.props.fetchApi('behance', 'latest', '1').then(() => {
+    this.props.fetchApi(this.state.siteSource, this.state.type, this.state.page).then(() => {
       this.setState({ refreshing: false });
     });
-  }
-
-  getMoreArticlesHandler = ()=> {
   }
 
   render() {
     if (!this.props.result) return null;
 
-    console.log(this.props.result);
     return (
       <ScrollView style={styles.contentContainer}>
         <FlatList
           data={this.props.result}
           renderItem={({ item }) => (
-            <ArticleItem article={item} />
+            <ArticleItem article={item}/>
           )}
-          onEndReached = {this.getMoreArticlesHandler}
         />
       </ScrollView>
     )
@@ -49,7 +46,7 @@ class MainContent extends Component {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    backgroundColor: colors.backgroundDarkColor,
+    backgroundColor: '#fff',
   }
 });
 
@@ -66,4 +63,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
