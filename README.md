@@ -1,7 +1,7 @@
 # SolarNews
 🐙 React-native news app for developper
 
-:clock0420:
+:clock4: 🚀 
 ### - Add WebView
 ### - Add Navigator
 ### - Page Profile
