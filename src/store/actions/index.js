@@ -1,11 +1,6 @@
 import { ERROR_API, OPEN_MENU, REQUEST_API, SUCCESS_API, IS_REFRESHING } from '../constants';
 import request from '../../api';
 
-export const openMenu = (payload) => ({
-  type: OPEN_MENU,
-  isOpen: payload
-});
-
 export const requestApi = (site, typeOfResult, pageNumber) => ({
   type: REQUEST_API,
   site,

@@ -39,15 +39,6 @@ export default class ArticleItem extends Component {
           />
           <Text style={styles.textListArticle}>{this.props.data.viewsCount}</Text>
         </View>
-        <View style={styles.iconContainer}>
-          <Icon
-            style={styles.icon}
-            name='link'
-            type='evilicon'
-            color={colors.iconColor}
-          />
-          <Text style={styles.textListArticle}>Read Me</Text>
-        </View>
       </View>)
   }
 }

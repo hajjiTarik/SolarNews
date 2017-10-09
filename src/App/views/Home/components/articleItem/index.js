@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import colors from '../../../../../design';
 import SubListArticle from '../subListArticle';
@@ -7,23 +7,26 @@ export default class ArticleItem extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
   }
 
   render() {
     return (
       <View style={styles.articleContainer}>
-        <View style={styles.header}>
-          <Text>{this.props.article.source.name}</Text>
-        </View>
-        <Image
-          resizeMode='cover'
-          style={{ height: 120 }}
-          source={{ uri: this.props.article.image.normal }}
-        />
-        <View style={styles.description}>
-          <Text style={styles.descriptionTitle}>{this.props.article.title}</Text>
-          <SubListArticle data={this.props.article.source}/>
-        </View>
+        <TouchableOpacity onPress={this.props.onReadMore}>
+          <View style={styles.header}>
+            <Text>{this.props.article.source.name}</Text>
+          </View>
+          <Image
+            resizeMode='cover'
+            style={{ height: 120 }}
+            source={{ uri: this.props.article.image.normal }}
+          />
+          <View style={styles.description}>
+            <Text style={styles.descriptionTitle}>{this.props.article.title}</Text>
+            <SubListArticle data={this.props.article.source}/>
+          </View>
+        </TouchableOpacity>
       </View>
     )
 

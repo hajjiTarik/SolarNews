@@ -18,6 +18,7 @@ class Home extends Component {
       page: 1,
     }
     this.props.fetchApi(this.state.siteSource, this.state.type, this.state.page);
+    this.onReadMore = this.onReadMore.bind(this);
   }
 
 
@@ -28,6 +29,10 @@ class Home extends Component {
     });
   }
 
+  onReadMore(item){
+    this.props.navigation.navigate('ArticleDetails', item);
+  }
+
   render() {
     if (!this.props.result) return null;
 
@@ -36,7 +41,7 @@ class Home extends Component {
         <FlatList
           data={this.props.result}
           renderItem={({ item }) => (
-            <ArticleItem article={item}/>
+            <ArticleItem onReadMore={()=>this.onReadMore(item)} article={item}/>
           )}
         />
       </ScrollView>
