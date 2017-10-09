@@ -43,4 +43,10 @@ export const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name="user" type="font-awesome" size={26} color={tintColor} />
     },
   },
-});
+},{
+  tabBarOptions: {
+    style: {
+      backgroundColor: '#FFF',
+    },
+  },
+},);
