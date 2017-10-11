@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { WebView, ActivityIndicator, View } from 'react-native';
+import { WebView,Text, ActivityIndicator, View } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 
@@ -26,18 +26,22 @@ class ArticleDetails extends Component {
       source
     } = this.props.navigation.state.params;
     return (
-      <View style={{backgroundColor: '#000', flex:1}}>
-        <WebView
-          source={{uri: source.targetUrl}}
-          onLoadStart={() => (this.showSpinner())}
-          onLoad={() => (this.hideSpinner())}
-        />
-        <Spinner
-          visible={this.state.visible}
-          textContent={'Loading...'}
-          textStyle={{ color: '#000' }}
-        />
-      </View>
+      <view>
+        <View><Text>Holo</Text></View>
+        <View style={{backgroundColor: '#000', flex:1}}>
+          <WebView
+            source={{uri: source.targetUrl}}
+            onLoadStart={() => (this.showSpinner())}
+            onLoad={() => (this.hideSpinner())}
+          />
+          <Spinner
+            visible={this.state.visible}
+            textContent={'Loading...'}
+            textStyle={{ color: '#000' }}
+          />
+        </View>
+      </view>
+
 
     )
   }
