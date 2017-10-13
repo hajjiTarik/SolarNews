@@ -2,8 +2,8 @@
 🐙 React-native news app for developper
 
 :clock4: 🚀 
-### - Add WebView
-### - Add Navigator
+### - ✅ Add WebView
+### - ✅ Add Navigator
 ### - Page Profile
 ### - Page Saved
 ### - Modify API
