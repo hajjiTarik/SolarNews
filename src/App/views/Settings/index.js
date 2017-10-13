@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
+import { List, ListItem } from 'react-native-elements';
 
-class Profile extends Component {
+class Settings extends Component {
 
   constructor(props){
     super(props);
@@ -17,4 +18,4 @@ class Profile extends Component {
   }
 }
 
-export default connect()(Profile);
+export default connect()(Settings);

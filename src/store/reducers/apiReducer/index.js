@@ -1,11 +1,13 @@
-import { ERROR_API, REQUEST_API, SUCCESS_API } from '../../constants';
-
+import { ERROR_API, REQUEST_API, SET_TYPE, SUCCESS_API } from '../../constants';
 
 export default (state = {
-                  isFetching: false
+                  isFetching: false,
+                  type: 'popular',
+                  currentSite: 'behance',
+                  nbArticles: 10
                 }, action) => {
   switch (action.type) {
-    case REQUEST_API :
+    case [REQUEST_API, SET_TYPE] :
       return {
         ...state,
         isFetching: true
@@ -16,6 +18,11 @@ export default (state = {
         result: action.result,
         isFetching: false
       };
+    case SET_TYPE :
+      return {
+        ...state,
+        type: action.articleType
+      }
     case ERROR_API :
       return {
         ...state,

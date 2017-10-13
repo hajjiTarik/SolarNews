@@ -1,4 +1,4 @@
-import { ERROR_API, OPEN_MENU, REQUEST_API, SUCCESS_API, IS_REFRESHING } from '../constants';
+import { ERROR_API, SET_TYPE, REQUEST_API, SUCCESS_API, IS_REFRESHING } from '../constants';
 import request from '../../api';
 
 export const requestApi = (site, typeOfResult, pageNumber) => ({
@@ -18,6 +18,11 @@ export const errorApi = error => ({
   error
 });
 
+export const setType = articleType => ({
+  type: SET_TYPE,
+  articleType
+});
+
 export const fetchApi = (site, typeOfResult, pageNumber) => {
 
   return dispatch => {
@@ -25,8 +30,12 @@ export const fetchApi = (site, typeOfResult, pageNumber) => {
     dispatch(requestApi(site, typeOfResult, pageNumber));
 
     return request(site, typeOfResult, pageNumber)
-      .then(response => response.data)
-      .then(json => dispatch(successApi(json)))
-      .catch(err => dispatch(errorApi(err)))
+      .then(response => {
+        return response.data;
+      })
+      .then(json => {
+        dispatch(successApi(json));
+        dispatch(setType(typeOfResult));
+      })
   }
 };
