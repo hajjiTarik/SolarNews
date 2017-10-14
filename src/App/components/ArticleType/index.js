@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { fetchApi, setType } from '../../../store/actions';
-import config from '../../../api/config/apiConfig';
+import config from '../../../config/apiConfig';
 import colors from '../../../design';
 
 export class Type extends Component {
@@ -17,10 +17,10 @@ export class Type extends Component {
   handleChangeType() {
     if (this.props.type === config.typeOfResult.latest) {
       this.props.setType(config.typeOfResult.popular);
-      this.props.fetchApi(this.props.currentSite, config.typeOfResult.popular, this.props.nbArticles);
+      this.props.fetchApi(this.props.siteSource, config.typeOfResult.popular, this.props.page);
     } else {
       this.props.setType(config.typeOfResult.latest);
-      this.props.fetchApi(this.props.currentSite, config.typeOfResult.latest, this.props.nbArticles);
+      this.props.fetchApi(this.props.siteSource, config.typeOfResult.latest, this.props.page);
     }
   }
 
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     type: state.apiReducer.type,
-    currentSite: state.apiReducer.currentSite,
-    nbArticles: state.apiReducer.nbArticles
+    siteSource: state.apiReducer.siteSource,
+    page: state.apiReducer.page
   }
 }
 

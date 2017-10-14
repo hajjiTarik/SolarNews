@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ActivityIndicator, Alert, FlatList, StyleSheet, View } from 'react-native';
-import ArticleItem from './components/articleItem';
+import ArticleItem from './../../components/ArticleItem';
 
 import { fetchApi } from '../../../store/actions';
 
@@ -12,10 +12,8 @@ class Home extends Component {
     super(props);
     this.state = {
       refreshing: false,
-      siteSource: 'behance',
-      page: 1,
-    }
-    this.props.fetchApi(this.state.siteSource, this.props.type, this.state.page);
+    };
+    this.props.fetchApi(this.props.siteSource, this.props.type, this.props.page);
     this.onReadMore = this.onReadMore.bind(this);
   }
 
@@ -26,7 +24,7 @@ class Home extends Component {
         refreshing: true
       },
       () => {
-        this.props.fetchApi(this.state.siteSource, this.props.type, this.state.page).then(() => {
+        this.props.fetchApi(this.props.siteSource, this.props.type, this.props.page).then(() => {
           this.setState({ refreshing: false });
         }).catch((e) => {
           Alert.alert("Error when fetshing");
@@ -77,7 +75,9 @@ const mapStateToProps = (state) => {
   return {
     result: state.apiReducer.result,
     isFetching: state.apiReducer.isFetching,
-    type: state.apiReducer.type
+    type: state.apiReducer.type,
+    siteSource: state.apiReducer.siteSource,
+    page: state.apiReducer.page,
   }
 }
 

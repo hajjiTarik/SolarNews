@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { WebView,StyleSheet, ActivityIndicator, View } from 'react-native';
+import { WebView,StyleSheet,Dimensions, ActivityIndicator, View } from 'react-native';
 
 
 class ArticleDetails extends Component {
@@ -11,12 +11,10 @@ class ArticleDetails extends Component {
   }
 
   showSpinner() {
-    console.log('Show Spinner');
     this.setState({ visible: true });
   }
 
   hideSpinner() {
-    console.log('Hide Spinner');
     this.setState({ visible: false });
   }
 
@@ -24,6 +22,7 @@ class ArticleDetails extends Component {
     const {
       source
     } = this.props.navigation.state.params;
+
     return (
         <View style={{backgroundColor: '#000', flex:1}}>
           <WebView
@@ -32,7 +31,7 @@ class ArticleDetails extends Component {
             onLoad={() => (this.hideSpinner())}
           />
 
-          <ActivityIndicator style={styles.loader} animating={this.props.isFetching}/>
+          <ActivityIndicator style={styles.loader} animating={this.state.visible}/>
         </View>
     )
   }
@@ -40,7 +39,12 @@ class ArticleDetails extends Component {
 
 const styles = StyleSheet.create({
   loader: {
-    flex: 1
+    width: 60,
+    height: 60,
+    position: 'absolute',
+    top: 50,
+    left: 150,
+    zIndex: 999,
   }
 });
 
