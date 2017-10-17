@@ -29,6 +29,7 @@ export default (state = {
         ...state,
         error: action.error,
         isFetching: true
+
       };
     default :
       return state;
