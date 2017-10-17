@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { fetchApi, setType } from '../../../store/actions';
 import config from '../../../config/apiConfig';
-import colors from '../../../design';
 
 export class Type extends Component {
 
@@ -26,17 +25,18 @@ export class Type extends Component {
 
   render() {
     return (
-      <Text style={styles.activeType} onPress={this.handleChangeType}>{this.props.type}</Text>
+      <View>
+        <Text style={styles.activeType} onPress={this.handleChangeType}>{this.props.type}</Text>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   activeType: {
-    color: colors.iconColor,
+    color: '#fff',
     fontWeight: 'bold',
     padding: 10,
-    backgroundColor: '#fff'
   }
 });
 

@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import colors from '../../../design';
 import SubListArticle from './components/subListArticle';
+
 export default class ArticleItem extends Component {
 
   constructor(props) {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     margin: 5,
     backgroundColor: '#fff',
     padding: 5,
-    borderBottomWidth: 3,
+    borderBottomWidth: 1,
     borderBottomColor: colors.iconColor,
   },
   header: {
@@ -53,7 +54,6 @@ const styles = StyleSheet.create({
     margin: 10
   },
   descriptionTitle: {
-    color: colors.backgroundDarkColor,
     fontSize: 15,
     fontWeight: 'bold'
   },

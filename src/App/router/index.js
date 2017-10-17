@@ -16,9 +16,11 @@ export const HomeStack = StackNavigator({
     screen: Home,
     navigationOptions:() => ({
       title: 'Home',
+      headerTintColor: '#fff',
       headerRight: <ArticleType />,
       headerStyle: {
-        backgroundColor: '#fff'
+        backgroundColor: colors.iconColor,
+        borderBottomWidth: 0,
       },
     }),
   },
@@ -26,16 +28,18 @@ export const HomeStack = StackNavigator({
     screen: ArticleDetails,
     navigationOptions:({ navigation }) => ({
       title: 'Details',
+      headerTintColor: '#fff',
       headerRight: <AddToFav params={navigation} />,
       headerStyle: {
-        backgroundColor: '#fff'
+        backgroundColor: colors.iconColor,
+        borderBottomWidth: 0,
       },
     }),
   },
 },{
   stackBarOptions: {
     style: {
-      backgroundColor: '#FFF',
+      backgroundColor: colors.iconColor,
     },
   }
 });
@@ -48,8 +52,10 @@ export const SavedStack = StackNavigator({
       console.log(navigation);
       return {
         title: 'Saved Articles',
+        headerTintColor: '#fff',
         headerStyle: {
-          backgroundColor: '#fff'
+          backgroundColor: colors.iconColor,
+          borderBottomWidth: 0,
         },
       }
     },
@@ -97,7 +103,7 @@ export const Tabs = TabNavigator({
   },
 }, {
   tabBarOptions: {
-    activeTintColor: colors.iconColor,
+    activeTintColor: colors.clearColor,
     style: {
       backgroundColor: '#FFF',
     },

@@ -29,7 +29,6 @@ export const setInCache = result => ({
 });
 
 export const fetchApi = (site, typeOfResult, pageNumber) => {
-
   return dispatch => {
 
     dispatch(requestApi(site, typeOfResult, pageNumber));
@@ -41,6 +40,9 @@ export const fetchApi = (site, typeOfResult, pageNumber) => {
       .then(json => {
         dispatch(successApi(json));
         dispatch(setType(typeOfResult));
+      })
+      .catch(e =>{
+        alert(e);
       })
   }
 };

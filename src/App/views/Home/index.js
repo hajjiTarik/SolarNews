@@ -17,6 +17,9 @@ class Home extends Component {
     this.onReadMore = this.onReadMore.bind(this);
   }
 
+  componentDidMount(){
+    this.props.fetchApi(this.props.siteSource, this.props.type, this.props.page);
+  }
 
   _onRefresh() {
     this.setState(

@@ -11,6 +11,9 @@ class AddToFav extends Component {
   constructor(props) {
     super(props);
     this.addToFavHandler = this.addToFavHandler.bind(this);
+    this.state = {
+      logoType: 'heart-o'
+    }
   }
 
   async addToFavHandler() {
@@ -20,7 +23,9 @@ class AddToFav extends Component {
       result.unshift(this.props.params.state.params);
       await AsyncStorage.setItem(appConstants.ARTICLE_STORAGE, JSON.stringify(result));
       this.props.setInCache(result);
-      alert('success');
+      this.setState({
+        logoType: 'font-awesome'
+      })
     } catch (error) {
       alert(error);
     }
@@ -29,9 +34,9 @@ class AddToFav extends Component {
   render() {
     return (
       <Icon onPress={this.addToFavHandler}
-            name='heart'
-            type='evilicon'
-            color={"#ff232f"}
+            name={this.state.logoType}
+            type= 'font-awesome'
+            color={"#fff"}
             size={33}
             style={styles.favIcon}
       />
@@ -43,10 +48,10 @@ const styles = StyleSheet.create({
   favIcon: {
     paddingRight: 10
   }
-})
+});
 
 const mapDispatchToProps = disptach => ({
   setInCache: bindActionCreators(setInCache, disptach)
-})
+});
 
 export default connect(null, mapDispatchToProps)(AddToFav);

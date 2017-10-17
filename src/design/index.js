@@ -1,3 +1,4 @@
 export default {
-  iconColor: '#5b9bda',
+  iconColor: '#4267b2',
+  clearColor: '#3a96d1',
 }
