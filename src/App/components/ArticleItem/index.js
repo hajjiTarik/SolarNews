@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import colors from '../../../../../design';
-import SubListArticle from '../subListArticle';
+import colors from '../../../design';
+import SubListArticle from './components/subListArticle';
+
 export default class ArticleItem extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
   render() {
@@ -15,7 +15,7 @@ export default class ArticleItem extends Component {
       <View style={styles.articleContainer}>
         <TouchableOpacity onPress={this.props.onReadMore}>
           <View style={styles.header}>
-            <Text>{this.props.article.source.name}</Text>
+            <Text style={styles.source}>{this.props.article.source.name}</Text>
           </View>
           <Image
             resizeMode='cover'
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     margin: 5,
     backgroundColor: '#fff',
     padding: 5,
-    borderBottomWidth: 3,
+    borderBottomWidth: 1,
     borderBottomColor: colors.iconColor,
   },
   header: {
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     margin: 10
   },
   descriptionTitle: {
-    color: colors.backgroundDarkColor,
     fontSize: 15,
     fontWeight: 'bold'
   },
@@ -75,5 +74,10 @@ const styles = StyleSheet.create({
   textListArticle: {
     color: colors.iconColor,
     paddingLeft: 5
+  },
+  source: {
+    fontStyle: 'italic',
+    color: '#595959',
+    fontSize: 12
   }
 });

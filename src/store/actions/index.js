@@ -1,5 +1,5 @@
-import { ERROR_API, SET_TYPE, REQUEST_API, SUCCESS_API, IS_REFRESHING } from '../constants';
-import request from '../../api';
+import { ERROR_API, SET_TYPE, REQUEST_API, SUCCESS_API, SET_IN_CACHE } from '../constants';
+import request from '../../config/api';
 
 export const requestApi = (site, typeOfResult, pageNumber) => ({
   type: REQUEST_API,
@@ -23,8 +23,12 @@ export const setType = articleType => ({
   articleType
 });
 
-export const fetchApi = (site, typeOfResult, pageNumber) => {
+export const setInCache = result => ({
+  type: SET_IN_CACHE,
+  result
+});
 
+export const fetchApi = (site, typeOfResult, pageNumber) => {
   return dispatch => {
 
     dispatch(requestApi(site, typeOfResult, pageNumber));
@@ -36,6 +40,9 @@ export const fetchApi = (site, typeOfResult, pageNumber) => {
       .then(json => {
         dispatch(successApi(json));
         dispatch(setType(typeOfResult));
+      })
+      .catch(e =>{
+        alert(e);
       })
   }
 };
