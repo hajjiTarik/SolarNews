@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { AsyncStorage, StyleSheet } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { isInCache, removeOneItemFromStorage, setInStorage } from '../../utils/cacheManager';
 import appConstants from '../../../config/appConstants';
 import { setInCache } from '../../../store/actions';
 
@@ -13,54 +14,37 @@ class AddToFav extends Component {
     this.addToFavHandler = this.addToFavHandler.bind(this);
 
     this.state = {
-      logoType: 'evilicon',
+      logoType: 'heart-o',
       isSaved: false
     }
     this.checkIfAleardySaved();
   }
 
   async checkIfAleardySaved() {
-    const currentArticle = this.props.params.state.params;
-    const res = await AsyncStorage.getItem(appConstants.ARTICLE_STORAGE);
-    let result = res ? JSON.parse(res) : [];
-
-    const savedArticle = result.find(article => {
-      return article._id === currentArticle._id;
-    });
+    const savedArticle = await isInCache(appConstants.ARTICLE_STORAGE, this.props.params.state.params, '_id');
 
     console.log(savedArticle);
 
-    this.setState(()=>({
+    this.setState(() => ({
       savedArticle: savedArticle,
-      logoType: !!savedArticle ? 'font-awesome' : 'evilicon',
-      result
+      logoType: savedArticle.length ? 'heart' : 'heart-o',
     }));
+
   }
 
   async addToFavHandler() {
-    const res = await AsyncStorage.getItem(appConstants.ARTICLE_STORAGE);
-    let result = res ? JSON.parse(res) : [];
     const currentArticle = this.props.params.state.params;
-
-
+    const savedArticle = await isInCache(appConstants.ARTICLE_STORAGE, this.props.params.state.params, '_id');
+    let newCache = [];
     try {
-      if(!this.state.savedArticle) {
-        let newResult = result;
-        newResult.unshift(currentArticle);
-        await AsyncStorage.setItem(appConstants.ARTICLE_STORAGE, JSON.stringify(newResult));
-        this.props.setInCache(newResult);
-
-      }else{
-        let newResult = result.filter(article =>{
-          return article._id !== currentArticle._id;
-        });
-
-        await AsyncStorage.setItem(appConstants.ARTICLE_STORAGE, JSON.stringify(newResult));
-
-        this.props.setInCache(newResult);
-
+      if (!savedArticle.length) {
+        newCache = await setInStorage(appConstants.ARTICLE_STORAGE, currentArticle, '_id');
+      } else {
+        newCache = await removeOneItemFromStorage(appConstants.ARTICLE_STORAGE, currentArticle, '_id');
       }
-      this.checkIfAleardySaved();
+
+      this.props.setInCache(newCache);
+      await this.checkIfAleardySaved();
 
     } catch (error) {
       alert(error);
@@ -69,13 +53,16 @@ class AddToFav extends Component {
 
   render() {
     return (
-      <Icon onPress={this.addToFavHandler}
-            name={'heart'}
-            type= {this.state.logoType}
-            color={"#fff"}
-            size={33}
-            style={styles.favIcon}
-      />
+      <View>
+        <TouchableWithoutFeedback onPress={this.addToFavHandler}>
+          <Icon name={this.state.logoType}
+                type='font-awesome'
+                color={"#fff"}
+                size={25}
+                style={styles.favIcon}
+          />
+        </TouchableWithoutFeedback>
+      </View>
     )
   }
 }

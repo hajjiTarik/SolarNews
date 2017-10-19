@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AsyncStorage, FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 
 import ArchivedArticleItem from '../../components/ArchivedArticleItem';
 import appConstants from '../../../config/appConstants';
 import { setInCache } from '../../../store/actions';
+import { getFromStorage, removeDataFromStorage } from '../../utils/cacheManager';
 
 class Saved extends Component {
 
@@ -14,8 +15,10 @@ class Saved extends Component {
     super(props);
     this.onReadMore = this.onReadMore.bind(this);
     this.getArticleFromCache = this.getArticleFromCache.bind(this);
+    this.removeAllArticlesHandler = this.removeAllArticlesHandler.bind(this);
     this.state = {
-      articles : this.props.articlesFromLocalStore
+      articles: this.props.articlesFromLocalStore,
+      refreshing: false,
     }
   }
 
@@ -29,36 +32,40 @@ class Saved extends Component {
 
   async getArticleFromCache() {
     try {
-      const res = await AsyncStorage.getItem(appConstants.ARTICLE_STORAGE);
-      let result = res ? JSON.parse(res) : [];
-      this.props.setInCache(result);
+      const res = await getFromStorage(appConstants.ARTICLE_STORAGE);
+      this.props.setInCache(res);
 
       this.setState({
-        articles: result
+        articles: res
       });
     } catch (error) {
       alert(error);
     }
   }
 
-  setSearchText(text){
+  setSearchText(text) {
     let result = this.state.articles;
-    if(text){
+    if (text) {
       let filtredResult = result.filter((article) => {
         return article.title.toLowerCase().includes(text.toLowerCase());
       });
 
-      if( filtredResult.length ) {
+      if (filtredResult.length) {
         this.setState({
           articles: filtredResult
         });
       }
     } else {
 
-      this.setState(()=> ({
+      this.setState(() => ({
         articles: this.props.articlesFromLocalStore
       }));
     }
+  }
+
+  async removeAllArticlesHandler() {
+    await removeDataFromStorage(appConstants.ARTICLE_STORAGE);
+    await this.getArticleFromCache();
   }
 
   render() {
@@ -68,14 +75,18 @@ class Saved extends Component {
           <SearchBar
             lightTheme
             onChangeText={this.setSearchText.bind(this)}
-            placeholder='Search...' />
+            placeholder='Search...'/>
         </View>
-
+        <View>
+          <Text onPress={() => this.removeAllArticlesHandler()}>Remove All</Text>
+        </View>
         <FlatList
           data={this.state.articles}
           renderItem={({ item }) => {
             return <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
           }}
+          refreshing={this.state.refreshing}
+          onRefresh={() => this.getArticleFromCache()}
         />
       </View>
     )
