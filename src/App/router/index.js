@@ -48,8 +48,7 @@ export const HomeStack = StackNavigator({
 export const SavedStack = StackNavigator({
   Saved: {
     screen: Saved,
-    navigationOptions:(navigation) => {
-      console.log(navigation);
+    navigationOptions:() => {
       return {
         title: 'Saved Articles',
         headerTintColor: '#fff',
@@ -64,8 +63,11 @@ export const SavedStack = StackNavigator({
     screen: ArticleDetails,
     navigationOptions:({ navigation }) => ({
       title: 'Details',
+      headerTintColor: '#fff',
+      headerRight: <AddToFav params={navigation} />,
       headerStyle: {
-        backgroundColor: '#fff'
+        backgroundColor: colors.iconColor,
+        borderBottomWidth: 0,
       },
     }),
   },
