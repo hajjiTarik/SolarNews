@@ -14,6 +14,7 @@ export default class extends Component {
         <View style={styles.description}>
           <Text style={styles.source}>{this.props.article.source.name} {this.props.index}</Text>
           <Text style={styles.descriptionTitle}>{this.props.article.title}</Text>
+          <Text style={styles.authorName}>{this.props.article.source.authorName}</Text>
         </View>
         <View style={{padding: 10}}>
           <Image
@@ -52,5 +53,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     marginBottom: 10,
+  },
+  authorName: {
+    fontStyle: 'italic',
+    fontSize: 11
   }
 });

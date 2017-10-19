@@ -67,7 +67,6 @@ class Saved extends Component {
         <View style={styles.savedSubMenu}>
           <SearchBar
             lightTheme
-            round
             onChangeText={this.setSearchText.bind(this)}
             placeholder='Search...' />
         </View>

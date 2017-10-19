@@ -11,21 +11,57 @@ class AddToFav extends Component {
   constructor(props) {
     super(props);
     this.addToFavHandler = this.addToFavHandler.bind(this);
+
     this.state = {
-      logoType: 'heart-o'
+      logoType: 'evilicon',
+      isSaved: false
     }
+    this.checkIfAleardySaved();
+  }
+
+  async checkIfAleardySaved() {
+    const currentArticle = this.props.params.state.params;
+    const res = await AsyncStorage.getItem(appConstants.ARTICLE_STORAGE);
+    let result = res ? JSON.parse(res) : [];
+
+    const savedArticle = result.find(article => {
+      return article._id === currentArticle._id;
+    });
+
+    console.log(savedArticle);
+
+    this.setState(()=>({
+      savedArticle: savedArticle,
+      logoType: !!savedArticle ? 'font-awesome' : 'evilicon',
+      result
+    }));
   }
 
   async addToFavHandler() {
+    const res = await AsyncStorage.getItem(appConstants.ARTICLE_STORAGE);
+    let result = res ? JSON.parse(res) : [];
+    const currentArticle = this.props.params.state.params;
+
+
     try {
-      const res = await AsyncStorage.getItem(appConstants.ARTICLE_STORAGE);
-      let result = res ? JSON.parse(res) : [];
-      result.unshift(this.props.params.state.params);
-      await AsyncStorage.setItem(appConstants.ARTICLE_STORAGE, JSON.stringify(result));
-      this.props.setInCache(result);
-      this.setState({
-        logoType: 'font-awesome'
-      })
+      if(!this.state.savedArticle) {
+        let newResult = result;
+        newResult.unshift(currentArticle);
+        await AsyncStorage.setItem(appConstants.ARTICLE_STORAGE, JSON.stringify(newResult));
+        this.props.setInCache(newResult);
+
+      }else{
+        let newResult = result.filter(article =>{
+          return article._id !== currentArticle._id;
+        });
+
+        await AsyncStorage.setItem(appConstants.ARTICLE_STORAGE, JSON.stringify(newResult));
+
+        this.props.setInCache(newResult);
+
+      }
+      this.checkIfAleardySaved();
+
     } catch (error) {
       alert(error);
     }
@@ -34,8 +70,8 @@ class AddToFav extends Component {
   render() {
     return (
       <Icon onPress={this.addToFavHandler}
-            name={this.state.logoType}
-            type= 'font-awesome'
+            name={'heart'}
+            type= {this.state.logoType}
             color={"#fff"}
             size={33}
             style={styles.favIcon}

@@ -4,7 +4,6 @@ import reducer from './reducers';
 
 export default class CreateStore {
   constructor() {
-
     const store = createStore(
       reducer,
       {},
