@@ -97,7 +97,7 @@ export const Tabs = TabNavigator({
   Profile: {
     screen: Settings,
     navigationOptions: {
-      tabBarLabel: 'Profile',
+      tabBarLabel: 'Settings',
       tabBarIcon: ({ tintColor }) => <Icon name="cog" type="font-awesome" size={26} color={tintColor}/>
     },
   },
