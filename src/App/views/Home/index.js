@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ActivityIndicator, Alert, FlatList, StyleSheet, View } from 'react-native';
 import ArticleItem from './../../components/ArticleItem';
 
-import { fetchApi } from '../../../store/actions';
+import { setPage, fetchApi } from '../../../store/actions';
 
 class Home extends Component {
 
@@ -13,20 +13,22 @@ class Home extends Component {
     this.state = {
       refreshing: false,
     };
-    this.props.fetchApi(this.props.siteSource, this.props.type, this.props.page);
     this.onReadMore = this.onReadMore.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchApi(this.props.siteSource, this.props.type, this.props.page);
   }
 
-  _onRefresh() {
-    this.setState(
-      {
+  handleLoadMore = () => {
+    this.props.setPage(this.props.page+1);
+    this._onRefresh();
+  };
+
+  _onRefresh = () => {
+    this.setState({
         refreshing: true
-      },
-      () => {
+      }, () => {
         this.props.fetchApi(this.props.siteSource, this.props.type, this.props.page).then(() => {
           this.setState({ refreshing: false });
         }).catch((e) => {
@@ -41,6 +43,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(1);
     return (
       <View style={styles.contentContainer}>
         <FlatList
@@ -50,8 +53,11 @@ class Home extends Component {
           )}
 
           refreshing={this.state.refreshing}
-          onRefresh={() => this._onRefresh()}
-        />
+          onRefresh={this._onRefresh}
+          onEndReached={this.handleLoadMore}
+          onEndThreshold={0}
+        >
+        </FlatList>
         <View style={styles.loader}>
           <ActivityIndicator animating={this.props.isFetching}/>
         </View>
@@ -66,7 +72,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   loader: {
-    backgroundColor: '#fff',
     flex: 10,
     flexDirection: 'row',
     alignItems: 'center',
@@ -87,6 +92,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchApi: bindActionCreators(fetchApi, dispatch),
+    setPage: bindActionCreators(setPage, dispatch)
   }
 }
 

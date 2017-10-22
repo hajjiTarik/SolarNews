@@ -1,21 +1,27 @@
 export default {
   "baseURL": "https://api.pnd.gs/v1/sources/",
-  "sites": {
-    "article": [
-      "hackerNews",
-      "echojs",
-      "productHunt",
-      "lobsters",
-      "growthHackers",
-      "designerNews",
-      "sidebar"
-    ],
-    "caption": [
-      "awwwards",
-      "behance",
-      "dribbble"
-    ]
-  },
+  "sites": [
+    {
+      id: "hackerNews",
+      name: "Hacker News"
+    },
+    {
+      id: "dribbble",
+      name: "Dribbble"
+    },
+    {
+      id: "behance",
+      name: "Behance"
+    },
+    {
+      id: "lobsters",
+      name: "Lobsters"
+    },
+    {
+      id: "designerNews",
+      name: "Designer News"
+    }
+  ],
   "typeOfResult": {
     "popular": "popular",
     "latest": "latest"

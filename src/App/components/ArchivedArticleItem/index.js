@@ -1,32 +1,54 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { CheckBox } from 'react-native-elements';
 
 import colors from '../../../design';
+
 export default class extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      checked: false
+    };
+
+    this.removeFromCacheHandler = this.removeFromCacheHandler.bind(this);
+  }
+
+  removeFromCacheHandler () {
+
+    this.setState(()=>({
+      checked: !this.state.checked
+    }));
   }
 
   render() {
+    const { article } = this.props;
     return (
-      <TouchableOpacity style={styles.articleContainer} onPress={this.props.onReadMore}>
-        <View style={styles.description}>
-          <Text style={styles.source}>{this.props.article.source.name} {this.props.index}</Text>
-          <Text style={styles.descriptionTitle}>{this.props.article.title}</Text>
-          <Text style={styles.authorName}>{this.props.article.source.authorName}</Text>
-        </View>
-        <View style={{padding: 10}}>
-          <Image
-            resizeMode='cover'
-            style={{
-              width: 100, height: 100
-            }}
-            source={{ uri: this.props.article.image.normal }}
+      <View style={styles.articleContainer} >
+        <View style={styles.removeContainer}>
+          <CheckBox
+            onPress={()=>this.removeFromCacheHandler()}
+            checked={this.state.checked}
           />
         </View>
-
-      </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.onReadMore}>
+          <View style={styles.description}>
+            <Text style={styles.source}>{article.source.name} {this.props.index}</Text>
+            <Text style={styles.descriptionTitle}>{article.title}</Text>
+            <Text style={styles.authorName}>{article.source.authorName}</Text>
+          </View>
+          <View style={{padding: 10}}>
+            <Image
+              resizeMode='cover'
+              style={{
+                width: 100, height: 100
+              }}
+              source={{ uri: article.image.normal }}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
     )
 
   }
@@ -38,6 +60,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#dedede',
     flexDirection: 'row'
+  },
+  removeContainer: {
+    opacity: 1
   },
   descriptionTitle: {
     color: '#000',

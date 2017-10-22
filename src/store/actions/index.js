@@ -1,4 +1,4 @@
-import { ERROR_API, SET_TYPE, REQUEST_API, SUCCESS_API, SET_IN_CACHE } from '../constants';
+import { ERROR_API, SET_TYPE, REQUEST_API, SUCCESS_API, SET_IN_CACHE, SET_PAGE } from '../constants';
 import request from '../../config/api';
 
 export const requestApi = (site, typeOfResult, pageNumber) => ({
@@ -8,9 +8,10 @@ export const requestApi = (site, typeOfResult, pageNumber) => ({
   pageNumber
 });
 
-export const successApi = result => ({
+export const successApi = (result, render) => ({
   type: SUCCESS_API,
-  result
+  result,
+  render
 });
 
 export const errorApi = error => ({
@@ -18,19 +19,28 @@ export const errorApi = error => ({
   error
 });
 
-export const setType = articleType => ({
-  type: SET_TYPE,
-  articleType
-});
-
 export const setInCache = result => ({
   type: SET_IN_CACHE,
   result
 });
 
-export const fetchApi = (site, typeOfResult, pageNumber) => {
-  return dispatch => {
 
+export const setType = articleType => ({
+  type: SET_TYPE,
+  articleType
+});
+
+export const setPage = page => ({
+  type: SET_PAGE,
+  page
+});
+
+export const fetchApi = (site, typeOfResult, pageNumber, render = false) => {
+  return dispatch => {
+    if( render ){
+      setPage(1);
+      pageNumber = 1;
+    }
     dispatch(requestApi(site, typeOfResult, pageNumber));
 
     return request(site, typeOfResult, pageNumber)
@@ -38,7 +48,7 @@ export const fetchApi = (site, typeOfResult, pageNumber) => {
         return response.data;
       })
       .then(json => {
-        dispatch(successApi(json));
+        dispatch(successApi(json, render));
         dispatch(setType(typeOfResult));
       })
       .catch(e =>{

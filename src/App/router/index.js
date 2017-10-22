@@ -79,6 +79,26 @@ export const SavedStack = StackNavigator({
   }
 });
 
+export const SettingsStack = StackNavigator({
+  Settings: {
+    screen: Settings,
+    navigationOptions:{
+      title: 'Settings',
+      headerTintColor: '#fff',
+      headerStyle: {
+        backgroundColor: colors.iconColor,
+        borderBottomWidth: 0,
+      },
+    },
+  },
+},{
+  stackBarOptions: {
+    style: {
+      backgroundColor: '#FFF',
+    },
+  }
+});
+
 export const Tabs = TabNavigator({
   Home: {
     screen: HomeStack,
@@ -96,8 +116,8 @@ export const Tabs = TabNavigator({
                                            type='font-awesome' size={23} color={tintColor}/>
     },
   },
-  Profile: {
-    screen: Settings,
+  Settings: {
+    screen: SettingsStack,
     navigationOptions: {
       tabBarLabel: 'Settings',
       tabBarIcon: ({ tintColor }) => <Icon name="cog" type="font-awesome" size={26} color={tintColor}/>
