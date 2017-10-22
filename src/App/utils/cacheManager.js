@@ -36,10 +36,6 @@ export async function setInStorage (key, data, prop){
   }
 }
 
-/**
- * @param key
- * @returns {Promise.<*|Promise>}
- */
 export async function getFromStorage (key){
   try {
     let savedData = await AsyncStorage.getItem(key);
@@ -51,12 +47,6 @@ export async function getFromStorage (key){
   }
 }
 
-/**
- * @param key
- * @param data
- * @param prop
- * @returns {Promise.<Array.<T>|*>}
- */
 export async function removeOneItemFromStorage (key, data, prop){
   try {
     let savedData = await AsyncStorage.getItem(key);
@@ -71,11 +61,6 @@ export async function removeOneItemFromStorage (key, data, prop){
   }
 }
 
-/**
- * @param key
- * @param clearAll
- * @returns {Promise.<void>}
- */
 export async function removeDataFromStorage (key, clearAll = false){
   try {
     if (clearAll) await AsyncStorage.clear();
