@@ -77,8 +77,9 @@ class Saved extends Component {
             onChangeText={this.setSearchText.bind(this)}
             placeholder='Search...'/>
         </View>
-        <View>
+        <View style={styles.optionMenu}>
           <Text onPress={() => this.removeAllArticlesHandler()}>Remove All</Text>
+          <Text>Select</Text>
         </View>
         <FlatList
           data={this.state.articles}
@@ -107,6 +108,11 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     borderRadius: 50
   },
+  optionMenu: {
+    padding: 10,
+    flexDirection: 'row',
+    backgroundColor: '#e0f3f9'
+  }
 });
 
 const mapStateToProps = ({ appContentReducer }) => ({

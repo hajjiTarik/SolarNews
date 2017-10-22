@@ -16,10 +16,10 @@ export class Type extends Component {
   handleChangeType() {
     if (this.props.type === config.typeOfResult.latest) {
       this.props.setType(config.typeOfResult.popular);
-      this.props.fetchApi(this.props.siteSource, config.typeOfResult.popular, this.props.page);
+      this.props.fetchApi(this.props.siteSource, config.typeOfResult.popular, this.props.page, true);
     } else {
       this.props.setType(config.typeOfResult.latest);
-      this.props.fetchApi(this.props.siteSource, config.typeOfResult.latest, this.props.page);
+      this.props.fetchApi(this.props.siteSource, config.typeOfResult.latest, this.props.page, true);
     }
   }
 
