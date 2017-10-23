@@ -80,10 +80,7 @@ export async function removeDataFromStorage (key, clearAll = false){
   try {
     if (clearAll) await AsyncStorage.clear();
 
-    console.log(key);
-    let result = await AsyncStorage.removeItem(key);
-
-    console.log(result);
+    await AsyncStorage.removeItem(key);
   } catch (e) {
     console.log(e);
   }
