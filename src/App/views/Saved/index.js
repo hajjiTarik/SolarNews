@@ -79,7 +79,7 @@ class Saved extends Component {
         </View>
         <View style={styles.optionMenu}>
           <Text onPress={() => this.removeAllArticlesHandler()}>Remove All</Text>
-          <Text >Select</Text>
+          <Text>Select</Text>
         </View>
         <FlatList
           data={this.state.articles}
