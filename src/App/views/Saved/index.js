@@ -71,7 +71,7 @@ class Saved extends Component {
   render() {
     return (
       <View style={styles.contentContainer}>
-        <View style={styles.savedSubMenu}>
+        <View>
           <SearchBar
             lightTheme
             onChangeText={this.setSearchText.bind(this)}

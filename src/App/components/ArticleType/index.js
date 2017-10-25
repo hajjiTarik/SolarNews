@@ -15,18 +15,21 @@ export class Type extends Component {
 
   handleChangeType() {
     if (this.props.type === config.typeOfResult.latest) {
-      this.props.setType(config.typeOfResult.popular);
       this.props.fetchApi(this.props.siteSource, config.typeOfResult.popular, this.props.page, true);
     } else {
-      this.props.setType(config.typeOfResult.latest);
       this.props.fetchApi(this.props.siteSource, config.typeOfResult.latest, this.props.page, true);
     }
+  }
+
+  renderTitle (){
+    if(this.props.type === 'popular') return 'Popular';
+    return 'Latest';
   }
 
   render() {
     return (
       <View>
-        <Text style={styles.activeType} onPress={this.handleChangeType}>{this.props.type}</Text>
+        <Text style={styles.activeType} onPress={this.handleChangeType}>{this.renderTitle()}</Text>
       </View>
     );
   }

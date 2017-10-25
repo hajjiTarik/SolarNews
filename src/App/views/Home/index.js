@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActivityIndicator, Alert, FlatList, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, View } from 'react-native';
 import ArticleItem from './../../components/ArticleItem';
 
 import { setPage, fetchApi } from '../../../store/actions';
@@ -43,19 +43,22 @@ class Home extends Component {
   }
 
   render() {
-    console.log(1);
     return (
       <View style={styles.contentContainer}>
+        <View>
+          <Text>Filter :</Text>
+        </View>
         <FlatList
           data={this.props.result}
-          renderItem={({ item }) => (
-            <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
-          )}
+          renderItem={({ item }) => {
+            return <ArticleItem key={item._id} onReadMore={() => this.onReadMore(item)} article={item}/>
+          }}
 
           refreshing={this.state.refreshing}
           onRefresh={this._onRefresh}
           onEndReached={this.handleLoadMore}
           onEndThreshold={0}
+          keyExtractor={(item, index) => index}
         >
         </FlatList>
         <View style={styles.loader}>
@@ -69,7 +72,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: '#fff',
-    flex: 1
+    flex: 1,
   },
   loader: {
     flex: 10,

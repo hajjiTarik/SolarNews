@@ -35,9 +35,9 @@ export const setPage = page => ({
   page
 });
 
-export const fetchApi = (site, typeOfResult, pageNumber, render = false) => {
+export const fetchApi = (site, typeOfResult, pageNumber, reset = false) => {
   return dispatch => {
-    if( render ){
+    if( reset ){
       setPage(1);
       pageNumber = 1;
     }
@@ -48,7 +48,7 @@ export const fetchApi = (site, typeOfResult, pageNumber, render = false) => {
         return response.data;
       })
       .then(json => {
-        dispatch(successApi(json, render));
+        dispatch(successApi(json, reset));
         dispatch(setType(typeOfResult));
       })
       .catch(e =>{
