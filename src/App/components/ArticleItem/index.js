@@ -29,7 +29,6 @@ export default class ArticleItem extends Component {
         </TouchableOpacity>
       </View>
     )
-
   }
 }
 
@@ -48,11 +47,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#d1d1d1',
   },
-  article: {
-    flex: 1,
-    justifyContent: 'center',
-    margin: 10
-  },
   descriptionTitle: {
     fontSize: 15,
     fontWeight: 'bold'
@@ -60,20 +54,6 @@ const styles = StyleSheet.create({
   description: {
     paddingTop: 10,
     paddingBottom: 10,
-  },
-  listArticle: {
-    flex: 1,
-    flexDirection: 'row'
-  },
-  iconContainer: {
-    height: 40,
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    marginRight: 10
-  },
-  textListArticle: {
-    color: colors.iconColor,
-    paddingLeft: 5
   },
   source: {
     fontStyle: 'italic',

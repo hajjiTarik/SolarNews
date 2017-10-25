@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   textListArticle: {
-    color: colors.backgroundDarkColor,
     paddingLeft: 5,
     fontSize: 11,
     alignItems: 'baseline',
