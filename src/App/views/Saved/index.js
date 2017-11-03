@@ -146,7 +146,6 @@ const styles = StyleSheet.create({
   },
   selectArticle: {
     flexDirection: 'row', alignItems: 'flex-start'
-
   }
 });
 

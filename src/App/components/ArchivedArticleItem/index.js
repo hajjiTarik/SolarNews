@@ -62,7 +62,6 @@ class ArchivedArticleItem extends Component {
               />
             </View>
           </View>
-
         </TouchableOpacity>
       </View>
     )
@@ -94,6 +93,9 @@ const styles = StyleSheet.create({
   savedCheckBox: {
     backgroundColor:'#FFF',
     padding: 10
+  },
+  removeContainer: {
+    opacity: 1
   },
   descriptionTitle: {
     color: '#000',

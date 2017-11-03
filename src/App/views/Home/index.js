@@ -11,7 +11,6 @@ import { SceneMap, TabBar, TabViewAnimated } from 'react-native-tab-view';
 const FirstRoute = () => <View style={[ styles.container, { backgroundColor: '#ff4081' } ]} />;
 const SecondRoute = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
 
-
 class Home extends Component {
 
   constructor(props) {
@@ -27,8 +26,7 @@ class Home extends Component {
       }
     };
     this.onReadMore = this.onReadMore.bind(this);
-  }
-
+ 
   _handleIndexChange = index => this.setState({ index });
 
   _renderHeader = props => <TabBar {...props} />;
@@ -65,6 +63,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(1);
     return (
       <View style={styles.contentContainer}>
 
