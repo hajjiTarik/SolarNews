@@ -7,38 +7,65 @@ export default class ArticleItem extends Component {
 
   constructor(props) {
     super(props);
+    this.renderViewsCount = this.renderViewsCount.bind(this);
+    this.renderLikesCount = this.renderLikesCount.bind(this);
+    this.renderCommentsCount = this.renderCommentsCount.bind(this);
   }
+
+  renderViewsCount = () => {
+    if (!this.props.source.viewsCount) return null;
+
+    return (
+      <View style={styles.iconContainer}>
+        <Icon
+          style={styles.icon}
+          name='eye'
+          type='evilicon'
+          color={colors.iconColor}
+        />
+        <Text style={styles.textListArticle}>{this.props.source.viewsCount}</Text>
+      </View>
+    );
+  };
+
+  renderLikesCount = () => {
+    if (!this.props.source.likesCount) return null;
+
+    return (
+      <View style={styles.iconContainer}>
+        <Icon
+          style={styles.icon}
+          name='heart'
+          type='evilicon'
+          color={"#ff232f"}
+        />
+        <Text style={styles.textListArticle}>{this.props.source.likesCount}</Text>
+      </View>
+    );
+  };
+
+  renderCommentsCount = () => {
+    if (!this.props.source.commentsCount) return null;
+
+    return (
+      <View style={styles.iconContainer}>
+        <Icon
+          style={styles.icon}
+          name='comment'
+          type='evilicon'
+          color={colors.iconColor}
+        />
+        <Text style={styles.textListArticle}>{this.props.source.commentsCount}</Text>
+      </View>
+    );
+  };
 
   render() {
     return (
       <View style={styles.listArticle}>
-        <View style={styles.iconContainer}>
-          <Icon
-            style={styles.icon}
-            name='heart'
-            type='evilicon'
-            color={"#ff232f"}
-          />
-          <Text style={styles.textListArticle}>{this.props.data.likesCount}</Text>
-        </View>
-        <View style={styles.iconContainer}>
-          <Icon
-            style={styles.icon}
-            name='comment'
-            type='evilicon'
-            color={colors.iconColor}
-          />
-          <Text style={styles.textListArticle}>{this.props.data.commentsCount}</Text>
-        </View>
-        <View style={styles.iconContainer}>
-          <Icon
-            style={styles.icon}
-            name='eye'
-            type='evilicon'
-            color={colors.iconColor}
-          />
-          <Text style={styles.textListArticle}>{this.props.data.viewsCount}</Text>
-        </View>
+        {this.renderLikesCount()}
+        {this.renderCommentsCount()}
+        {this.renderViewsCount()}
       </View>)
   }
 }

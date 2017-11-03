@@ -1,4 +1,13 @@
-import { ERROR_API, SET_TYPE, REQUEST_API, SUCCESS_API, SET_IN_CACHE, SET_PAGE } from '../constants';
+import {
+  ERROR_API,
+  SET_TYPE,
+  REQUEST_API,
+  SUCCESS_API,
+  SET_IN_CACHE,
+  SET_PAGE,
+  SET_CHECKBOX_VISIBILITY,
+  SET_ACTIVE_SITE
+} from '../constants';
 import request from '../../config/api';
 
 export const requestApi = (site, typeOfResult, pageNumber) => ({
@@ -35,20 +44,31 @@ export const setPage = page => ({
   page
 });
 
-export const fetchApi = (site, typeOfResult, pageNumber, render = false) => {
+export const showCheckbox = visible => ({
+  type: SET_CHECKBOX_VISIBILITY,
+  visible
+});
+
+export const setActiveSite = activeSite => ({
+  type: SET_ACTIVE_SITE,
+  activeSite
+});
+
+export const fetchApi = (site, typeOfResult, pageNumber, reset = false) => {
+
+  console.log(site, typeOfResult, pageNumber);
+
   return dispatch => {
-    if( render ){
+    if( reset ){
       setPage(1);
       pageNumber = 1;
     }
     dispatch(requestApi(site, typeOfResult, pageNumber));
 
     return request(site, typeOfResult, pageNumber)
-      .then(response => {
-        return response.data;
-      })
+      .then(({ data }) => data)
       .then(json => {
-        dispatch(successApi(json, render));
+        dispatch(successApi(json, reset));
         dispatch(setType(typeOfResult));
       })
       .catch(e =>{

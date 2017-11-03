@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
+import { Icon } from 'react-native-elements';
 
 import ArchivedArticleItem from '../../components/ArchivedArticleItem';
 import appConstants from '../../../config/appConstants';
-import { setInCache } from '../../../store/actions';
+import { setInCache, showCheckbox } from '../../../store/actions';
 import { getFromStorage, removeDataFromStorage } from '../../utils/cacheManager';
 
 class Saved extends Component {
@@ -19,6 +20,8 @@ class Saved extends Component {
     this.state = {
       articles: this.props.articlesFromLocalStore,
       refreshing: false,
+      searchVisibility: false,
+      blockRefresh: false
     }
   }
 
@@ -31,6 +34,7 @@ class Saved extends Component {
   }
 
   async getArticleFromCache() {
+    if(this.state.blockRefresh) return;
     try {
       const res = await getFromStorage(appConstants.ARTICLE_STORAGE);
       this.props.setInCache(res);
@@ -46,6 +50,10 @@ class Saved extends Component {
   setSearchText(text) {
     let result = this.state.articles;
     if (text) {
+      this.setState({
+        blockRefresh: true
+      });
+
       let filtredResult = result.filter((article) => {
         return article.title.toLowerCase().includes(text.toLowerCase());
       });
@@ -58,9 +66,11 @@ class Saved extends Component {
     } else {
 
       this.setState(() => ({
-        articles: this.props.articlesFromLocalStore
+        articles: this.props.articlesFromLocalStore,
+        blockRefresh: false
       }));
     }
+
   }
 
   async removeAllArticlesHandler() {
@@ -68,26 +78,44 @@ class Saved extends Component {
     await this.getArticleFromCache();
   }
 
+  handleSearchVisibility = () => {
+    this.setState({
+      searchVisibility: !this.state.searchVisibility
+    });
+  }
+
+  handleCheckboxVisibility = () => {
+    this.props.showCheckbox(!this.props.checkboxVisibility);
+  };
+
+  renderSearchBlock  = () => {
+    if(this.state.searchVisibility) return;
+    return(
+      <View>
+        <SearchBar
+          DarkTheme
+          onChangeText={this.setSearchText.bind(this)}
+          placeholder='Search...'/>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.contentContainer}>
-        <View style={styles.savedSubMenu}>
-          <SearchBar
-            lightTheme
-            onChangeText={this.setSearchText.bind(this)}
-            placeholder='Search...'/>
-        </View>
         <View style={styles.optionMenu}>
-          <Text onPress={() => this.removeAllArticlesHandler()}>Remove All</Text>
-          <Text>Select</Text>
+          <Icon style={styles.selectArticle} onPress={this.handleSearchVisibility} name="search" type='font-awesome' size={28} color='#fff'/>
+          <Text style={styles.selectArticle} onPress={this.handleCheckboxVisibility}>Select All</Text>
+          <Icon style={styles.removeAll} onPress={this.removeAllArticlesHandler} name="trash" type='font-awesome' size={28} color='#fff'/>
         </View>
+        {this.renderSearchBlock()}
         <FlatList
           data={this.state.articles}
           renderItem={({ item }) => {
             return <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
           }}
           refreshing={this.state.refreshing}
-          onRefresh={() => this.getArticleFromCache()}
+          onRefresh={this.getArticleFromCache}
         />
       </View>
     )
@@ -110,17 +138,25 @@ const styles = StyleSheet.create({
   },
   optionMenu: {
     padding: 10,
+    backgroundColor: '#99d3f7',
     flexDirection: 'row',
-    backgroundColor: '#e0f3f9'
+  },
+  removeAll: {
+    flexDirection: 'row', alignItems: 'flex-end'
+  },
+  selectArticle: {
+    flexDirection: 'row', alignItems: 'flex-start'
   }
 });
 
-const mapStateToProps = ({ appContentReducer }) => ({
-  articlesFromLocalStore: appContentReducer.articles
+const mapStateToProps = ({ appContentReducer, appReducer }) => ({
+  articlesFromLocalStore: appContentReducer.articles,
+  checkboxVisibility: appReducer.visible
 })
 
 const mapDispatchToProps = disptach => ({
-  setInCache: bindActionCreators(setInCache, disptach)
+  setInCache: bindActionCreators(setInCache, disptach),
+  showCheckbox: bindActionCreators(showCheckbox, disptach)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Saved);

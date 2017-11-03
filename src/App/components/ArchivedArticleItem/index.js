@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
 import { CheckBox } from 'react-native-elements';
 
 import colors from '../../../design';
 
-export default class extends Component {
+import { articleSelector } from '../../selectors';
+
+class ArchivedArticleItem extends Component {
 
   constructor(props) {
     super(props);
@@ -16,36 +19,48 @@ export default class extends Component {
   }
 
   removeFromCacheHandler () {
-
     this.setState(()=>({
       checked: !this.state.checked
     }));
   }
 
+  renderCheckboxBlock = () => {
+    if(!this.props.checkboxVisibility) return;
+
+    return(<View style={styles.removeContainer}>
+            <CheckBox
+              style={styles.savedCheckBox}
+              onPress={()=>this.removeFromCacheHandler()}
+              checked={this.state.checked}
+            />
+          </View>);
+  }
+
   render() {
-    const { article } = this.props;
+    const {
+      title,
+      image,
+      source
+    } = articleSelector(this.props.article);
     return (
       <View style={styles.articleContainer} >
-        <View style={styles.removeContainer}>
-          <CheckBox
-            onPress={()=>this.removeFromCacheHandler()}
-            checked={this.state.checked}
-          />
-        </View>
+        {this.renderCheckboxBlock()}
         <TouchableOpacity onPress={this.props.onReadMore}>
           <View style={styles.description}>
-            <Text style={styles.source}>{article.source.name} {this.props.index}</Text>
-            <Text style={styles.descriptionTitle}>{article.title}</Text>
-            <Text style={styles.authorName}>{article.source.authorName}</Text>
-          </View>
-          <View style={{padding: 10}}>
-            <Image
-              resizeMode='cover'
-              style={{
-                width: 100, height: 100
-              }}
-              source={{ uri: article.image.normal }}
-            />
+            <View style={{width: this.props.checkboxVisibility ? width - 160 : width - 110}}>
+              <Text style={styles.descriptionTitle}>{title}</Text>
+              <Text style={styles.authorName}>{source.authorName}</Text>
+              <Text style={styles.source}>{source.name}</Text>
+            </View>
+            <View style={styles.articleImage}>
+              <Image
+                resizeMode='cover'
+                style={{
+                  width: 80, height: 80
+                }}
+                source={{ uri: image.normal }}
+              />
+            </View>
           </View>
         </TouchableOpacity>
       </View>
@@ -54,33 +69,59 @@ export default class extends Component {
   }
 }
 
+const mapStateToProps = ({ appContentReducer, appReducer }) => ({
+  checkboxVisibility: appReducer.visible
+})
+
+export default connect(mapStateToProps)(ArchivedArticleItem);
+
+const { width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   articleContainer: {
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#dedede',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flex: 1,
+  },
+  removeContainer: {
+    opacity: 1,
+    alignSelf: 'flex-start',
+    width:50,
+  },
+  savedCheckBox: {
+    backgroundColor:'#FFF',
+    padding: 10
   },
   removeContainer: {
     opacity: 1
   },
   descriptionTitle: {
     color: '#000',
-    fontSize: 15,
+    fontSize: 19,
     fontWeight: 'bold',
-    width: 230, height: 50
+    marginBottom: 5,
   },
   description: {
-    padding: 10
+    padding: 10,
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    width: width - 50,
   },
   source: {
-    color: colors.iconColor,
+    color: colors.clearColor,
     fontSize: 12,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginTop: 5,
+  },
+  articleImage: {
+    padding: 10,
+    alignSelf: 'flex-start'
   },
   authorName: {
     fontStyle: 'italic',
-    fontSize: 11
+    fontSize: 11,
+    color: '#5e5e5e'
   }
 });

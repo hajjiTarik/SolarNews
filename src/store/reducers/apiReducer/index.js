@@ -3,7 +3,6 @@ import { ERROR_API, REQUEST_API, SET_TYPE, SET_PAGE, SUCCESS_API } from '../../c
 export default (state = {
                   isFetching: false,
                   type: 'popular',
-                  siteSource: 'behance',
                   page: 1,
                   result: []
                 }, action) => {
@@ -14,9 +13,9 @@ export default (state = {
         isFetching: true
       };
     case SUCCESS_API :
-      const result = !action.render ? [...state.result , ...action.result] : action.result;
+      const result = action.render ? [...state.result , ...action.result] : action.result;
 
-      console.log(action.render);
+      console.log('step 2', result);
       return {
         ...state,
         result,

@@ -19,7 +19,7 @@ export const HomeStack = StackNavigator({
       headerTintColor: '#fff',
       headerRight: <ArticleType />,
       headerStyle: {
-        backgroundColor: colors.iconColor,
+        backgroundColor: colors.clearColor,
         borderBottomWidth: 0,
       },
     }),
@@ -31,7 +31,7 @@ export const HomeStack = StackNavigator({
       headerTintColor: '#fff',
       headerRight: <AddToFav params={navigation} />,
       headerStyle: {
-        backgroundColor: colors.iconColor,
+        backgroundColor: colors.clearColor,
         borderBottomWidth: 0,
       },
     }),
@@ -39,7 +39,7 @@ export const HomeStack = StackNavigator({
 },{
   stackBarOptions: {
     style: {
-      backgroundColor: colors.iconColor,
+      backgroundColor: colors.clearColor,
     },
   }
 });
@@ -53,7 +53,7 @@ export const SavedStack = StackNavigator({
         title: 'Saved Articles',
         headerTintColor: '#fff',
         headerStyle: {
-          backgroundColor: colors.iconColor,
+          backgroundColor: colors.clearColor,
           borderBottomWidth: 0,
         },
       }
@@ -66,7 +66,7 @@ export const SavedStack = StackNavigator({
       headerTintColor: '#fff',
       headerRight: <AddToFav params={navigation} />,
       headerStyle: {
-        backgroundColor: colors.iconColor,
+        backgroundColor: colors.clearColor,
         borderBottomWidth: 0,
       },
     }),
@@ -86,7 +86,7 @@ export const SettingsStack = StackNavigator({
       title: 'Settings',
       headerTintColor: '#fff',
       headerStyle: {
-        backgroundColor: colors.iconColor,
+        backgroundColor: colors.clearColor,
         borderBottomWidth: 0,
       },
     },
