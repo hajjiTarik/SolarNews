@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { AppRegistry, Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import colors from '../../../design';
 import SubListArticle from './components/subListArticle';
@@ -23,7 +23,7 @@ export default class ArticleItem extends Component {
       <View style={styles.articleContainer}>
         <TouchableOpacity onPress={this.props.onReadMore}>
           <View style={styles.header}>
-            <Text style={styles.source}>{this.props.article.source.name}</Text>
+            <Text style={styles.source}>{source.name}</Text>
           </View>
           <Image
             resizeMode='cover'

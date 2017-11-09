@@ -11,20 +11,18 @@ import { setInCache } from '../../../store/actions';
 class AddToFav extends Component {
   constructor(props) {
     super(props);
-    this.addToFavHandler = this.addToFavHandler.bind(this);
 
     this.state = {
       logoType: 'heart-o',
       isSaved: false
-    }
+    };
+
+    this.addToFavHandler = this.addToFavHandler.bind(this);
     this.checkIfAleardySaved();
   }
 
   async checkIfAleardySaved() {
     const savedArticle = await isInCache(appConstants.ARTICLE_STORAGE, this.props.params.state.params, '_id');
-
-    console.log(savedArticle);
-
     this.setState(() => ({
       savedArticle: savedArticle,
       logoType: savedArticle.length ? 'heart' : 'heart-o',
