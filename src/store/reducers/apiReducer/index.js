@@ -13,7 +13,7 @@ export default (state = {
         isFetching: true
       };
     case SUCCESS_API :
-      const result = !action.render ? [...state.result , ...action.result] : action.result;
+      const result = action.render ? [...state.result , ...action.result] : action.result;
 
       console.log('step 2', result);
       return {

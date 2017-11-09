@@ -5,7 +5,7 @@
 ### - ✅ Add WebView
 ### - ✅ Add Navigator
 ### - Page Profile
-### - Page Saved
-### - Modify API
-### - Add Easy Loading
+### - ✅ Page Saved
+### - ✅ Modify API
+### - ✅ Add Easy Loading
 
