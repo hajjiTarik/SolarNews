@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActivityIndicator, Alert, FlatList,NetInfo, RefreshControl, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Alert, FlatList, NetInfo, RefreshControl, StyleSheet, View } from 'react-native';
 import ArticleItem from './../../components/ArticleItem';
 
-import { setPage, fetchApi } from '../../../store/actions';
-import initConnection from '../../utils/connectivityManager';
-import { SceneMap, TabBar, TabViewAnimated } from 'react-native-tab-view';
-
-const FirstRoute = () => <View style={[ styles.container, { backgroundColor: '#ff4081' } ]} />;
-const SecondRoute = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
+import { fetchApi, setPage } from '../../../store/actions';
 
 class Home extends Component {
 
@@ -17,24 +12,16 @@ class Home extends Component {
     super(props);
     this.state = {
       refreshing: false,
-      navigation: {
-        index: 0,
-        routes: [
-          { key: '1', title: 'First' },
-          { key: '2', title: 'Second' },
-        ],
-      }
     };
     this.onReadMore = this.onReadMore.bind(this);
- 
-  _handleIndexChange = index => this.setState({ index });
+    this.page = 1;
+  }
 
-  _renderHeader = props => <TabBar {...props} />;
+  componentWillMount() {
+    console.log(this.props.activeSite);
+    this.props.navigation.setParams({ title: this.props.activeSite });
+  }
 
-  _renderScene = SceneMap({
-    '1': FirstRoute,
-    '2': SecondRoute,
-  });
 
   componentDidMount() {
     this.props.fetchApi(this.props.activeSite, this.props.type, this.props.page);
@@ -42,28 +29,28 @@ class Home extends Component {
   }
 
   handleLoadMore = () => {
-    this.props.fetchApi(this.props.activeSite, this.props.type, this.props.page+1, true);
+    this.page = this.page + 1;
+    this.props.fetchApi(this.props.activeSite, this.props.type, this.page);
   };
 
   _onRefresh = () => {
     this.setState({
-        refreshing: true
-      }, () => {
-        this.props.fetchApi(this.props.activeSite, this.props.type, this.props.page).then(() => {
-          this.setState({ refreshing: false });
-        }).catch((e) => {
-          Alert.alert("Error when fetshing");
-          this.setState({ refreshing: false });
-        });
+      refreshing: true
+    }, () => {
+      this.props.fetchApi(this.props.activeSite, this.props.type, this.props.page, true).then(() => {
+        this.setState({ refreshing: false });
+      }).catch((e) => {
+        Alert.alert("Error when fetshing");
+        this.setState({ refreshing: false });
       });
-  }
+    });
+  };
 
   onReadMore(item) {
     this.props.navigation.navigate('ArticleDetails', item);
   }
 
   render() {
-    console.log(1);
     return (
       <View style={styles.contentContainer}>
 

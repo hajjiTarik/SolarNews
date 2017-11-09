@@ -12,6 +12,7 @@ class App extends Component {
 
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
+    console.log('App', this.props.notificationDate);
   }
 
   componentWillUnmount() {
@@ -19,16 +20,16 @@ class App extends Component {
   }
 
   _handleAppStateChange = (appState) => {
-    if (appState === 'background') {
+    if (appState === 'background' && this.props.notificationDate) {
 
-      let date = new Date(Date.now() + (6 * 1000));
+      let date = this.props.notificationDate;
 
       PushNotification.localNotificationSchedule({
         message: "New Article ",
-        date // in 60 secs
+        date
       })
     }
-  }
+  };
 
   render() {
     return [
@@ -40,4 +41,10 @@ class App extends Component {
     ];
   }
 }
-export default connect()(App);
+
+const mapStateToProps = ({ appReducer }) => ({
+  notificationDate: appReducer.notificationDate
+});
+
+
+export default connect(mapStateToProps)(App);

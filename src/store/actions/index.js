@@ -6,7 +6,8 @@ import {
   SET_IN_CACHE,
   SET_PAGE,
   SET_CHECKBOX_VISIBILITY,
-  SET_ACTIVE_SITE
+  SET_ACTIVE_SITE,
+  SET_NOTIFICATION_DATE
 } from '../constants';
 import request from '../../config/api';
 
@@ -52,6 +53,11 @@ export const showCheckbox = visible => ({
 export const setActiveSite = activeSite => ({
   type: SET_ACTIVE_SITE,
   activeSite
+});
+
+export const setNotificationDate = notificationDate => ({
+  type: SET_NOTIFICATION_DATE,
+  notificationDate
 });
 
 export const fetchApi = (site, typeOfResult, pageNumber, reset = false) => {

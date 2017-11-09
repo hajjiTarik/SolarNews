@@ -20,7 +20,7 @@ class Saved extends Component {
     this.state = {
       articles: this.props.articlesFromLocalStore,
       refreshing: false,
-      searchVisibility: false,
+      searchVisibility: true,
       blockRefresh: false
     }
   }
@@ -104,7 +104,7 @@ class Saved extends Component {
     return (
       <View style={styles.contentContainer}>
         <View style={styles.optionMenu}>
-          <Icon style={styles.selectArticle} onPress={this.handleSearchVisibility} name="search" type='font-awesome' size={28} color='#fff'/>
+          <Icon style={styles.searchContainer} onPress={this.handleSearchVisibility} name="search" type='font-awesome' size={28} color='#fff'/>
           <Text style={styles.selectArticle} onPress={this.handleCheckboxVisibility}>Select All</Text>
           <Icon style={styles.removeAll} onPress={this.removeAllArticlesHandler} name="trash" type='font-awesome' size={28} color='#fff'/>
         </View>
@@ -134,7 +134,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 5,
     paddingLeft: 10,
-    borderRadius: 50
+    borderRadius: 50,
+    width:240
   },
   optionMenu: {
     padding: 10,
@@ -142,10 +143,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   removeAll: {
-    flexDirection: 'row', alignItems: 'flex-end'
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    width:50
   },
   selectArticle: {
-    flexDirection: 'row', alignItems: 'flex-start'
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    width:80
+  },
+  searchContainer: {
+    flexDirection: 'row', alignItems: 'flex-start',
+    width:250
   }
 });
 
