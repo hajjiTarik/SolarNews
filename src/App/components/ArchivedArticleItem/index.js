@@ -94,9 +94,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#FFF',
     padding: 10
   },
-  removeContainer: {
-    opacity: 1
-  },
   descriptionTitle: {
     color: '#000',
     fontSize: 19,

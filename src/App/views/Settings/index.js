@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, DatePickerIOS } from 'react-native';
 import { CheckBox, Divider } from 'react-native-elements';
 
 import config from '../../../config/apiConfig';
-import { setActiveSite } from '../../../store/actions';
+import { setActiveSite, setNotificationDate } from '../../../store/actions';
 
 class Settings extends Component {
 
@@ -13,19 +13,18 @@ class Settings extends Component {
     super(props);
     this.renderSitesList = this.renderSitesList.bind(this);
     this.state = {
-      activeSite: this.props.activeSite
+      activeSite: this.props.activeSite,
     }
   }
 
   getSite = source => {
     this.props.setActiveSite(source.id);
-  }
+  };
 
   renderSitesList = () => {
     const listSource = config.sites;
     return listSource.map((source) => {
-      return <View style={styles.sitesListCheckboxContainer}>
-        <Divider style={{ backgroundColor: '#dedede' }} />
+      return <View>
           <CheckBox
             style={styles.sitesListCheckbox}
             center
@@ -35,19 +34,39 @@ class Settings extends Component {
             checkedIcon='dot-circle-o'
             uncheckedIcon='circle-o'
           />
-        </View>
+      </View>
     })
-  }
+  };
+
+  onDateChange = date => {
+    this.setState({date: date});
+    this.props.setNotificationDate(date);
+  };
 
   render() {
     return (
-      <View style={styles.sitesContainer}>
+      <ScrollView style={styles.sitesContainer}>
         <View style={{ paddingLeft:10, paddingRight: 0 }}>
-          <Text style={styles.title}>Choose source site:</Text>
-          {this.renderSitesList()}
+          <Text style={styles.title}>Choose source site :</Text>
           <Divider style={{ backgroundColor: '#dedede' }} />
+          {this.renderSitesList()}
         </View>
-      </View>
+
+        <View style={{ paddingLeft:10, paddingRight: 0 }}>
+          <Text style={styles.title}>Remember me to read :</Text>
+          <Divider style={{ backgroundColor: '#dedede' }} />
+          <Text style={{fontWeight: 'bold', fontSize: 12, paddingTop: 10, paddingBottom: 10}}>
+            Notification on : {this.props.notificationDate.toString()}
+          </Text>
+          <DatePickerIOS
+            date={this.props.notificationDate}
+            minimumDate={new Date()}
+            mode="date"
+            onDateChange={this.onDateChange}
+          />
+        </View>
+
+      </ScrollView>
     )
   }
 }
@@ -56,32 +75,33 @@ const styles = StyleSheet.create({
   sitesContainer: {
     backgroundColor: '#FFF',
     marginBottom: 10,
-    flex:1,
-  },
-  sitesListCheckboxContainer: {
-    backgroundColor: '#fcfcfc'
+    padding:0
   },
   sitesListCheckbox: {
     alignSelf: 'flex-start',
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 10,
+    padding:0,
   },
 
   title: {
-    padding: 10
+    paddingTop: 15,
+    paddingBottom: 15,
+    fontWeight: 'bold'
   }
 });
 
 const mapStateToProps = ({ appReducer })=> {
   return {
-    activeSite: appReducer.activeSite
+    activeSite: appReducer.activeSite,
+    notificationDate: appReducer.notificationDate
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setActiveSite: bindActionCreators(setActiveSite, dispatch)
+    setActiveSite: bindActionCreators(setActiveSite, dispatch),
+    setNotificationDate: bindActionCreators(setNotificationDate, dispatch)
   }
 };
 

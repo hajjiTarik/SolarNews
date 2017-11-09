@@ -15,10 +15,11 @@ export class Type extends Component {
 
   handleChangeType() {
     if (this.props.type === config.typeOfResult.latest) {
-      this.props.fetchApi(this.props.siteSource, config.typeOfResult.popular, this.props.page, true);
+      this.props.fetchApi(this.props.activeSite, config.typeOfResult.popular, this.props.page, true);
     } else {
-      this.props.fetchApi(this.props.siteSource, config.typeOfResult.latest, this.props.page, true);
+      this.props.fetchApi(this.props.activeSite, config.typeOfResult.latest, this.props.page, true);
     }
+
   }
 
   renderTitle (){
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     type: state.apiReducer.type,
-    siteSource: state.apiReducer.siteSource,
+    activeSite: state.appReducer.activeSite,
     page: state.apiReducer.page
   }
 }

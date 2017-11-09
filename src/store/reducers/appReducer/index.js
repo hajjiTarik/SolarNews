@@ -1,8 +1,9 @@
-import { SET_CHECKBOX_VISIBILITY, SET_ACTIVE_SITE } from '../../constants';
+import { SET_CHECKBOX_VISIBILITY, SET_ACTIVE_SITE, SET_NOTIFICATION_DATE } from '../../constants';
 
 export default (state = {
                   visible: false,
-                  activeSite: 'behance'
+                  activeSite: 'behance',
+                  notificationDate: new Date()
                 }, action) => {
   switch (action.type) {
     case SET_CHECKBOX_VISIBILITY :
@@ -14,6 +15,11 @@ export default (state = {
       return {
         ...state,
         activeSite: action.activeSite
+      };
+    case SET_NOTIFICATION_DATE :
+      return {
+        ...state,
+        notificationDate: action.notificationDate
       };
     default :
       return state;
