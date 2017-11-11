@@ -71,7 +71,7 @@ class ArchivedArticleItem extends Component {
 
 const mapStateToProps = ({ appContentReducer, appReducer }) => ({
   checkboxVisibility: appReducer.visible
-})
+});
 
 export default connect(mapStateToProps)(ArchivedArticleItem);
 

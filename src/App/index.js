@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs } from './router';
 import { PushNotif } from './components/PushNotifications/index';
-import { AppState, StatusBar } from 'react-native';
+import { AppRegistry, AppState, StatusBar } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 
 class App extends Component {
@@ -46,5 +46,7 @@ const mapStateToProps = ({ appReducer }) => ({
   notificationDate: appReducer.notificationDate
 });
 
+
+AppRegistry.registerComponent('App', () => App );
 
 export default connect(mapStateToProps)(App);

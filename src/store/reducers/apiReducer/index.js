@@ -13,9 +13,7 @@ export default (state = {
         isFetching: true
       };
     case SUCCESS_API :
-      const result = action.render ? [...state.result , ...action.result] : action.result;
-
-      console.log('step 2', result);
+      const result = (!action.render ? [...state.result , ...action.result] : action.result);
       return {
         ...state,
         result,
@@ -27,9 +25,10 @@ export default (state = {
         type: action.articleType
       };
     case SET_PAGE :
+      console.log(action.page++);
       return {
         ...state,
-        page: action.page
+        page: action.page++
       };
     case ERROR_API :
       return {

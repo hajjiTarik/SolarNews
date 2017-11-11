@@ -7,7 +7,8 @@ import {
   SET_PAGE,
   SET_CHECKBOX_VISIBILITY,
   SET_ACTIVE_SITE,
-  SET_NOTIFICATION_DATE
+  SET_NOTIFICATION_DATE,
+  SET_FONT_SIZE
 } from '../constants';
 import request from '../../config/api';
 
@@ -18,63 +19,95 @@ export const requestApi = (site, typeOfResult, pageNumber) => ({
   pageNumber
 });
 
+export const setFontSize = value => ({
+  type: SET_FONT_SIZE,
+  value
+});
+
+
 export const successApi = (result, render) => ({
   type: SUCCESS_API,
   result,
   render
 });
 
+/**
+ * @param error
+ */
 export const errorApi = error => ({
   type: ERROR_API,
   error
 });
 
+/**
+ * @param result
+ */
 export const setInCache = result => ({
   type: SET_IN_CACHE,
   result
 });
 
-
+/**
+ * @param articleType
+ */
 export const setType = articleType => ({
   type: SET_TYPE,
   articleType
 });
 
-export const setPage = page => ({
+/**
+ * @param page
+ */
+export const setPage = (page = 0) => ({
   type: SET_PAGE,
   page
 });
 
+/**
+ * @param visible
+ */
 export const showCheckbox = visible => ({
   type: SET_CHECKBOX_VISIBILITY,
   visible
 });
 
+/**
+ * @param activeSite
+ */
 export const setActiveSite = activeSite => ({
   type: SET_ACTIVE_SITE,
   activeSite
 });
 
+/**
+ * @param notificationDate
+ */
 export const setNotificationDate = notificationDate => ({
   type: SET_NOTIFICATION_DATE,
   notificationDate
 });
 
-export const fetchApi = (site, typeOfResult, pageNumber, reset = false) => {
+/**
+ *
+ * @param site
+ * @param typeOfResult
+ * @param pageNumber
+ * @param render
+ * @returns {function(*)}
+ */
+export const fetchApi = (site, typeOfResult, pageNumber, render = false) => {
 
-  console.log(site, typeOfResult, pageNumber);
-
-  return dispatch => {
-    if( reset ){
-      setPage(1);
-      pageNumber = 1;
+  return (dispatch) => {
+    if( render ){
+      dispatch(setPage());
     }
+
     dispatch(requestApi(site, typeOfResult, pageNumber));
 
     return request(site, typeOfResult, pageNumber)
       .then(({ data }) => data)
       .then(json => {
-        dispatch(successApi(json, reset));
+        dispatch(successApi(json, render));
         dispatch(setType(typeOfResult));
       })
       .catch(e =>{
