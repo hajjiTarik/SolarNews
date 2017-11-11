@@ -12,6 +12,7 @@ class App extends Component {
 
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
+    console.log('App', this.props.notificationDate);
   }
 
   componentWillUnmount() {
