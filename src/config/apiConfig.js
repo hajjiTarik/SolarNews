@@ -45,10 +45,6 @@ export default {
       id: "sidebar",
       name: "Sidebar"
     },
-    {
-      id: "designerNews",
-      name: "Designer News"
-    }
   ],
   "typeOfResult": {
     "popular": "popular",

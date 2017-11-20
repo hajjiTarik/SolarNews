@@ -6,30 +6,48 @@ import { StyleSheet, ScrollView } from 'react-native';
 import Sites from './components/Sites';
 import FontSize from './components/FontSize';
 import NotificationAlarm from './components/NotificationAlarm';
+import DeleteAllSettings from './components/DeleteAllSettings';
+
 import { persist } from '../../../store/actions';
 
 import { setActiveSite, setNotificationDate, setFontSize } from '../../../store/actions';
+import { getFromStorage } from '../../utils/cacheManager';
+import constants  from '../../../config/appConstants';
 
 class Settings extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      sites: this.props.activeSite,
+      fontSize: this.props.fontSize,
+      notificationDateValue: this.props.notificationDate
+    }
   }
 
-  getSettingsFromCache () {
+  async componentDidMount () {
+    const fontSizeCached = await getFromStorage(constants.FONT_SIZE);
+    const notificationDate = await getFromStorage(constants.NOTIFICATION_DATE);
+    const sites = await getFromStorage(constants.SITES);
 
+    this.setState(()=> ({
+      fontSize: fontSizeCached.fontSize,
+
+    }));
   }
 
   render() {
+    console.log(this.state.fontSize);
     return (
       <ScrollView style={styles.sitesContainer}>
         <Sites
           activeSite={this.props.activeSite}
           setActiveSite={this.props.setActiveSite}
           persist={this.props.persist}
+          defaultValue = {this.state.sites}
         />
         <FontSize
-          fontSize={this.props.fontSize}
+          fontSize={this.state.fontSize}
           setFontSize={this.props.setFontSize}
           persist={this.props.persist}
         />
@@ -37,7 +55,9 @@ class Settings extends Component {
           notificationDate={this.props.notificationDate}
           setNotificationDate={this.props.setNotificationDate}
           persist={this.props.persist}
+          defaultValue = {this.state.notificationDateValue}
         />
+        <DeleteAllSettings />
       </ScrollView>
     )
   }
@@ -46,8 +66,7 @@ class Settings extends Component {
 const styles = StyleSheet.create({
   sitesContainer: {
     backgroundColor: '#FFF',
-    marginBottom: 10,
-    padding:0
+    paddingBottom: 60
   }
 });
 

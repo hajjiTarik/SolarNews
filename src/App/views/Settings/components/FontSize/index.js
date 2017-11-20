@@ -17,7 +17,12 @@ export default class extends Component {
         <View style={{alignItems: 'stretch', justifyContent: 'center', flex:1, paddingLeft:10, paddingRight:10}}>
           <Slider
             value={this.props.fontSize}
-            onValueChange={(value) => this.props.setFontSize(value)}
+            onSlidingComplete={(value) => {
+              let convertedValue = Math.floor(value);
+
+              this.props.setFontSize(value);
+              this.props.persist('fontSize', convertedValue);
+            }}
             minimumValue={10}
             maximumValue={18}
             thumbTintColor={config.skyBlueColor}

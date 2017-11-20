@@ -24,8 +24,7 @@ class AddToFav extends Component {
   async checkIfAleardySaved() {
     const savedArticle = await isInCache(appConstants.ARTICLE_STORAGE, this.props.params.state.params, '_id');
     this.setState(() => ({
-      savedArticle: savedArticle,
-      logoType: savedArticle.length ? 'heart' : 'heart-o',
+      logoType: savedArticle ? 'heart' : 'heart-o',
     }));
 
   }
@@ -35,7 +34,7 @@ class AddToFav extends Component {
     const savedArticle = await isInCache(appConstants.ARTICLE_STORAGE, this.props.params.state.params, '_id');
     let newCache = [];
     try {
-      if (!savedArticle.length) {
+      if (!savedArticle) {
         newCache = await setInStorage(appConstants.ARTICLE_STORAGE, currentArticle, '_id');
       } else {
         newCache = await removeOneItemFromStorage(appConstants.ARTICLE_STORAGE, currentArticle, '_id');

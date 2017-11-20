@@ -90,7 +90,9 @@ export const setNotificationDate = notificationDate => ({
 
 /**
  * @param key
+ * @type string
  * @param data
+ * @type object
  */
 export const persist = (key, data) => ({
   type: TRIGGER_PERSISTENCE,

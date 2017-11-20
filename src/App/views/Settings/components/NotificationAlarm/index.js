@@ -9,8 +9,8 @@ export default class extends Component {
 
   onDateChange = date => {
     this.props.setNotificationDate(date);
+    this.props.persist('notificationDate', date);
   };
-
 
   render () {
     return (
