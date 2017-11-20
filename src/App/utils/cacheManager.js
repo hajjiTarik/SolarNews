@@ -6,7 +6,7 @@ import { AsyncStorage } from 'react-native';
  * @param prop
  * @returns {Promise.<Array.<T>|*>}
  */
-export async function isInCache (key, data, prop){
+export async function isInCache (key, data, prop = ''){
   let savedData = await AsyncStorage.getItem(key);
   savedData = savedData ? JSON.parse(savedData) : [];
 
@@ -19,7 +19,7 @@ export async function isInCache (key, data, prop){
  * @param prop
  * @returns {Promise.<void>}
  */
-export async function setInStorage (key, data, prop){
+export async function setInStorage (key, data, prop = ''){
   try {
     let savedItem = isInCache(key, data, prop);
     let dataFromCache = await AsyncStorage.getItem(key);
@@ -57,7 +57,7 @@ export async function getFromStorage (key){
  * @param prop
  * @returns {Promise.<Array.<T>|*>}
  */
-export async function removeOneItemFromStorage (key, data, prop){
+export async function removeOneItemFromStorage (key, data, prop = ''){
   try {
     let savedData = await AsyncStorage.getItem(key);
 

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { CheckBox, Divider } from 'react-native-elements';
-import config from '../../../config/apiConfig';
-import { setActiveSite } from '../../../store/actions';
 
-class ChooseSites extends Component {
+import config from '../../../../../config/apiConfig';
 
-  constructor (){
-    super();
+export default class extends Component {
+
+  constructor (props){
+    super(props);
   }
 
   renderSitesList = () => {
@@ -21,7 +19,8 @@ class ChooseSites extends Component {
         title={source.name}
         checked={source.id === this.props.activeSite}
         onPress={() => {
-          this.props.setActiveSite(source.id)
+          this.props.setActiveSite(source.id);
+          this.props.persist('Sites', source.id);
         }}
         key={index}
         checkedIcon='dot-circle-o'
@@ -42,16 +41,6 @@ class ChooseSites extends Component {
     )
   }
 }
-
-const mapStateToProps = ({ appReducer }) => ({
-  activeSite: appReducer.activeSite
-});
-
-const mapDispatchToProps = dispatch => ({
-  setActiveSite: bindActionCreators(setActiveSite, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChooseSites);
 
 const styles = StyleSheet.create({
   sitesListCheckbox: {

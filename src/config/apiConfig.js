@@ -20,6 +20,34 @@ export default {
     {
       id: "designerNews",
       name: "Designer News"
+    },
+    {
+      id: "echojs",
+      name: "Echo JS"
+    },
+    {
+      id: "awwwards",
+      name: "Awwwards"
+    },
+    {
+      id: "jobs",
+      name: "Job Board"
+    },
+    {
+      id: "productHunt",
+      name: "Product Hunt"
+    },
+    {
+      id: "growthHackers",
+      name: "Growth Hackers"
+    },
+    {
+      id: "sidebar",
+      name: "Sidebar"
+    },
+    {
+      id: "designerNews",
+      name: "Designer News"
     }
   ],
   "typeOfResult": {
