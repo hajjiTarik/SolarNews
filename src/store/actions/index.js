@@ -8,7 +8,8 @@ import {
   SET_CHECKBOX_VISIBILITY,
   SET_ACTIVE_SITE,
   SET_NOTIFICATION_DATE,
-  SET_FONT_SIZE
+  SET_FONT_SIZE,
+  TRIGGER_PERSISTENCE
 } from '../constants';
 import request from '../../config/api';
 
@@ -88,6 +89,19 @@ export const setNotificationDate = notificationDate => ({
 });
 
 /**
+ * @param key
+ * @type string
+ * @param data
+ * @type object
+ */
+export const persist = (key, data) => ({
+  type: TRIGGER_PERSISTENCE,
+  key,
+  data
+});
+
+/**
+
  *
  * @param site
  * @param typeOfResult

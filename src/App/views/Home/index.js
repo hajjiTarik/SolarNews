@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ActivityIndicator, Alert, FlatList, Image, RefreshControl, StyleSheet, View } from 'react-native';
 import ArticleItem from './../../components/ArticleItem';
-
 import { fetchApi, setPage } from '../../../store/actions';
 
 class Home extends Component {
@@ -54,19 +53,19 @@ class Home extends Component {
 
     return (
       <FlatList
-        data={this.props.result}
-        renderItem={({ item }) => {
-          return <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
-        }}
-        onEndReached={this.handleLoadMore}
-        onEndThreshold={0}
-        keyExtractor={(item, index) => index}
-        refreshControl={<RefreshControl
-          refreshing={this.state.refreshing}
-          onRefresh={this._onRefresh.bind(this)}
-        />
-        }
-      >
+          data={this.props.result}
+          renderItem={({ item }) => {
+            return <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
+          }}
+          onEndReached={this.handleLoadMore}
+          onEndThreshold={0}
+          keyExtractor={(item, index) => index}
+          refreshControl={<RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />
+          }
+        >
       </FlatList>
     )
   };
@@ -88,6 +87,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: '#fff',
     flex: 1,
+    padding: 0
   },
   loader: {
     flex: 10,

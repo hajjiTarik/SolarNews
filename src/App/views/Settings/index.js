@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Text, View, StyleSheet, ScrollView, DatePickerIOS } from 'react-native';
-import { Divider, Slider } from 'react-native-elements';
+import { StyleSheet, ScrollView } from 'react-native';
 
-import ChooseSites from '../../components/ChooseSites';
+import Sites from './components/Sites';
+import FontSize from './components/FontSize';
+import NotificationAlarm from './components/NotificationAlarm';
+import DeleteAllSettings from './components/DeleteAllSettings';
+
+import { persist } from '../../../store/actions';
+
 import { setActiveSite, setNotificationDate, setFontSize } from '../../../store/actions';
-import config from '../../../design';
+import { getFromStorage } from '../../utils/cacheManager';
+import constants  from '../../../config/appConstants';
 
 class Settings extends Component {
 
@@ -14,47 +20,36 @@ class Settings extends Component {
     super(props);
   }
 
-  onDateChange = date => {
-    this.props.setNotificationDate(date);
-  };
+  async componentDidMount () {
+    const fontSizeCached = await getFromStorage(constants.FONT_SIZE);
+    const notificationDateCached = await getFromStorage(constants.NOTIFICATION_DATE);
+    const sitesCached = await getFromStorage(constants.SITES);
+
+    this.props.setActiveSite(sitesCached[constants.SITES] || this.props.activeSite);
+    this.props.setFontSize(fontSizeCached[constants.FONT_SIZE] || this.props.fontSize);
+    this.props.setNotificationDate(notificationDateCached[constants.NOTIFICATION_DATE] || this.props.notificationDate);
+  }
 
   render() {
+
     return (
       <ScrollView style={styles.sitesContainer}>
-        <ChooseSites />
-        <View style={styles.block} >
-          <Text style={styles.title}>Remember me to read :</Text>
-          <Divider style={{ backgroundColor: '#dedede' }} />
-          <View style={{alignItems: 'stretch', justifyContent: 'center', flex:1, paddingLeft:10, paddingRight:10}}>
-            <Slider
-              value={this.props.fontSize}
-              onValueChange={(value) => this.props.setFontSize(value)}
-              minimumValue={10}
-              maximumValue={18}
-              thumbTintColor={config.skyBlueColor}
-              maximumTrackTintColor="#F4F4F4"
-              minimumTrackTintColor={config.clearColor}
-            />
-            <Text>Selected value: {Math.floor(this.props.fontSize)}px</Text>
-            <Text style={{paddingTop: 20,fontSize: Math.floor(this.props.fontSize), color: config.clearColor}}>This example text</Text>
-          </View>
-        </View>
-
-        <View style={styles.block} >
-          <Text style={styles.title}>Remember me to read :</Text>
-          <Divider style={{ backgroundColor: '#dedede' }} />
-          <View style={{paddingLeft:10, paddingRight:10}}>
-            <Text style={{fontWeight: 'bold', fontSize: 12, paddingTop: 10, paddingBottom: 10}}>
-              Notification on : {this.props.notificationDate.toString()}
-            </Text>
-            <DatePickerIOS
-              date={this.props.notificationDate}
-              minimumDate={new Date()}
-              mode="date"
-              onDateChange={this.onDateChange}
-            />
-          </View>
-        </View>
+        <Sites
+          activeSite={this.props.activeSite}
+          setActiveSite={this.props.setActiveSite}
+          persist={this.props.persist}
+        />
+        <FontSize
+          fontSize={this.props.fontSize}
+          setFontSize={this.props.setFontSize}
+          persist={this.props.persist}
+        />
+        <NotificationAlarm
+          notificationDate={this.props.notificationDate}
+          setNotificationDate={this.props.setNotificationDate}
+          persist={this.props.persist}
+        />
+        <DeleteAllSettings />
       </ScrollView>
     )
   }
@@ -63,28 +58,12 @@ class Settings extends Component {
 const styles = StyleSheet.create({
   sitesContainer: {
     backgroundColor: '#FFF',
-    marginBottom: 10,
-    padding:0
-  },
-  block: {
-    paddingTop: 20
-  },
-  sitesListCheckbox: {
-    alignSelf: 'flex-start',
-    paddingTop: 10,
-    paddingBottom: 10,
-    padding:0,
-  },
-
-  title: {
-    paddingTop: 15,
-    paddingBottom: 15,
-    fontWeight: 'bold',
-    paddingLeft: 10,
+    paddingBottom: 60
   }
 });
 
 const mapStateToProps = ({ appReducer })=> {
+
   return {
     activeSite: appReducer.activeSite,
     notificationDate: appReducer.notificationDate,
@@ -96,7 +75,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setActiveSite: bindActionCreators(setActiveSite, dispatch),
     setNotificationDate: bindActionCreators(setNotificationDate, dispatch),
-    setFontSize: bindActionCreators(setFontSize, dispatch)
+    setFontSize: bindActionCreators(setFontSize, dispatch),
+    persist: bindActionCreators(persist, dispatch)
   }
 };
 

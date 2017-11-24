@@ -13,6 +13,7 @@ export default (state = {
         visible: action.visible
       };
     case SET_ACTIVE_SITE :
+      console.log("reducer", action.activeSite);
       return {
         ...state,
         activeSite: action.activeSite
