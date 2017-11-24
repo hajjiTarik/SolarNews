@@ -25,7 +25,6 @@ export default (state = {
         type: action.articleType
       };
     case SET_PAGE :
-      console.log(action.page++);
       return {
         ...state,
         page: action.page++

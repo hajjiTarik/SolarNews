@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, DatePickerIOS } from 'react-native';
 import { Divider } from 'react-native-elements';
+import constants  from '../../../../../config/appConstants';
 
 export default class extends Component {
   constructor(props){
@@ -9,7 +10,7 @@ export default class extends Component {
 
   onDateChange = date => {
     this.props.setNotificationDate(date);
-    this.props.persist('notificationDate', date);
+    this.props.persist(constants.NOTIFICATION_DATE, date);
   };
 
   render () {
@@ -22,7 +23,7 @@ export default class extends Component {
             Notification on : {this.props.notificationDate.toString()}
           </Text>
           <DatePickerIOS
-            date={this.props.notificationDate}
+            date={new Date(this.props.notificationDate)}
             minimumDate={new Date()}
             mode="date"
             onDateChange={this.onDateChange}

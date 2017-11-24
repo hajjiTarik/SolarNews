@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Divider, Slider } from 'react-native-elements';
 import config from '../../../../../design/index';
+import constants  from '../../../../../config/appConstants';
 
 export default class extends Component {
 
@@ -17,11 +18,10 @@ export default class extends Component {
         <View style={{alignItems: 'stretch', justifyContent: 'center', flex:1, paddingLeft:10, paddingRight:10}}>
           <Slider
             value={this.props.fontSize}
-            onSlidingComplete={(value) => {
+            onSlidingComplete={value => {
               let convertedValue = Math.floor(value);
-
-              this.props.setFontSize(value);
-              this.props.persist('fontSize', convertedValue);
+              this.props.setFontSize(convertedValue);
+              this.props.persist(constants.FONT_SIZE, convertedValue);
             }}
             minimumValue={10}
             maximumValue={18}
@@ -30,7 +30,9 @@ export default class extends Component {
             minimumTrackTintColor={config.clearColor}
           />
           <Text>Selected value: {Math.floor(this.props.fontSize)}px</Text>
-          <Text style={{paddingTop: 20,fontSize: Math.floor(this.props.fontSize), color: config.clearColor}}>This example text</Text>
+          <Text style={{paddingTop: 20,fontSize: Math.floor(this.props.fontSize), color: config.clearColor}}>
+            This example text
+          </Text>
         </View>
       </View>
     )

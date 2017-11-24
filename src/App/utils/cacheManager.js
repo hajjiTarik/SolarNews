@@ -37,7 +37,7 @@ export async function setInStorage(key, data, prop = '') {
     } else {
       result = { [key] : data };
     }
-
+    console.log('in cache manager',savedData, key, result);
     await AsyncStorage.setItem(key, JSON.stringify(result));
 
     return result;

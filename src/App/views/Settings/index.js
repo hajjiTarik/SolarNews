@@ -18,36 +18,29 @@ class Settings extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      sites: this.props.activeSite,
-      fontSize: this.props.fontSize,
-      notificationDateValue: this.props.notificationDate
-    }
   }
 
   async componentDidMount () {
     const fontSizeCached = await getFromStorage(constants.FONT_SIZE);
-    const notificationDate = await getFromStorage(constants.NOTIFICATION_DATE);
-    const sites = await getFromStorage(constants.SITES);
+    const notificationDateCached = await getFromStorage(constants.NOTIFICATION_DATE);
+    const sitesCached = await getFromStorage(constants.SITES);
 
-    this.setState(()=> ({
-      fontSize: fontSizeCached.fontSize,
-
-    }));
+    this.props.setActiveSite(sitesCached[constants.SITES] || this.props.activeSite);
+    this.props.setFontSize(fontSizeCached[constants.FONT_SIZE] || this.props.fontSize);
+    this.props.setNotificationDate(notificationDateCached[constants.NOTIFICATION_DATE] || this.props.notificationDate);
   }
 
   render() {
-    console.log(this.state.fontSize);
+
     return (
       <ScrollView style={styles.sitesContainer}>
         <Sites
           activeSite={this.props.activeSite}
           setActiveSite={this.props.setActiveSite}
           persist={this.props.persist}
-          defaultValue = {this.state.sites}
         />
         <FontSize
-          fontSize={this.state.fontSize}
+          fontSize={this.props.fontSize}
           setFontSize={this.props.setFontSize}
           persist={this.props.persist}
         />
@@ -55,7 +48,6 @@ class Settings extends Component {
           notificationDate={this.props.notificationDate}
           setNotificationDate={this.props.setNotificationDate}
           persist={this.props.persist}
-          defaultValue = {this.state.notificationDateValue}
         />
         <DeleteAllSettings />
       </ScrollView>
@@ -71,6 +63,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ appReducer })=> {
+
   return {
     activeSite: appReducer.activeSite,
     notificationDate: appReducer.notificationDate,

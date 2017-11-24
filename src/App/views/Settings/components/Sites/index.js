@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { CheckBox, Divider } from 'react-native-elements';
 
 import config from '../../../../../config/apiConfig';
+import constants  from '../../../../../config/appConstants';
 
 export default class extends Component {
 
@@ -13,20 +14,20 @@ export default class extends Component {
   renderSitesList = () => {
     const listSource = config.sites;
     return listSource.map((source, index) => {
-      return(<CheckBox
+      return (<CheckBox
         style={styles.sitesListCheckbox}
         center
         title={source.name}
         checked={source.id === this.props.activeSite}
         onPress={() => {
+          this.props.persist(constants.SITES, source.id);
           this.props.setActiveSite(source.id);
-          this.props.persist('Sites', source.id);
         }}
         key={index}
         checkedIcon='dot-circle-o'
         uncheckedIcon='circle-o'
-      />)
-    })
+      />);
+    });
   };
 
   render() {
