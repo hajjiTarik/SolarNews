@@ -101,6 +101,7 @@ export const persist = (key, data) => ({
 });
 
 /**
+
  *
  * @param site
  * @param typeOfResult
