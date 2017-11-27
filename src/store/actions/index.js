@@ -103,6 +103,7 @@ export const persist = (key, data) => ({
 });
 
 /**
+<<<<<<< HEAD
  * @type string
  * @type object
  */
@@ -112,7 +113,6 @@ export const setTopArticle = topArticle => ({
 });
 
 /**
- *
  * @param site
  * @param typeOfResult
  * @param pageNumber
