@@ -1,14 +1,16 @@
 import {
   ERROR_API,
-  SET_TYPE,
   REQUEST_API,
-  SUCCESS_API,
-  SET_IN_CACHE,
-  SET_PAGE,
-  SET_CHECKBOX_VISIBILITY,
+  RESET_ALL_SETTINGS,
   SET_ACTIVE_SITE,
-  SET_NOTIFICATION_DATE,
+  SET_CHECKBOX_VISIBILITY,
   SET_FONT_SIZE,
+  SET_IN_CACHE,
+  SET_NOTIFICATION_DATE,
+  SET_PAGE,
+  SET_TOP_ARTICLE,
+  SET_TYPE,
+  SUCCESS_API,
   TRIGGER_PERSISTENCE
 } from '../constants';
 import request from '../../config/api';
@@ -59,7 +61,7 @@ export const setType = articleType => ({
 /**
  * @param page
  */
-export const setPage = (page = 0) => ({
+export const setPage = (page = 1) => ({
   type: SET_PAGE,
   page
 });
@@ -101,18 +103,27 @@ export const persist = (key, data) => ({
 });
 
 /**
+ * @type string
+ * @type object
+ */
+export const setTopArticle = topArticle => ({
+  type: SET_TOP_ARTICLE,
+  topArticle
+});
+
+/**
  *
  * @param site
  * @param typeOfResult
  * @param pageNumber
  * @param render
+ * @param action callback Action
  * @returns {function(*)}
  */
-export const fetchApi = (site, typeOfResult, pageNumber, render = false) => {
-
+export const fetchApi = (site, typeOfResult, pageNumber, render = false, action = false) => {
   return (dispatch) => {
-    if( render ){
-      dispatch(setPage());
+    if (render) {
+      dispatch(setPage(1));
     }
 
     dispatch(requestApi(site, typeOfResult, pageNumber));
@@ -120,11 +131,19 @@ export const fetchApi = (site, typeOfResult, pageNumber, render = false) => {
     return request(site, typeOfResult, pageNumber)
       .then(({ data }) => data)
       .then(json => {
-        dispatch(successApi(json, render));
-        dispatch(setType(typeOfResult));
+        if (action) {
+          dispatch(action(json));
+        } else {
+          dispatch(successApi(json, render));
+          dispatch(setType(typeOfResult));
+        }
       })
-      .catch(e =>{
+      .catch(e => {
         alert(e);
       })
   }
 };
+
+export const setDefaultSettings = () => ({
+  type: RESET_ALL_SETTINGS
+});

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, DatePickerIOS } from 'react-native';
+import { DatePickerIOS, StyleSheet, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
-import constants  from '../../../../../config/appConstants';
+import constants from '../../../../../config/appConstants';
 
 export default class extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
@@ -13,13 +13,13 @@ export default class extends Component {
     this.props.persist(constants.NOTIFICATION_DATE, date);
   };
 
-  render () {
+  render() {
     return (
-      <View style={styles.block} >
+      <View style={styles.block}>
         <Text style={styles.title}>Remember me to read :</Text>
-        <Divider style={{ backgroundColor: '#dedede' }} />
-        <View style={{paddingLeft:10, paddingRight:10}}>
-          <Text style={{fontWeight: 'bold', fontSize: 12, paddingTop: 10, paddingBottom: 10}}>
+        <Divider style={{ backgroundColor: '#dedede' }}/>
+        <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+          <Text style={{ fontWeight: 'bold', fontSize: 12, paddingTop: 10, paddingBottom: 10 }}>
             Notification on : {this.props.notificationDate.toString()}
           </Text>
           <DatePickerIOS

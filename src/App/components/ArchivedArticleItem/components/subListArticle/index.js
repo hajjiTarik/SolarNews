@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import colors from '../../../../../design';
 
-export default class ArticleItem extends Component {
+export default class extends Component {
 
   constructor(props) {
     super(props);

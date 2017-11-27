@@ -1,46 +1,30 @@
 import { AsyncStorage } from 'react-native';
-import { shallowComparing } from './helpers';
+import { isEqual } from 'lodash';
 
 /**
  * @param key
  * @param data
- * @param prop = ''
- * @returns {Promise.<Array.<T>|*>}
+ * @returns {Promise.<boolean>}
  */
-export async function isInCache(key, data, prop = '') {
+export async function isInCache(key, data) {
   let savedData = JSON.parse(await AsyncStorage.getItem(key)) || {};
-
-  if (savedData instanceof Array) {
-    return (savedData || []).filter(item => item[prop] === data[prop]).length;
-  } else {
-    return shallowComparing(savedData, { [key] : data });
-  }
+  return isEqual({ [key] : data }, savedData);
 }
 
 /**
  * @param key
  * @param data
- * @param prop
  * @returns {Promise.<void>}
  */
-export async function setInStorage(key, data, prop = '') {
+export async function setInStorage(key, data) {
   try {
-    let isItemSaved = await isInCache(key, data, prop);
-    let savedData = JSON.parse(await AsyncStorage.getItem(key));
-    let result = null;
-
+    let isItemSaved = await isInCache(key, data);
     if (isItemSaved) return;
 
-    if (savedData instanceof Array) {
-      result = savedData || [];
-      result.unshift(data);
-    } else {
-      result = { [key] : data };
-    }
-    console.log('in cache manager',savedData, key, result);
+    let result = { [key] : data };
     await AsyncStorage.setItem(key, JSON.stringify(result));
-
     return result;
+
   } catch (e) {
     console.log(e);
   }
@@ -53,28 +37,9 @@ export async function setInStorage(key, data, prop = '') {
 export async function getFromStorage(key) {
   try {
     let savedData = await AsyncStorage.getItem(key);
-    savedData = savedData ? JSON.parse(savedData) : [];
+    savedData = savedData ? JSON.parse(savedData) : {};
     return savedData;
-  } catch (e) {
-    console.log(e);
-  }
-}
 
-/**
- * @param key
- * @param data
- * @param prop
- * @returns {Promise.<Array.<T>|*>}
- */
-export async function removeOneItemFromStorage(key, data, prop = '') {
-  try {
-    let savedData = await AsyncStorage.getItem(key);
-
-    savedData = savedData ? JSON.parse(savedData) : [];
-    let result = savedData.filter(item => item[prop] !== data[prop]);
-    await AsyncStorage.setItem(key, JSON.stringify(result));
-
-    return result;
   } catch (e) {
     console.log(e);
   }

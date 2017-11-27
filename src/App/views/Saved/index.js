@@ -37,6 +37,7 @@ class Saved extends Component {
     if(this.state.blockRefresh) return;
     try {
       const res = await getFromStorage(appConstants.ARTICLE_STORAGE);
+      console.log("res", res);
       this.props.setInCache(res);
 
       this.setState({
@@ -161,11 +162,11 @@ const styles = StyleSheet.create({
 const mapStateToProps = ({ appContentReducer, appReducer }) => ({
   articlesFromLocalStore: appContentReducer.articles,
   checkboxVisibility: appReducer.visible
-})
+});
 
 const mapDispatchToProps = disptach => ({
   setInCache: bindActionCreators(setInCache, disptach),
   showCheckbox: bindActionCreators(showCheckbox, disptach)
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Saved);

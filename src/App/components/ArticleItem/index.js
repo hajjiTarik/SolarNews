@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
-import colors from '../../../design';
-import SubListArticle from './components/subListArticle';
-
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { articleSelector } from '../../selectors';
 
 export default class ArticleItem extends Component {
@@ -15,16 +11,12 @@ export default class ArticleItem extends Component {
   render() {
     const {
       title,
-      source,
       image
-    }  =  articleSelector(this.props.article);
+    } = articleSelector(this.props.article);
 
     return (
       <View style={styles.articleContainer}>
         <TouchableOpacity onPress={this.props.onReadMore}>
-          <View style={styles.header}>
-            <Text style={styles.source}>{source.name}</Text>
-          </View>
           <Image
             resizeMode='cover'
             style={{ height: 120 }}
@@ -32,7 +24,6 @@ export default class ArticleItem extends Component {
           />
           <View style={styles.description}>
             <Text style={styles.descriptionTitle}>{title}</Text>
-            <SubListArticle source={source}/>
           </View>
         </TouchableOpacity>
       </View>
@@ -42,18 +33,8 @@ export default class ArticleItem extends Component {
 
 const styles = StyleSheet.create({
   articleContainer: {
-    margin: 5,
     backgroundColor: '#fff',
-    padding: 5,
-    borderBottomWidth: 2,
-    borderBottomColor: colors.clearColor,
-  },
-  header: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#d1d1d1',
+    borderRadius: 8
   },
   descriptionTitle: {
     fontSize: 15,
@@ -61,12 +42,7 @@ const styles = StyleSheet.create({
     color: '#393e42'
   },
   description: {
-    paddingTop: 10,
+    padding: 10,
     paddingBottom: 10,
-  },
-  source: {
-    fontStyle: 'italic',
-    color: '#595959',
-    fontSize: 12
   }
 });

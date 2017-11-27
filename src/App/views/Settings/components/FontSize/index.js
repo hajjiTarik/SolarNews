@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Divider, Slider } from 'react-native-elements';
 import config from '../../../../../design/index';
-import constants  from '../../../../../config/appConstants';
+import constants from '../../../../../config/appConstants';
 
 export default class extends Component {
 
@@ -10,12 +10,12 @@ export default class extends Component {
     super(props);
   }
 
-  render () {
-    return(
-      <View style={styles.block} >
+  render() {
+    return (
+      <View style={styles.block}>
         <Text style={styles.title}>Remember me to read :</Text>
-        <Divider style={{ backgroundColor: '#dedede' }} />
-        <View style={{alignItems: 'stretch', justifyContent: 'center', flex:1, paddingLeft:10, paddingRight:10}}>
+        <Divider style={{ backgroundColor: '#dedede' }}/>
+        <View style={{ alignItems: 'stretch', justifyContent: 'center', flex: 1, paddingLeft: 10, paddingRight: 10 }}>
           <Slider
             value={this.props.fontSize}
             onSlidingComplete={value => {
@@ -25,12 +25,12 @@ export default class extends Component {
             }}
             minimumValue={10}
             maximumValue={18}
-            thumbTintColor={config.skyBlueColor}
+            thumbTintColor={config.clearColor}
             maximumTrackTintColor="#F4F4F4"
-            minimumTrackTintColor={config.clearColor}
+            minimumTrackTintColor={config.iconColor}
           />
           <Text>Selected value: {Math.floor(this.props.fontSize)}px</Text>
-          <Text style={{paddingTop: 20,fontSize: Math.floor(this.props.fontSize), color: config.clearColor}}>
+          <Text style={{ paddingTop: 20, fontSize: Math.floor(this.props.fontSize), color: config.clearColor }}>
             This example text
           </Text>
         </View>

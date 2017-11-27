@@ -4,15 +4,20 @@ import { Button } from 'react-native-elements';
 import { removeDataFromStorage } from '../../../../utils/cacheManager';
 
 export default class extends Component {
-  async deleteAllSettingsHandler () {
-    try {
-      await removeDataFromStorage(true);
-      alert('All settings removed successfully');
-    } catch (e) {
-      console.log(e);
-    }
 
+  constructor (props){
+    super(props);
   }
+
+  deleteAllSettingsHandler = () => {
+    if(!this.props.keys.length) return;
+
+    this.props.keys.map(async (key) => {
+      await removeDataFromStorage(false, key);
+    });
+
+    this.props.setDefaultSettings();
+  };
 
   render () {
 

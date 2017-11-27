@@ -14,10 +14,12 @@ export class Type extends Component {
   }
 
   handleChangeType() {
+
+    console.log(this.props.type);
     if (this.props.type === config.typeOfResult.latest) {
-      this.props.fetchApi(this.props.activeSite, config.typeOfResult.popular, this.props.page, true);
+      this.props.fetchApi(this.props.activeSite, config.typeOfResult.popular, 1, true);
     } else {
-      this.props.fetchApi(this.props.activeSite, config.typeOfResult.latest, this.props.page, true);
+      this.props.fetchApi(this.props.activeSite, config.typeOfResult.latest, 1, true);
     }
 
   }

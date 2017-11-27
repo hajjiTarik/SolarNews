@@ -2,8 +2,8 @@ export default {
   "baseURL": "https://api.pnd.gs/v1/sources/",
   "sites": [
     {
-      id: "hackerNews",
-      name: "Hacker News"
+      id: "awwwards",
+      name: "Awwwards"
     },
     {
       id: "dribbble",
@@ -12,6 +12,10 @@ export default {
     {
       id: "behance",
       name: "Behance"
+    },
+    {
+      id: "hackerNews",
+      name: "Hacker News"
     },
     {
       id: "lobsters",
@@ -24,10 +28,6 @@ export default {
     {
       id: "echojs",
       name: "Echo JS"
-    },
-    {
-      id: "awwwards",
-      name: "Awwwards"
     },
     {
       id: "jobs",

@@ -3,8 +3,9 @@ import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { isEqual, omit } from 'lodash';
 
-import { isInCache, removeOneItemFromStorage, setInStorage } from '../../utils/cacheManager';
+import { getFromStorage, setInStorage } from '../../utils/cacheManager';
 import appConstants from '../../../config/appConstants';
 import { setInCache } from '../../../store/actions';
 
@@ -18,28 +19,51 @@ class AddToFav extends Component {
     };
 
     this.addToFavHandler = this.addToFavHandler.bind(this);
-    this.checkIfAleardySaved();
+    this.checkIfAleardySaved().then();
   }
 
   async checkIfAleardySaved() {
-    const savedArticle = await isInCache(appConstants.ARTICLE_STORAGE, this.props.params.state.params, '_id');
+    const savedArticles = await getFromStorage(appConstants.ARTICLE_STORAGE);
+    const currentArticle = this.props.params.state.params;
+    const savedArticle = savedArticles[appConstants.ARTICLE_STORAGE][this.props.params.state.params['_id']];
+    let isArticleSaved = false;
+
+    if (savedArticles) {
+      if (savedArticles[appConstants.ARTICLE_STORAGE][this.props.params.state.params['_id']]) {
+        isArticleSaved = isEqual(savedArticles[appConstants.ARTICLE_STORAGE][currentArticle['_id']], currentArticle);
+      }
+    }
+
     this.setState(() => ({
-      logoType: savedArticle ? 'heart' : 'heart-o',
+      logoType: isArticleSaved ? 'heart' : 'heart-o',
     }));
 
+    return savedArticle;
   }
 
   async addToFavHandler() {
-    const currentArticle = this.props.params.state.params;
-    const savedArticle = await isInCache(appConstants.ARTICLE_STORAGE, this.props.params.state.params, '_id');
-    let newCache = [];
+    if (!this.props.params.state.params) return;
+
+    const savedArticles = await getFromStorage(appConstants.ARTICLE_STORAGE);
+    const currentArticle = {
+      [this.props.params.state.params['_id']]: this.props.params.state.params
+    };
+
+    const savedArticle = await this.checkIfAleardySaved();
+    let newCache = null;
+
     try {
       if (!savedArticle) {
-        newCache = await setInStorage(appConstants.ARTICLE_STORAGE, currentArticle, '_id');
+        newCache = await setInStorage(appConstants.ARTICLE_STORAGE,
+          {
+            ...savedArticles[appConstants.ARTICLE_STORAGE],
+            ...currentArticle
+          }
+        )
       } else {
-        newCache = await removeOneItemFromStorage(appConstants.ARTICLE_STORAGE, currentArticle, '_id');
+        newCache = omit(savedArticles[appConstants.ARTICLE_STORAGE], this.props.params.state.params['_id']);
+        await setInStorage(appConstants.ARTICLE_STORAGE, newCache);
       }
-
       this.props.setInCache(newCache);
       await this.checkIfAleardySaved();
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { CheckBox } from 'react-native-elements';
-
 import colors from '../../../design';
 
 import { articleSelector } from '../../selectors';
@@ -79,9 +78,9 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   articleContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f9fa',
     borderBottomWidth: 1,
-    borderBottomColor: '#dedede',
+    borderBottomColor: '#ecedee',
     flexDirection: 'row',
     flex: 1,
   },
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
     padding: 10
   },
   descriptionTitle: {
-    color: '#000',
+    color: '#2c3137',
     fontSize: 19,
     fontWeight: 'bold',
     marginBottom: 5,

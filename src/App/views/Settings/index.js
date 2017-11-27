@@ -10,7 +10,7 @@ import DeleteAllSettings from './components/DeleteAllSettings';
 
 import { persist } from '../../../store/actions';
 
-import { setActiveSite, setNotificationDate, setFontSize } from '../../../store/actions';
+import { setActiveSite, setNotificationDate, setFontSize, setDefaultSettings } from '../../../store/actions';
 import { getFromStorage } from '../../utils/cacheManager';
 import constants  from '../../../config/appConstants';
 
@@ -49,7 +49,10 @@ class Settings extends Component {
           setNotificationDate={this.props.setNotificationDate}
           persist={this.props.persist}
         />
-        <DeleteAllSettings />
+        <DeleteAllSettings
+          setDefaultSettings={this.props.setDefaultSettings}
+          keys={[constants.FONT_SIZE, constants.NOTIFICATION_DATE, constants.SITES]}
+        />
       </ScrollView>
     )
   }
@@ -76,7 +79,8 @@ const mapDispatchToProps = dispatch => {
     setActiveSite: bindActionCreators(setActiveSite, dispatch),
     setNotificationDate: bindActionCreators(setNotificationDate, dispatch),
     setFontSize: bindActionCreators(setFontSize, dispatch),
-    persist: bindActionCreators(persist, dispatch)
+    persist: bindActionCreators(persist, dispatch),
+    setDefaultSettings: bindActionCreators(setDefaultSettings, dispatch)
   }
 };
 

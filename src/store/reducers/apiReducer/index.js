@@ -1,10 +1,11 @@
-import { ERROR_API, REQUEST_API, SET_TYPE, SET_PAGE, SUCCESS_API } from '../../constants';
+import { ERROR_API, REQUEST_API, SET_PAGE, SET_TOP_ARTICLE, SET_TYPE, SUCCESS_API } from '../../constants';
 
 export default (state = {
                   isFetching: false,
                   type: 'popular',
                   page: 1,
-                  result: []
+                  result: [],
+                  topArticle: []
                 }, action) => {
   switch (action.type) {
     case [REQUEST_API, SET_TYPE] :
@@ -13,7 +14,8 @@ export default (state = {
         isFetching: true
       };
     case SUCCESS_API :
-      const result = (!action.render ? [...state.result , ...action.result] : action.result);
+      const result = (!action.render ? [...state.result, ...action.result] : action.result);
+
       return {
         ...state,
         result,
@@ -25,9 +27,16 @@ export default (state = {
         type: action.articleType
       };
     case SET_PAGE :
+      const current = ++action.page;
+
       return {
         ...state,
-        page: action.page++
+        page: current
+      };
+    case SET_TOP_ARTICLE :
+      return {
+        ...state,
+        topArticle: action.topArticle
       };
     case ERROR_API :
       return {

@@ -1,4 +1,4 @@
-import { SET_CHECKBOX_VISIBILITY, SET_ACTIVE_SITE, SET_NOTIFICATION_DATE, SET_FONT_SIZE } from '../../constants';
+import { SET_CHECKBOX_VISIBILITY, SET_ACTIVE_SITE, SET_NOTIFICATION_DATE, SET_FONT_SIZE,RESET_ALL_SETTINGS } from '../../constants';
 
 export default (state = {
                   visible: false,
@@ -13,7 +13,6 @@ export default (state = {
         visible: action.visible
       };
     case SET_ACTIVE_SITE :
-      console.log("reducer", action.activeSite);
       return {
         ...state,
         activeSite: action.activeSite
@@ -27,6 +26,19 @@ export default (state = {
       return {
         ...state,
         notificationDate: action.notificationDate
+      };
+    case RESET_ALL_SETTINGS :
+      console.log({
+        ...state,
+        activeSite: state.activeSite,
+        fontSize: state.fontSize,
+        notificationDate: state.notificationDate
+      });
+      return {
+        ...state,
+        activeSite: 'behance',
+        fontSize: 14,
+        notificationDate: new Date()
       };
     default :
       return state;
