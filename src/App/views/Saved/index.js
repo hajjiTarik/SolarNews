@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { Icon, SearchBar } from 'react-native-elements';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { values } from 'lodash';
+import { isEmpty, values } from 'lodash';
 
 import ArchivedArticleItem from '../../components/ArchivedArticleItem';
 import appConstants from '../../../config/appConstants';
 import { setInCache, showCheckbox } from '../../../store/actions';
 import { getFromStorage, removeDataFromStorage } from '../../utils/cacheManager';
+import SavedHeader from './components/SavedHeader';
 
 class Saved extends Component {
 
@@ -19,8 +19,8 @@ class Saved extends Component {
     this.state = {
       articles: this.props.articlesFromLocalStore,
       refreshing: false,
-      searchVisibility: true,
-      blockRefresh: false
+      blockRefresh: false,
+      checkboxVisibility: false
     };
 
     this.getArticleFromCache();
@@ -33,10 +33,9 @@ class Saved extends Component {
   getArticleFromCache = async () => {
     try {
       const res = await getFromStorage(appConstants.ARTICLE_STORAGE);
-      const savedArticles = res[appConstants.ARTICLE_STORAGE];
-
-      if (!Object.keys(savedArticles).length) return;
-
+      const savedArticles = !isEmpty(res) && res.hasOwnProperty(appConstants.ARTICLE_STORAGE)
+        ? res[appConstants.ARTICLE_STORAGE]
+        : {};
       this.props.setInCache(savedArticles);
       this.setState({
         articles: savedArticles
@@ -44,10 +43,11 @@ class Saved extends Component {
     } catch (error) {
       alert(error);
     }
-  }
+  };
 
-  setSearchText(text) {
-    let result = this.state.articles;
+  setSearchText = text => {
+    let result = !isEmpty(this.state.articles) ? values(this.state.articles): [];
+
     if (text) {
       this.setState({
         blockRefresh: true
@@ -63,62 +63,42 @@ class Saved extends Component {
         });
       }
     } else {
-
       this.setState(() => ({
         articles: this.props.articlesFromLocalStore,
         blockRefresh: false
       }));
     }
-
-  }
+  };
 
   async removeAllArticlesHandler() {
-    await removeDataFromStorage(appConstants.ARTICLE_STORAGE);
+    await removeDataFromStorage(false, appConstants.ARTICLE_STORAGE);
     await this.getArticleFromCache();
   }
 
-  handleSearchVisibility = () => {
-    this.setState({
-      searchVisibility: !this.state.searchVisibility
-    });
-  };
-
   handleCheckboxVisibility = () => {
-    this.props.showCheckbox(!this.props.checkboxVisibility);
+    this.setState({
+      checkboxVisibility: !this.state.checkboxVisibility,
+    })
   };
-
-  renderSearchBlock = () => {
-    if (this.state.searchVisibility) return;
-    return (
-      <View>
-        <SearchBar
-          DarkTheme
-          onChangeText={this.setSearchText.bind(this)}
-          placeholder='Search...'/>
-      </View>
-    );
-  }
 
   render() {
-    if (!this.state.articles) return null;
-
     const convertedData = values(this.state.articles).reverse();
-    if (!convertedData.length) return null;
-
     return (
       <View style={styles.contentContainer}>
-        <View style={styles.optionMenu}>
-          <Icon style={styles.searchContainer} onPress={this.handleSearchVisibility} name="search" type='font-awesome'
-                size={28} color='#fff'/>
-          <Text style={styles.selectArticle} onPress={this.handleCheckboxVisibility}>Select All</Text>
-          <Icon style={styles.removeAll} onPress={this.removeAllArticlesHandler} name="trash" type='font-awesome'
-                size={28} color='#fff'/>
-        </View>
-        {this.renderSearchBlock()}
+        <SavedHeader
+          removeAllArticlesHandler={this.removeAllArticlesHandler}
+          handleCheckboxVisibility={this.handleCheckboxVisibility}
+          handleSearchVisibility={this.handleSearchVisibility}
+          setSearchText={this.setSearchText}
+        />
         <FlatList
           data={convertedData}
           renderItem={({ item }) => {
-            return <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
+            return <ArchivedArticleItem
+              checkboxVisibility={this.state.checkboxVisibility}
+              onReadMore={() => this.onReadMore(item)}
+              article={item}
+            />
           }}
           refreshing={this.state.refreshing}
           onRefresh={this.getArticleFromCache}
@@ -132,36 +112,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flex: 1
   },
-
-  nbArticles: {
-    color: '#fff'
-  },
-  searchBar: {
-    backgroundColor: '#fff',
-    padding: 5,
-    paddingLeft: 10,
-    borderRadius: 50,
-    width: 240
-  },
-  optionMenu: {
-    padding: 10,
-    backgroundColor: '#99d3f7',
-    flexDirection: 'row',
-  },
-  removeAll: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    width: 50
-  },
-  selectArticle: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    width: 80
-  },
-  searchContainer: {
-    flexDirection: 'row', alignItems: 'flex-start',
-    width: 250
-  }
 });
 
 const mapStateToProps = ({ appContentReducer, appReducer }) => ({

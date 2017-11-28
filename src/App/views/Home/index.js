@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActivityIndicator, Alert, FlatList, Image, RefreshControl, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Alert, Button, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { Badge } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+
 import ArchivedArticleItem from './../../components/ArchivedArticleItem';
-import { fetchApi, setPage } from '../../../store/actions';
+import { fetchApi, setPage, setToggleCarousel } from '../../../store/actions';
 import ArticleCarousel from '../../components/ArticleCarousel';
+import InfoMessage from '../../components/InfoMessage';
 
 class Home extends Component {
 
@@ -13,6 +16,10 @@ class Home extends Component {
     super(props);
     this.state = {
       refreshing: false,
+      messageType: 'INFO',
+      messageShow: false,
+      messageContent: 'toto',
+      border: false
     };
     this.onReadMore = this.onReadMore.bind(this);
   }
@@ -26,6 +33,17 @@ class Home extends Component {
     this.props.setPage(this.props.page);
     this.props.fetchApi(this.props.activeSite, this.props.type, this.props.page);
   };
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.activeSite !== this.props.activeSite) {
+      this.setState({
+        messageType: 'WARN',
+        messageShow: true,
+        messageContent: 'Your Settings has changed please refresh'
+      });
+      console.log(1);
+    }
+  }
 
   _onRefresh = () => {
     this.setState({
@@ -47,9 +65,7 @@ class Home extends Component {
   renderItems = () => {
     if (!this.props.result || !this.props.result.length) {
       return (<View>
-        <Image
-          source={require('../../../Assets/nointernet.png')}
-        />
+        <Button onPress={() => this._onRefresh()} title={"Refresh"}/>
       </View>);
     }
 
@@ -75,7 +91,7 @@ class Home extends Component {
     )
   };
 
-  get gradient () {
+  get gradient() {
     return (
       <LinearGradient
         colors={['#6d3cc6', '#63a4cc']}
@@ -90,7 +106,16 @@ class Home extends Component {
     return (
       <View style={styles.contentContainer}>
         { this.gradient }
-        <ArticleCarousel />
+        <InfoMessage show={this.state.messageShow} message={this.state.messageContent} type={this.state.messageType} />
+        <Badge
+          value={this.props.showCarousel ? 'Hide' : 'Show'}
+          containerStyle={{ backgroundColor: '#484848', opacity: 0.3, width: 70, margin: 10 }}
+          textStyle={{ color: '#ffffff' }}
+          onPress={() => {
+            this.props.setToggleCarousel(this.props.showCarousel)
+          }}
+        />
+        <ArticleCarousel toggle={this.props.showCarousel}/>
         {this.renderItems()}
         <View style={styles.loader}>
           <ActivityIndicator animating={this.props.isFetching}/>
@@ -106,6 +131,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f9fa',
     flex: 1,
     padding: 0
+  },
+  hideButton: {
+    opacity: 0.4,
+    width: 80,
+    margin: 0,
+    padding: 0,
   },
   loader: {
     flex: 10,
@@ -128,13 +159,15 @@ const mapStateToProps = ({ apiReducer, appReducer }) => {
     type: apiReducer.type,
     page: apiReducer.page,
     activeSite: appReducer.activeSite,
+    showCarousel: appReducer.showCarousel
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchApi: bindActionCreators(fetchApi, dispatch),
-    setPage: bindActionCreators(setPage, dispatch)
+    setPage: bindActionCreators(setPage, dispatch),
+    setToggleCarousel: bindActionCreators(setToggleCarousel, dispatch)
   }
 };
 

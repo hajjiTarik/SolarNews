@@ -57,7 +57,7 @@ export const SavedStack = StackNavigator({
         title: 'Favorite Articles',
         headerTintColor: '#fff',
         headerStyle: {
-          backgroundColor: colors.clearColor,
+          backgroundColor: '#6d3cc6',
           borderBottomWidth: 0,
         },
       }

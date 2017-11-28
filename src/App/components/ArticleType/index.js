@@ -14,8 +14,6 @@ export class Type extends Component {
   }
 
   handleChangeType() {
-
-    console.log(this.props.type);
     if (this.props.type === config.typeOfResult.latest) {
       this.props.fetchApi(this.props.activeSite, config.typeOfResult.popular, 1, true);
     } else {
@@ -24,8 +22,8 @@ export class Type extends Component {
 
   }
 
-  renderTitle (){
-    if(this.props.type === 'popular') return 'Popular';
+  renderTitle() {
+    if (this.props.type === 'popular') return 'Popular';
     return 'Latest';
   }
 
@@ -43,6 +41,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     padding: 10,
+    backgroundColor: '#421372',
+    opacity: 0.8
   }
 });
 

@@ -1,10 +1,18 @@
-import { SET_CHECKBOX_VISIBILITY, SET_ACTIVE_SITE, SET_NOTIFICATION_DATE, SET_FONT_SIZE,RESET_ALL_SETTINGS } from '../../constants';
+import {
+  RESET_ALL_SETTINGS,
+  SET_ACTIVE_SITE,
+  SET_CHECKBOX_VISIBILITY,
+  SET_FONT_SIZE,
+  SET_NOTIFICATION_DATE,
+  TOGGLE_CAROUSEL
+} from '../../constants';
 
 export default (state = {
                   visible: false,
                   activeSite: 'behance',
                   notificationDate: new Date(),
-                  fontSize: 14
+                  fontSize: 14,
+                  showCarousel: true
                 }, action) => {
   switch (action.type) {
     case SET_CHECKBOX_VISIBILITY :
@@ -26,6 +34,11 @@ export default (state = {
       return {
         ...state,
         notificationDate: action.notificationDate
+      };
+    case TOGGLE_CAROUSEL :
+      return {
+        ...state,
+        showCarousel: !action.showCarousel
       };
     case RESET_ALL_SETTINGS :
       console.log({

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
-import { connect } from 'react-redux';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import colors from '../../../design';
 
 import { articleSelector } from '../../selectors';
 
-class ArchivedArticleItem extends Component {
+export default class extends Component {
 
   constructor(props) {
     super(props);
@@ -17,23 +16,23 @@ class ArchivedArticleItem extends Component {
     this.removeFromCacheHandler = this.removeFromCacheHandler.bind(this);
   }
 
-  removeFromCacheHandler () {
-    this.setState(()=>({
+  removeFromCacheHandler() {
+    this.setState(() => ({
       checked: !this.state.checked
     }));
   }
 
   renderCheckboxBlock = () => {
-    if(!this.props.checkboxVisibility) return;
+    if (!this.props.checkboxVisibility) return;
 
-    return(<View style={styles.removeContainer}>
-            <CheckBox
-              style={styles.savedCheckBox}
-              onPress={()=>this.removeFromCacheHandler()}
-              checked={this.state.checked}
-            />
-          </View>);
-  }
+    return (<View style={styles.removeContainer}>
+      <CheckBox
+        style={styles.savedCheckBox}
+        onPress={() => this.removeFromCacheHandler()}
+        checked={this.state.checked}
+      />
+    </View>);
+  };
 
   render() {
     const {
@@ -41,12 +40,13 @@ class ArchivedArticleItem extends Component {
       image,
       source
     } = articleSelector(this.props.article);
+
     return (
-      <View style={styles.articleContainer} >
+      <View style={styles.articleContainer}>
         {this.renderCheckboxBlock()}
         <TouchableOpacity onPress={this.props.onReadMore}>
           <View style={styles.description}>
-            <View style={{width: this.props.checkboxVisibility ? width - 160 : width - 110}}>
+            <View style={{ width: this.props.checkboxVisibility ? width - 160 : width - 110 }}>
               <Text style={styles.descriptionTitle}>{title}</Text>
               <Text style={styles.authorName}>{source.authorName}</Text>
               <Text style={styles.source}>{source.name}</Text>
@@ -68,12 +68,6 @@ class ArchivedArticleItem extends Component {
   }
 }
 
-const mapStateToProps = ({ appContentReducer, appReducer }) => ({
-  checkboxVisibility: appReducer.visible
-});
-
-export default connect(mapStateToProps)(ArchivedArticleItem);
-
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -87,10 +81,10 @@ const styles = StyleSheet.create({
   removeContainer: {
     opacity: 1,
     alignSelf: 'flex-start',
-    width:50,
+    width: 50,
   },
   savedCheckBox: {
-    backgroundColor:'#FFF',
+    backgroundColor: 'transparent',
     padding: 10
   },
   descriptionTitle: {
