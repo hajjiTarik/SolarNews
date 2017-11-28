@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { isEqual, omit } from 'lodash';
+import { omit } from 'lodash';
 
 import { getFromStorage, setInStorage } from '../../utils/cacheManager';
 import appConstants from '../../../config/appConstants';
@@ -15,40 +15,32 @@ class AddToFav extends Component {
 
     this.state = {
       logoType: 'heart-o',
-      isSaved: false
+      isSaved: false,
+      refreshing: false,
     };
 
     this.addToFavHandler = this.addToFavHandler.bind(this);
-    this.checkIfAleardySaved().then();
+    this.checkIfAleardySaved();
   }
 
   async checkIfAleardySaved() {
     const savedArticles = await getFromStorage(appConstants.ARTICLE_STORAGE);
-    const currentArticle = this.props.params.state.params;
-    const savedArticle = savedArticles[appConstants.ARTICLE_STORAGE][this.props.params.state.params['_id']];
-    let isArticleSaved = false;
+    if (!Object.keys(savedArticles).length) return false;
 
-    if (savedArticles) {
-      if (savedArticles[appConstants.ARTICLE_STORAGE][this.props.params.state.params['_id']]) {
-        isArticleSaved = isEqual(savedArticles[appConstants.ARTICLE_STORAGE][currentArticle['_id']], currentArticle);
-      }
-    }
+    const savedArticle = savedArticles[appConstants.ARTICLE_STORAGE][this.props.params.state.params['_id']];
 
     this.setState(() => ({
-      logoType: isArticleSaved ? 'heart' : 'heart-o',
+      logoType: savedArticle ? 'heart' : 'heart-o',
     }));
 
     return savedArticle;
   }
 
   async addToFavHandler() {
-    if (!this.props.params.state.params) return;
-
     const savedArticles = await getFromStorage(appConstants.ARTICLE_STORAGE);
     const currentArticle = {
       [this.props.params.state.params['_id']]: this.props.params.state.params
     };
-
     const savedArticle = await this.checkIfAleardySaved();
     let newCache = null;
 
@@ -65,8 +57,8 @@ class AddToFav extends Component {
         await setInStorage(appConstants.ARTICLE_STORAGE, newCache);
       }
       this.props.setInCache(newCache);
-      await this.checkIfAleardySaved();
 
+      await this.checkIfAleardySaved();
     } catch (error) {
       alert(error);
     }
@@ -75,14 +67,14 @@ class AddToFav extends Component {
   render() {
     return (
       <View>
-        <TouchableWithoutFeedback onPress={this.addToFavHandler}>
+        <TouchableOpacity onPress={this.addToFavHandler}>
           <Icon name={this.state.logoType}
                 type='font-awesome'
                 color={"#fff"}
                 size={25}
                 style={styles.favIcon}
           />
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </View>
     )
   }

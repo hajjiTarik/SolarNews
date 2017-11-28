@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { Icon, SearchBar } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
-import { Icon } from 'react-native-elements';
+import { values } from 'lodash';
 
 import ArchivedArticleItem from '../../components/ArchivedArticleItem';
 import appConstants from '../../../config/appConstants';
@@ -15,17 +15,14 @@ class Saved extends Component {
   constructor(props) {
     super(props);
     this.onReadMore = this.onReadMore.bind(this);
-    this.getArticleFromCache = this.getArticleFromCache.bind(this);
     this.removeAllArticlesHandler = this.removeAllArticlesHandler.bind(this);
     this.state = {
       articles: this.props.articlesFromLocalStore,
       refreshing: false,
       searchVisibility: true,
       blockRefresh: false
-    }
-  }
+    };
 
-  componentDidMount() {
     this.getArticleFromCache();
   }
 
@@ -33,15 +30,16 @@ class Saved extends Component {
     this.props.navigation.navigate('ArticleDetails', item);
   }
 
-  async getArticleFromCache() {
-    if(this.state.blockRefresh) return;
+  getArticleFromCache = async () => {
     try {
       const res = await getFromStorage(appConstants.ARTICLE_STORAGE);
-      console.log("res", res);
-      this.props.setInCache(res);
+      const savedArticles = res[appConstants.ARTICLE_STORAGE];
 
+      if (!Object.keys(savedArticles).length) return;
+
+      this.props.setInCache(savedArticles);
       this.setState({
-        articles: res
+        articles: savedArticles
       });
     } catch (error) {
       alert(error);
@@ -83,15 +81,15 @@ class Saved extends Component {
     this.setState({
       searchVisibility: !this.state.searchVisibility
     });
-  }
+  };
 
   handleCheckboxVisibility = () => {
     this.props.showCheckbox(!this.props.checkboxVisibility);
   };
 
-  renderSearchBlock  = () => {
-    if(this.state.searchVisibility) return;
-    return(
+  renderSearchBlock = () => {
+    if (this.state.searchVisibility) return;
+    return (
       <View>
         <SearchBar
           DarkTheme
@@ -102,16 +100,23 @@ class Saved extends Component {
   }
 
   render() {
+    if (!this.state.articles) return null;
+
+    const convertedData = values(this.state.articles).reverse();
+    if (!convertedData.length) return null;
+
     return (
       <View style={styles.contentContainer}>
         <View style={styles.optionMenu}>
-          <Icon style={styles.searchContainer} onPress={this.handleSearchVisibility} name="search" type='font-awesome' size={28} color='#fff'/>
+          <Icon style={styles.searchContainer} onPress={this.handleSearchVisibility} name="search" type='font-awesome'
+                size={28} color='#fff'/>
           <Text style={styles.selectArticle} onPress={this.handleCheckboxVisibility}>Select All</Text>
-          <Icon style={styles.removeAll} onPress={this.removeAllArticlesHandler} name="trash" type='font-awesome' size={28} color='#fff'/>
+          <Icon style={styles.removeAll} onPress={this.removeAllArticlesHandler} name="trash" type='font-awesome'
+                size={28} color='#fff'/>
         </View>
         {this.renderSearchBlock()}
         <FlatList
-          data={this.state.articles}
+          data={convertedData}
           renderItem={({ item }) => {
             return <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
           }}
@@ -136,7 +141,7 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingLeft: 10,
     borderRadius: 50,
-    width:240
+    width: 240
   },
   optionMenu: {
     padding: 10,
@@ -146,16 +151,16 @@ const styles = StyleSheet.create({
   removeAll: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    width:50
+    width: 50
   },
   selectArticle: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    width:80
+    width: 80
   },
   searchContainer: {
     flexDirection: 'row', alignItems: 'flex-start',
-    width:250
+    width: 250
   }
 });
 

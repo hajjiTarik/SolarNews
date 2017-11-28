@@ -49,6 +49,40 @@ export const HomeStack = StackNavigator({
 });
 
 
+export const SavedStack = StackNavigator({
+  Saved: {
+    screen: Saved,
+    navigationOptions:() => {
+      return {
+        title: 'Favorite Articles',
+        headerTintColor: '#fff',
+        headerStyle: {
+          backgroundColor: colors.clearColor,
+          borderBottomWidth: 0,
+        },
+      }
+    },
+  },
+  ArticleDetails: {
+    screen: ArticleDetails,
+    navigationOptions:({ navigation }) => ({
+      title: 'Details',
+      headerTintColor: '#fff',
+      headerRight: <AddToFav params={navigation} />,
+      headerStyle: {
+        backgroundColor: colors.clearColor,
+        borderBottomWidth: 0,
+      },
+    }),
+  },
+},{
+  stackBarOptions: {
+    style: {
+      backgroundColor: '#FFF',
+    },
+  }
+});
+
 export const SettingsStack = StackNavigator({
   Settings: {
     screen: Settings,
@@ -75,6 +109,14 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => <Icon name='trophy' type='evilicon' size={39} color={tintColor}/>
+    },
+  },
+  Saved: {
+    screen: SavedStack,
+    navigationOptions: {
+      tabBarLabel: 'favorite articles',
+      tabBarIcon: ({ tintColor }) => <Icon name='heart'
+                                           type='evilicon' size={39} color={tintColor}/>
     },
   },
   Settings: {

@@ -1,7 +1,7 @@
 import { SET_IN_CACHE } from '../../constants';
 
 export default (state = {
-                  articles: [],
+                  articles: {},
                 }, action) => {
   switch (action.type) {
     case SET_IN_CACHE :
