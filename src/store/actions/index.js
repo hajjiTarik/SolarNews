@@ -12,7 +12,8 @@ import {
   SET_TYPE,
   SUCCESS_API,
   TRIGGER_PERSISTENCE,
-  TOGGLE_CAROUSEL
+  TOGGLE_CAROUSEL,
+  CHANGE_ARTICLE_DISPOSITION
 } from '../constants';
 import request from '../../config/api';
 
@@ -104,7 +105,6 @@ export const persist = (key, data) => ({
 });
 
 /**
-<<<<<<< HEAD
  * @type string
  * @type object
  */
@@ -113,9 +113,18 @@ export const setTopArticle = topArticle => ({
   topArticle
 });
 
+/**
+ * @param showCarousel
+ */
 export const setToggleCarousel = showCarousel => ({
   type: TOGGLE_CAROUSEL,
   showCarousel
+});
+
+/**
+ */
+export const changeArticleDisposition = () => ({
+  type: CHANGE_ARTICLE_DISPOSITION,
 });
 
 /**

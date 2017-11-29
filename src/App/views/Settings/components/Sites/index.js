@@ -56,5 +56,8 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     fontWeight: 'bold',
     paddingLeft: 10,
+    fontSize: 17,
+    color: '#2c3137',
+    fontFamily: 'AlegreyaSans-Medium'
   }
 });

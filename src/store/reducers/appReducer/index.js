@@ -4,7 +4,8 @@ import {
   SET_CHECKBOX_VISIBILITY,
   SET_FONT_SIZE,
   SET_NOTIFICATION_DATE,
-  TOGGLE_CAROUSEL
+  TOGGLE_CAROUSEL,
+  CHANGE_ARTICLE_DISPOSITION
 } from '../../constants';
 
 export default (state = {
@@ -12,7 +13,8 @@ export default (state = {
                   activeSite: 'behance',
                   notificationDate: new Date(),
                   fontSize: 14,
-                  showCarousel: true
+                  showCarousel: true,
+                  typeOfArticle: false
                 }, action) => {
   switch (action.type) {
     case SET_CHECKBOX_VISIBILITY :
@@ -41,17 +43,17 @@ export default (state = {
         showCarousel: !action.showCarousel
       };
     case RESET_ALL_SETTINGS :
-      console.log({
-        ...state,
-        activeSite: state.activeSite,
-        fontSize: state.fontSize,
-        notificationDate: state.notificationDate
-      });
       return {
         ...state,
         activeSite: 'behance',
         fontSize: 14,
         notificationDate: new Date()
+      };
+    case CHANGE_ARTICLE_DISPOSITION :
+      console.log(!state.typeOfArticle);
+      return {
+        ...state,
+        typeOfArticle: !state.typeOfArticle
       };
     default :
       return state;

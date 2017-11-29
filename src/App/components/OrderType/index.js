@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class extends Component {
+import { changeArticleDisposition } from '../../../store/actions';
+
+class OrderType extends Component {
 
   constructor(props) {
     super(props);
@@ -12,8 +16,18 @@ export default class extends Component {
   render() {
     return (
       <View style={{padding:10}}>
-        <Icon name='clone' type='font-awesome' color='#fff' size={25}/>
+        <TouchableOpacity onPress={this.props.changeArticleDisposition}>
+          <Icon name='clone' type='font-awesome' color='#fff' size={20}/>
+        </TouchableOpacity>
       </View>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeArticleDisposition: bindActionCreators(changeArticleDisposition, dispatch)
+  }
+};
+
+export default connect(null, mapDispatchToProps)(OrderType)

@@ -3,6 +3,7 @@ import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import { CheckBox } from 'react-native-elements';
 import colors from '../../../design';
 
+import SubListArticle from '../SubListArticle';
 import { articleSelector } from '../../selectors';
 
 export default class extends Component {
@@ -50,6 +51,7 @@ export default class extends Component {
               <Text style={styles.descriptionTitle}>{title}</Text>
               <Text style={styles.authorName}>{source.authorName}</Text>
               <Text style={styles.source}>{source.name}</Text>
+              <SubListArticle source={source}/>
             </View>
             <View style={styles.articleImage}>
               <Image
@@ -92,12 +94,13 @@ const styles = StyleSheet.create({
     fontSize: 19,
     fontWeight: 'bold',
     marginBottom: 5,
+    fontFamily: 'AlegreyaSans-Medium'
   },
   description: {
     padding: 10,
     flexDirection: 'row',
     alignSelf: 'flex-end',
-    width: width - 50,
+    width: width - 50
   },
   source: {
     color: colors.clearColor,

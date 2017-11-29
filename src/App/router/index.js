@@ -24,6 +24,11 @@ export const HomeStack = StackNavigator({
       headerStyle: {
         backgroundColor: colors.iconColor,
         borderBottomWidth: 0,
+        height: 60,
+      },
+      headerTitleStyle: {
+        fontSize: 20,
+        fontFamily: 'Lobster-Regular'
       },
       header: (props) => <Header {...props} />,
     }),
@@ -37,6 +42,11 @@ export const HomeStack = StackNavigator({
       headerStyle: {
         backgroundColor: colors.clearColor,
         borderBottomWidth: 0,
+      },
+
+      headerTitleStyle: {
+        fontSize: 20,
+        fontFamily: 'Lobster-Regular'
       },
     }),
   },
@@ -60,6 +70,11 @@ export const SavedStack = StackNavigator({
           backgroundColor: '#6d3cc6',
           borderBottomWidth: 0,
         },
+
+        headerTitleStyle: {
+          fontSize: 20,
+          fontFamily: 'Lobster-Regular'
+        },
       }
     },
   },
@@ -72,6 +87,11 @@ export const SavedStack = StackNavigator({
       headerStyle: {
         backgroundColor: colors.clearColor,
         borderBottomWidth: 0,
+      },
+
+      headerTitleStyle: {
+        fontSize: 20,
+        fontFamily: 'Lobster-Regular'
       },
     }),
   },
@@ -92,6 +112,11 @@ export const SettingsStack = StackNavigator({
       headerStyle: {
         backgroundColor: colors.clearColor,
         borderBottomWidth: 0,
+      },
+
+      headerTitleStyle: {
+        fontSize: 20,
+        fontFamily: 'Lobster-Regular'
       },
     },
   },

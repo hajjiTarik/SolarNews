@@ -13,7 +13,7 @@ export default class extends Component {
   render() {
     return (
       <View style={styles.block}>
-        <Text style={styles.title}>Remember me to read :</Text>
+        <Text style={styles.title}>Set Font Size :</Text>
         <Divider style={{ backgroundColor: '#dedede' }}/>
         <View style={{ alignItems: 'stretch', justifyContent: 'center', flex: 1, paddingLeft: 10, paddingRight: 10 }}>
           <Slider
@@ -25,9 +25,9 @@ export default class extends Component {
             }}
             minimumValue={10}
             maximumValue={18}
-            thumbTintColor={config.clearColor}
-            maximumTrackTintColor="#F4F4F4"
-            minimumTrackTintColor={config.iconColor}
+            thumbTintColor={'#904eff'}
+            maximumTrackTintColor="#b7babd"
+            minimumTrackTintColor={'#904eff'}
           />
           <Text>Selected value: {Math.floor(this.props.fontSize)}px</Text>
           <Text style={{ paddingTop: 20, fontSize: Math.floor(this.props.fontSize), color: config.clearColor }}>
@@ -49,5 +49,8 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     fontWeight: 'bold',
     paddingLeft: 10,
+    fontSize: 17,
+    color: '#2c3137',
+    fontFamily: 'AlegreyaSans-Medium'
   }
 });

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { articleSelector } from '../../selectors';
+import SubListArticle from '../SubListArticle';
 
 export default class ArticleItem extends Component {
 
@@ -11,7 +12,8 @@ export default class ArticleItem extends Component {
   render() {
     const {
       title,
-      image
+      image,
+      source
     } = articleSelector(this.props.article);
 
     return (
@@ -24,6 +26,7 @@ export default class ArticleItem extends Component {
           />
           <View style={styles.description}>
             <Text style={styles.descriptionTitle}>{title}</Text>
+            <SubListArticle source={source}/>
           </View>
         </TouchableOpacity>
       </View>
@@ -34,7 +37,6 @@ export default class ArticleItem extends Component {
 const styles = StyleSheet.create({
   articleContainer: {
     backgroundColor: '#fff',
-    borderRadius: 8
   },
   descriptionTitle: {
     fontSize: 15,

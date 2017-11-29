@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import colors from '../../../../../design';
 
 export default class extends Component {
 
@@ -21,7 +20,7 @@ export default class extends Component {
           style={styles.icon}
           name='eye'
           type='evilicon'
-          color={colors.iconColor}
+          color={'#2c3137'}
         />
         <Text style={styles.textListArticle}>{this.props.source.viewsCount}</Text>
       </View>
@@ -37,7 +36,7 @@ export default class extends Component {
           style={styles.icon}
           name='heart'
           type='evilicon'
-          color={"#ff232f"}
+          color={"#2c3137"}
         />
         <Text style={styles.textListArticle}>{this.props.source.likesCount}</Text>
       </View>
@@ -53,7 +52,7 @@ export default class extends Component {
           style={styles.icon}
           name='comment'
           type='evilicon'
-          color={colors.iconColor}
+          color={'#2c3137'}
         />
         <Text style={styles.textListArticle}>{this.props.source.commentsCount}</Text>
       </View>
@@ -74,10 +73,8 @@ const styles = StyleSheet.create({
   listArticle: {
     flex: 1,
     flexDirection: 'row',
-    borderTopWidth: 1,
-    borderTopColor: '#d1d1d1',
     marginTop: 10,
-    paddingTop: 10
+    paddingTop: 10,
   },
   iconContainer: {
     flexDirection: 'row',

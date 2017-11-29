@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
   activeType: {
     color: '#fff',
     fontWeight: 'bold',
-    padding: 10,
+    padding: 8,
     backgroundColor: '#421372',
-    opacity: 0.8
+    opacity: 0.8,
+    fontSize:12
   }
 });
 

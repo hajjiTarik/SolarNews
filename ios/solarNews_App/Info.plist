@@ -64,6 +64,21 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>AlegreyaSans-Black.ttf</string>
+		<string>AlegreyaSans-BlackItalic.ttf</string>
+		<string>AlegreyaSans-Bold.ttf</string>
+		<string>AlegreyaSans-BoldItalic.ttf</string>
+		<string>AlegreyaSans-ExtraBold.ttf</string>
+		<string>AlegreyaSans-ExtraBoldItalic.ttf</string>
+		<string>AlegreyaSans-Italic.ttf</string>
+		<string>AlegreyaSans-Light.ttf</string>
+		<string>AlegreyaSans-LightItalic.ttf</string>
+		<string>AlegreyaSans-Medium.ttf</string>
+		<string>AlegreyaSans-MediumItalic.ttf</string>
+		<string>AlegreyaSans-Regular.ttf</string>
+		<string>AlegreyaSans-Thin.ttf</string>
+		<string>AlegreyaSans-ThinItalic.ttf</string>
+		<string>Lobster-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import colors from '../../../design/index';
 import ArticleItem from '../ArticleItem/index';
 import { bindActionCreators } from 'redux';
-import { fetchApi, setTopArticle } from '../../../store/actions';
+import { fetchApi, setTopArticle, setToggleCarousel} from '../../../store/actions';
 import config from '../../../config/apiConfig';
+import { Badge } from 'react-native-elements';
 
 
 const { width } = Dimensions.get('window');
@@ -40,58 +41,76 @@ class ArticleCarousel extends Component {
     );
   }
 
-  render() {
+  renderCarousel() {
     if(!this.props.toggle) return null;
 
     const articles = this.props.topArticle.filter((item, index) => index < 5);
+    return (
+      <View style={styles.carouselContainer}>
+        <Carousel
+          ref={(c) => {
+            if (!this.state.slider1Ref) {
+              this.setState({ slider1Ref: c });
+            }
+          }}
+          data={articles}
+          renderItem={this.renderItem}
+          sliderWidth={width - 20}
+          itemWidth={width - 20}
+          autoplay={true}
+          onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
+        />
+        <Pagination
+          dotsLength={articles.length}
+          activeDotIndex={this.state.slider1ActiveSlide}
+          containerStyle={styles.paginationContainer}
+          dotColor={'rgba(255, 255, 255, 0.92)'}
+          dotStyle={styles.paginationDot}
+          inactiveDotColor={'#fff'}
+          inactiveDotOpacity={0.4}
+          inactiveDotScale={0.6}
+          carouselRef={this.state.slider1Ref}
+          tappableDots={!!this.state.slider1Ref}
+        />
+      </View>
+    )
+  }
+
+  render() {
 
     return (
       <View>
-        <Text style={styles.carouselTitle}>
-          Top 5 Articles from {this.state.currentSite.name}
-        </Text>
-        <View style={styles.carouselContainer}>
-          <Carousel
-            ref={(c) => {
-              if (!this.state.slider1Ref) {
-                this.setState({ slider1Ref: c });
-              }
+        <View style={styles.carouselTopTitleContainer}>
+          <Badge
+            value={this.props.toggle ? 'Hide' : 'Show'}
+            containerStyle={{ backgroundColor: '#484848',alignSelf: 'flex-end', opacity: 0.3, width: 70, margin: 10 }}
+            textStyle={{ color: '#ffffff' }}
+            onPress={() => {
+              this.props.setToggleCarousel(this.props.toggle)
             }}
-            data={articles}
-            renderItem={this.renderItem}
-            sliderWidth={width - 20}
-            itemWidth={width - 20}
-            autoplay={true}
-            onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
           />
-          <Pagination
-            dotsLength={articles.length}
-            activeDotIndex={this.state.slider1ActiveSlide}
-            containerStyle={styles.paginationContainer}
-            dotColor={'rgba(255, 255, 255, 0.92)'}
-            dotStyle={styles.paginationDot}
-            inactiveDotColor={'#fff'}
-            inactiveDotOpacity={0.4}
-            inactiveDotScale={0.6}
-            carouselRef={this.state.slider1Ref}
-            tappableDots={!!this.state.slider1Ref}
-          />
+          <Text style={styles.carouselTitle}>
+            Top 5 Articles from {this.state.currentSite.name}
+          </Text>
         </View>
+        {this.renderCarousel()}
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ apiReducer }) => {
+const mapStateToProps = ({ apiReducer, appReducer }) => {
   return {
     topArticle: apiReducer.topArticle,
+    toggle: appReducer.showCarousel,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchApi: bindActionCreators(fetchApi, dispatch),
-    setTopArticle: bindActionCreators(setTopArticle, dispatch)
+    setTopArticle: bindActionCreators(setTopArticle, dispatch),
+    setToggleCarousel: bindActionCreators(setToggleCarousel, dispatch)
   }
 };
 
@@ -105,6 +124,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
 
+  },
+  carouselTopTitleContainer: {
   },
   slide: {
     width: width - 20,
@@ -132,6 +153,7 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent',
     color: '#fff',
     fontWeight: 'bold',
-    paddingLeft: 10
+    paddingLeft: 10,
+    alignSelf: 'flex-start'
   }
 });

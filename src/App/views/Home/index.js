@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActivityIndicator, Alert, Button, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Alert, Button, FlatList, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { Badge } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -9,6 +9,7 @@ import ArchivedArticleItem from './../../components/ArchivedArticleItem';
 import { fetchApi, setPage, setToggleCarousel } from '../../../store/actions';
 import ArticleCarousel from '../../components/ArticleCarousel';
 import InfoMessage from '../../components/InfoMessage';
+import ArticleItem from '../../components/ArticleItem';
 
 class Home extends Component {
 
@@ -19,7 +20,8 @@ class Home extends Component {
       messageType: 'INFO',
       messageShow: false,
       messageContent: 'toto',
-      border: false
+      border: false,
+      typeOfArticle: false
     };
     this.onReadMore = this.onReadMore.bind(this);
   }
@@ -41,7 +43,6 @@ class Home extends Component {
         messageShow: true,
         messageContent: 'Your Settings has changed please refresh'
       });
-      console.log(1);
     }
   }
 
@@ -73,7 +74,11 @@ class Home extends Component {
       <FlatList
         data={this.props.result}
         renderItem={({ item }) => {
-          return <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
+          if(this.props.typeOfArticle){
+            return <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
+          } else {
+            return <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
+          }
         }}
         onEndReached={this.handleLoadMore}
         onEndThreshold={0}
@@ -104,18 +109,10 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={styles.contentContainer}>
+      <View scrollEnabled={false} style={styles.contentContainer}>
         { this.gradient }
         <InfoMessage show={this.state.messageShow} message={this.state.messageContent} type={this.state.messageType} />
-        <Badge
-          value={this.props.showCarousel ? 'Hide' : 'Show'}
-          containerStyle={{ backgroundColor: '#484848', opacity: 0.3, width: 70, margin: 10 }}
-          textStyle={{ color: '#ffffff' }}
-          onPress={() => {
-            this.props.setToggleCarousel(this.props.showCarousel)
-          }}
-        />
-        <ArticleCarousel toggle={this.props.showCarousel}/>
+        <ArticleCarousel/>
         {this.renderItems()}
         <View style={styles.loader}>
           <ActivityIndicator animating={this.props.isFetching}/>
@@ -159,7 +156,7 @@ const mapStateToProps = ({ apiReducer, appReducer }) => {
     type: apiReducer.type,
     page: apiReducer.page,
     activeSite: appReducer.activeSite,
-    showCarousel: appReducer.showCarousel
+    typeOfArticle: appReducer.typeOfArticle
   }
 };
 
@@ -167,7 +164,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchApi: bindActionCreators(fetchApi, dispatch),
     setPage: bindActionCreators(setPage, dispatch),
-    setToggleCarousel: bindActionCreators(setToggleCarousel, dispatch)
   }
 };
 
