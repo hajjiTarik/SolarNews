@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActivityIndicator, Alert, Button, FlatList, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { Badge } from 'react-native-elements';
+import { ActivityIndicator, Button, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import ArchivedArticleItem from './../../components/ArchivedArticleItem';
-import { fetchApi, setPage, setToggleCarousel } from '../../../store/actions';
+import { fetchApi, setPage } from '../../../store/actions';
 import ArticleCarousel from '../../components/ArticleCarousel';
 import InfoMessage from '../../components/InfoMessage';
 import ArticleItem from '../../components/ArticleItem';
@@ -36,8 +35,9 @@ class Home extends Component {
     this.props.fetchApi(this.props.activeSite, this.props.type, this.props.page);
   };
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     if (nextProps.activeSite !== this.props.activeSite) {
+      this._onRefresh();
       this.setState({
         messageType: 'WARN',
         messageShow: true,
@@ -49,14 +49,13 @@ class Home extends Component {
   _onRefresh = () => {
     this.setState({
       refreshing: true
-    }, () => {
-      this.props.fetchApi(this.props.activeSite, this.props.type, 1, true).then(() => {
-        this.setState({ refreshing: false });
-      }).catch(e => {
-        Alert.alert("Error when fetshing");
-        this.setState({ refreshing: false });
-      });
     });
+    this.props.fetchApi(this.props.activeSite, this.props.type, 1, true).then(() => {
+      this.setState({ refreshing: false });
+    });
+    setTimeout(()=>{
+      this.setState({ refreshing: false });
+    },1000);
   };
 
   onReadMore(item) {
@@ -70,11 +69,12 @@ class Home extends Component {
       </View>);
     }
 
+    console.log(this.state.refreshing);
     return (
       <FlatList
         data={this.props.result}
         renderItem={({ item }) => {
-          if(this.props.typeOfArticle){
+          if (this.props.typeOfArticle) {
             return <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
           } else {
             return <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
@@ -111,8 +111,8 @@ class Home extends Component {
     return (
       <View scrollEnabled={false} style={styles.contentContainer}>
         { this.gradient }
-        <InfoMessage show={this.state.messageShow} message={this.state.messageContent} type={this.state.messageType} />
-        <ArticleCarousel/>
+        <InfoMessage show={this.state.messageShow} message={this.state.messageContent} type={this.state.messageType}/>
+        <ArticleCarousel />
         {this.renderItems()}
         <View style={styles.loader}>
           <ActivityIndicator animating={this.props.isFetching}/>

@@ -26,7 +26,7 @@ export default class ArticleItem extends Component {
           />
           <View style={styles.description}>
             <Text style={styles.descriptionTitle}>{title}</Text>
-            <SubListArticle source={source}/>
+            {!this.props.noInfo ? <SubListArticle source={source}/> : null}
           </View>
         </TouchableOpacity>
       </View>

@@ -36,7 +36,7 @@ class ArticleCarousel extends Component {
   renderItem({ item, index }) {
     return (
       <View style={styles.slide}>
-        <ArticleItem article={item} keys={index}/>
+        <ArticleItem noInfo={true} article={item} keys={index}/>
       </View>
     );
   }
@@ -83,7 +83,7 @@ class ArticleCarousel extends Component {
         <View style={styles.carouselTopTitleContainer}>
           <Badge
             value={this.props.toggle ? 'Hide' : 'Show'}
-            containerStyle={{ backgroundColor: '#484848',alignSelf: 'flex-end', opacity: 0.3, width: 70, margin: 10 }}
+            containerStyle={{ backgroundColor: '#000',alignSelf: 'flex-end', opacity: 0.4, width: 70, margin: 10 }}
             textStyle={{ color: '#ffffff' }}
             onPress={() => {
               this.props.setToggleCarousel(this.props.toggle)
