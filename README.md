@@ -4,7 +4,6 @@
 :clock4: 🚀 
 ### - ✅ Add WebView
 ### - ✅ Add Navigator
-### - Page Profile
 ### - ✅ Page Saved
 ### - ✅ Modify API
 ### - ✅ Add Easy Loading
