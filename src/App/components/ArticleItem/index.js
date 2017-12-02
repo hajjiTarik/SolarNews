@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { articleSelector } from '../../selectors';
 import SubListArticle from '../SubListArticle';
+import styles from './index.style';
 
 export default class ArticleItem extends Component {
 
@@ -33,18 +34,3 @@ export default class ArticleItem extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  articleContainer: {
-    backgroundColor: '#fff',
-  },
-  descriptionTitle: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#393e42'
-  },
-  description: {
-    padding: 10,
-    paddingBottom: 10,
-  }
-});

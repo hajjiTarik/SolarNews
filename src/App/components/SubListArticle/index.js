@@ -6,9 +6,6 @@ export default class extends Component {
 
   constructor(props) {
     super(props);
-    this.renderViewsCount = this.renderViewsCount.bind(this);
-    this.renderLikesCount = this.renderLikesCount.bind(this);
-    this.renderCommentsCount = this.renderCommentsCount.bind(this);
   }
 
   renderViewsCount = () => {

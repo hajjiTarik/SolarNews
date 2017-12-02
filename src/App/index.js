@@ -22,7 +22,7 @@ class App extends Component {
     if (appState === 'background' && this.props.notificationDate) {
 
       let date = this.props.notificationDate;
-
+      PushNotification.setApplicationIconBadgeNumber(1);
       PushNotification.localNotificationSchedule({
         message: "New Article ",
         date
