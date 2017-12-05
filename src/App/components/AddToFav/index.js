@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import { omit } from 'lodash';
 
 import { getFromStorage, setInStorage } from '../../utils/cacheManager';
-import appConstants from '../../../config/appConstants';
-import { setInCache } from '../../../store/actions';
+import appConstants from '../../config/appConstants';
+import { setInCache } from '../../store/actions';
 
 class AddToFav extends Component {
   constructor(props) {

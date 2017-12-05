@@ -1,4 +1,11 @@
-import { ERROR_API, REQUEST_API, SET_PAGE, SET_TOP_ARTICLE, SET_TYPE, SUCCESS_API } from '../../constants';
+import {
+  ERROR_API,
+  REQUEST_API,
+  SET_PAGE,
+  SET_TOP_ARTICLE,
+  SET_TYPE,
+  SUCCESS_API
+} from '../../constants';
 
 export default (state = {
                   isFetching: false,

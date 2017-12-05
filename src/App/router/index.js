@@ -13,7 +13,7 @@ import OrderType from '../components/OrderType';
 import AddToFav from '../components/AddToFav';
 import Header from '../components/Header';
 import ResetAllSettings from '../components/ResetAllSettings';
-import constants from '../../config/appConstants';
+import constants from '../config/appConstants';
 
 export const HomeStack = StackNavigator({
   Home: {
@@ -24,7 +24,6 @@ export const HomeStack = StackNavigator({
       headerRight: <ArticleType />,
       headerLeft: <OrderType />,
       headerStyle: {
-        backgroundColor: colors.iconColor,
         borderBottomWidth: 0,
         height: 60,
       },
@@ -43,7 +42,7 @@ export const HomeStack = StackNavigator({
       headerRight: <AddToFav params={navigation} />,
 
       headerStyle: {
-        backgroundColor: '#6d3cc6',
+        backgroundColor: colors.mainColor,
         borderBottomWidth: 0,
       },
 
@@ -70,7 +69,7 @@ export const SavedStack = StackNavigator({
         title: 'Favorite Articles',
         headerTintColor: '#fff',
         headerStyle: {
-          backgroundColor: '#6d3cc6',
+          backgroundColor: colors.mainColor,
           borderBottomWidth: 0,
         },
 
@@ -89,7 +88,7 @@ export const SavedStack = StackNavigator({
       headerRight: <AddToFav params={navigation} />,
 
       headerStyle: {
-        backgroundColor: '#6d3cc6',
+        backgroundColor: colors.mainColor,
         borderBottomWidth: 0,
       },
 
@@ -119,7 +118,7 @@ export const SettingsStack = StackNavigator({
           constants.SITES
         ]} />,
       headerStyle: {
-        backgroundColor: '#6d3cc6',
+        backgroundColor: colors.mainColor,
         borderBottomWidth: 0,
       },
 

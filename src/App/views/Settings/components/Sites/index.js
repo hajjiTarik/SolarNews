@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { CheckBox, Divider } from 'react-native-elements';
 
-import config from '../../../../../config/apiConfig';
-import constants  from '../../../../../config/appConstants';
+import config from '../../../../config/apiConfig';
+import constants  from '../../../../config/appConstants';
 
 export default class extends Component {
 

@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { changeArticleDisposition } from '../../../store/actions';
+import { changeArticleDisposition } from '../../store/actions';
 
 class OrderType extends Component {
 

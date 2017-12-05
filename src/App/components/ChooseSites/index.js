@@ -3,8 +3,8 @@ import { Text, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { CheckBox, Divider } from 'react-native-elements';
-import config from '../../../config/apiConfig';
-import { setActiveSite } from '../../../store/actions';
+import config from '../../config/apiConfig';
+import { setActiveSite } from '../../store/actions';
 
 class ChooseSites extends Component {
 

@@ -6,8 +6,8 @@ import { Badge } from 'react-native-elements';
 
 import ArticleItem from '../ArticleItem/index';
 import { bindActionCreators } from 'redux';
-import { fetchApi, setTopArticle, setToggleCarousel} from '../../../store/actions';
-import config from '../../../config/apiConfig';
+import { fetchApi, setTopArticle, setToggleCarousel} from '../../store/actions';
+import config from '../../config/apiConfig';
 import styles from './index.style';
 
 const { width } = Dimensions.get('window');

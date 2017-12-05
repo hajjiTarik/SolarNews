@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Divider, Slider } from 'react-native-elements';
 import config from '../../../../../design/index';
-import constants from '../../../../../config/appConstants';
+import constants from '../../../../config/appConstants';
 
 export default class extends Component {
 

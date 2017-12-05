@@ -1,4 +1,4 @@
-import { setInStorage } from '../../App/utils/cacheManager';
+import { setInStorage } from '../../utils/cacheManager';
 import { TRIGGER_PERSISTENCE } from '../constants';
 
 export default  store => next => {

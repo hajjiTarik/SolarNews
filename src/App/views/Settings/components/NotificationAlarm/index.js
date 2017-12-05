@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DatePickerIOS, StyleSheet, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
-import constants from '../../../../../config/appConstants';
+import constants from '../../../../config/appConstants';
 
 export default class extends Component {
   constructor(props) {

@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -18,11 +19,14 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		145CC058514D43CCA30118A1 /* AlegreyaSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D6CF6AEFA0374F33973E59D0 /* AlegreyaSans-Italic.ttf */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		1FE4CF0AB36B423587F90CA4 /* AlegreyaSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09632B0BA64F4B479DFFC2C4 /* AlegreyaSans-Thin.ttf */; };
+		2618C25487B8404B991890C9 /* AlegreyaSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B7C835BA3E4482BB15DEB3C /* AlegreyaSans-BoldItalic.ttf */; };
+		26EE17E918C94A37ACB6715A /* AlegreyaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80A93936A3D2483480AE868F /* AlegreyaSans-Regular.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -36,35 +40,31 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2D380F973EDB4F4ABD86CF67 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B545FC186B348D181B5EBCA /* libBVLinearGradient.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* solarNews_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* solarNews_AppTests.m */; };
+		2F48A4A3008B468EBB7790C5 /* AlegreyaSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68121ACDFAF44FB6AF6697D9 /* AlegreyaSans-ExtraBold.ttf */; };
 		3E7F1235EFE541B0A421E90B /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51531027A71D417685A710D4 /* Octicons.ttf */; };
+		546F45C6368A428DBCE27C27 /* AlegreyaSans-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0F535A3C2FC425C95D71939 /* AlegreyaSans-BlackItalic.ttf */; };
+		5D1DDC6997DD42338208ABCB /* AlegreyaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7075F8050A78441AA4EB7EA7 /* AlegreyaSans-Bold.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		7E27F2DBE754416DB242DCA1 /* AlegreyaSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9DE33343F3D4811BE63A069 /* AlegreyaSans-Black.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		838DD1E1FB1F49F79FA695BF /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D8B533F73CA40F883CAB0DE /* MaterialIcons.ttf */; };
 		87957F9B4D824D9E8C777E96 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 755DA74484E04D2DBD135652 /* Foundation.ttf */; };
+		9242CDE0737048EC9F1D1949 /* AlegreyaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C5501003FAC466BAEC23C82 /* AlegreyaSans-Medium.ttf */; };
+		93929BDA81ED43EDBB444F31 /* AlegreyaSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7381A75DDB184AF9BFB45F20 /* AlegreyaSans-ExtraBoldItalic.ttf */; };
 		99DCBF97F5864D76BBA4E15F /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1661F9898E2E4DF4AF9CF95A /* Entypo.ttf */; };
 		A90EDC1549CD4A95932AA731 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E374AE2FE9D8433D80A163BC /* MaterialCommunityIcons.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		C2E5CA143B8748A5A3D7FDBB /* AlegreyaSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C6D0318FB453B9143F5DD /* AlegreyaSans-MediumItalic.ttf */; };
+		C5C1D8056F3B4611B2DEBDDF /* AlegreyaSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE634F3F6C994CD08E3764F1 /* AlegreyaSans-Light.ttf */; };
 		CC6AA07D1F82FBAA0041A2C9 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC6AA07A1F82FB570041A2C9 /* libRCTPushNotification.a */; };
+		CCACADB7815642A5BD449452 /* AlegreyaSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5898D85BCEBA4F21B8DA2FC6 /* AlegreyaSans-LightItalic.ttf */; };
 		CD7581313B4149C18FA4278C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46FB636F27784DEFBB49A247 /* Zocial.ttf */; };
 		DB7071F7D75E4180A5E6C6E0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41511714D65414BA5747FCB /* FontAwesome.ttf */; };
 		E0B3205BE28A41CEBF3487AF /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B98715BA3B841689CF5A43B /* SimpleLineIcons.ttf */; };
-		EEFB447FD2734B259083D732 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFDB82F1103439C945F65ED /* libRNVectorIcons.a */; };
-		FC7B5925A5664B9B9880C73A /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53DD5F3558C641A6A85E487A /* Feather.ttf */; };
-		7E27F2DBE754416DB242DCA1 /* AlegreyaSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9DE33343F3D4811BE63A069 /* AlegreyaSans-Black.ttf */; };
-		546F45C6368A428DBCE27C27 /* AlegreyaSans-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0F535A3C2FC425C95D71939 /* AlegreyaSans-BlackItalic.ttf */; };
-		5D1DDC6997DD42338208ABCB /* AlegreyaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7075F8050A78441AA4EB7EA7 /* AlegreyaSans-Bold.ttf */; };
-		2618C25487B8404B991890C9 /* AlegreyaSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B7C835BA3E4482BB15DEB3C /* AlegreyaSans-BoldItalic.ttf */; };
-		2F48A4A3008B468EBB7790C5 /* AlegreyaSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68121ACDFAF44FB6AF6697D9 /* AlegreyaSans-ExtraBold.ttf */; };
-		93929BDA81ED43EDBB444F31 /* AlegreyaSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7381A75DDB184AF9BFB45F20 /* AlegreyaSans-ExtraBoldItalic.ttf */; };
-		145CC058514D43CCA30118A1 /* AlegreyaSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D6CF6AEFA0374F33973E59D0 /* AlegreyaSans-Italic.ttf */; };
-		C5C1D8056F3B4611B2DEBDDF /* AlegreyaSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE634F3F6C994CD08E3764F1 /* AlegreyaSans-Light.ttf */; };
-		CCACADB7815642A5BD449452 /* AlegreyaSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5898D85BCEBA4F21B8DA2FC6 /* AlegreyaSans-LightItalic.ttf */; };
-		9242CDE0737048EC9F1D1949 /* AlegreyaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C5501003FAC466BAEC23C82 /* AlegreyaSans-Medium.ttf */; };
-		C2E5CA143B8748A5A3D7FDBB /* AlegreyaSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C6D0318FB453B9143F5DD /* AlegreyaSans-MediumItalic.ttf */; };
-		26EE17E918C94A37ACB6715A /* AlegreyaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80A93936A3D2483480AE868F /* AlegreyaSans-Regular.ttf */; };
-		1FE4CF0AB36B423587F90CA4 /* AlegreyaSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09632B0BA64F4B479DFFC2C4 /* AlegreyaSans-Thin.ttf */; };
-		F0994326E3F04163B603FD59 /* AlegreyaSans-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80CAFDEC870942179420B848 /* AlegreyaSans-ThinItalic.ttf */; };
 		E9594EF6518E4FD3ABABE251 /* Lobster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5927DB9BFF8C4A738FDEEE94 /* Lobster-Regular.ttf */; };
+		EEFB447FD2734B259083D732 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFDB82F1103439C945F65ED /* libRNVectorIcons.a */; };
+		F0994326E3F04163B603FD59 /* AlegreyaSans-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80CAFDEC870942179420B848 /* AlegreyaSans-ThinItalic.ttf */; };
+		FC7B5925A5664B9B9880C73A /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53DD5F3558C641A6A85E487A /* Feather.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,6 +360,7 @@
 		00E356EE1AD99517003FC87E /* solarNews_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = solarNews_AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* solarNews_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = solarNews_AppTests.m; sourceTree = "<group>"; };
+		09632B0BA64F4B479DFFC2C4 /* AlegreyaSans-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-Thin.ttf"; path = "../assets/fonts/AlegreyaSans-Thin.ttf"; sourceTree = "<group>"; };
 		0D8B533F73CA40F883CAB0DE /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		1270214EDD724DE79E154869 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
@@ -367,7 +368,6 @@
 		13B07F961A680F5B00A75B9A /* solarNews_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = solarNews_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = solarNews_App/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = solarNews_App/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = solarNews_App/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = solarNews_App/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = solarNews_App/main.m; sourceTree = "<group>"; };
@@ -380,35 +380,34 @@
 		3E8832B3CFA64638BDCA480A /* PT_Sans-Narrow-Web-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PT_Sans-Narrow-Web-Bold.ttf"; path = "../src/Assets/fonts/PT_Sans-Narrow-Web-Bold.ttf"; sourceTree = "<group>"; };
 		3EFDB82F1103439C945F65ED /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		46FB636F27784DEFBB49A247 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		4D0C6D0318FB453B9143F5DD /* AlegreyaSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-MediumItalic.ttf"; path = "../assets/fonts/AlegreyaSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		51531027A71D417685A710D4 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		53DD5F3558C641A6A85E487A /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		5898D85BCEBA4F21B8DA2FC6 /* AlegreyaSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-LightItalic.ttf"; path = "../assets/fonts/AlegreyaSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		5927DB9BFF8C4A738FDEEE94 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lobster-Regular.ttf"; path = "../assets/fonts/Lobster-Regular.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		68121ACDFAF44FB6AF6697D9 /* AlegreyaSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-ExtraBold.ttf"; path = "../assets/fonts/AlegreyaSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		6B98715BA3B841689CF5A43B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		7075F8050A78441AA4EB7EA7 /* AlegreyaSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-Bold.ttf"; path = "../assets/fonts/AlegreyaSans-Bold.ttf"; sourceTree = "<group>"; };
 		7124C3CEA02E431C9C6D4F66 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		7381A75DDB184AF9BFB45F20 /* AlegreyaSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-ExtraBoldItalic.ttf"; path = "../assets/fonts/AlegreyaSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		755DA74484E04D2DBD135652 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		80A93936A3D2483480AE868F /* AlegreyaSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-Regular.ttf"; path = "../assets/fonts/AlegreyaSans-Regular.ttf"; sourceTree = "<group>"; };
+		80CAFDEC870942179420B848 /* AlegreyaSans-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-ThinItalic.ttf"; path = "../assets/fonts/AlegreyaSans-ThinItalic.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		969BBD5DC7764D8DAE7EA9A4 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		9B7C835BA3E4482BB15DEB3C /* AlegreyaSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-BoldItalic.ttf"; path = "../assets/fonts/AlegreyaSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		9C5501003FAC466BAEC23C82 /* AlegreyaSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-Medium.ttf"; path = "../assets/fonts/AlegreyaSans-Medium.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B41511714D65414BA5747FCB /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		BF1236AAFFFC409C81C13B82 /* PT_Sans-Narrow-Web-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PT_Sans-Narrow-Web-Regular.ttf"; path = "../src/Assets/fonts/PT_Sans-Narrow-Web-Regular.ttf"; sourceTree = "<group>"; };
+		C9DE33343F3D4811BE63A069 /* AlegreyaSans-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-Black.ttf"; path = "../assets/fonts/AlegreyaSans-Black.ttf"; sourceTree = "<group>"; };
 		CC6AA0741F82FB570041A2C9 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		D6CF6AEFA0374F33973E59D0 /* AlegreyaSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-Italic.ttf"; path = "../assets/fonts/AlegreyaSans-Italic.ttf"; sourceTree = "<group>"; };
+		DE634F3F6C994CD08E3764F1 /* AlegreyaSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-Light.ttf"; path = "../assets/fonts/AlegreyaSans-Light.ttf"; sourceTree = "<group>"; };
+		E0F535A3C2FC425C95D71939 /* AlegreyaSans-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AlegreyaSans-BlackItalic.ttf"; path = "../assets/fonts/AlegreyaSans-BlackItalic.ttf"; sourceTree = "<group>"; };
 		E374AE2FE9D8433D80A163BC /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		C9DE33343F3D4811BE63A069 /* AlegreyaSans-Black.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-Black.ttf"; path = "../assets/fonts/AlegreyaSans-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E0F535A3C2FC425C95D71939 /* AlegreyaSans-BlackItalic.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-BlackItalic.ttf"; path = "../assets/fonts/AlegreyaSans-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7075F8050A78441AA4EB7EA7 /* AlegreyaSans-Bold.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-Bold.ttf"; path = "../assets/fonts/AlegreyaSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9B7C835BA3E4482BB15DEB3C /* AlegreyaSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-BoldItalic.ttf"; path = "../assets/fonts/AlegreyaSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		68121ACDFAF44FB6AF6697D9 /* AlegreyaSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-ExtraBold.ttf"; path = "../assets/fonts/AlegreyaSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7381A75DDB184AF9BFB45F20 /* AlegreyaSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-ExtraBoldItalic.ttf"; path = "../assets/fonts/AlegreyaSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D6CF6AEFA0374F33973E59D0 /* AlegreyaSans-Italic.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-Italic.ttf"; path = "../assets/fonts/AlegreyaSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DE634F3F6C994CD08E3764F1 /* AlegreyaSans-Light.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-Light.ttf"; path = "../assets/fonts/AlegreyaSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5898D85BCEBA4F21B8DA2FC6 /* AlegreyaSans-LightItalic.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-LightItalic.ttf"; path = "../assets/fonts/AlegreyaSans-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9C5501003FAC466BAEC23C82 /* AlegreyaSans-Medium.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-Medium.ttf"; path = "../assets/fonts/AlegreyaSans-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4D0C6D0318FB453B9143F5DD /* AlegreyaSans-MediumItalic.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-MediumItalic.ttf"; path = "../assets/fonts/AlegreyaSans-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		80A93936A3D2483480AE868F /* AlegreyaSans-Regular.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-Regular.ttf"; path = "../assets/fonts/AlegreyaSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		09632B0BA64F4B479DFFC2C4 /* AlegreyaSans-Thin.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-Thin.ttf"; path = "../assets/fonts/AlegreyaSans-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		80CAFDEC870942179420B848 /* AlegreyaSans-ThinItalic.ttf */ = {isa = PBXFileReference; name = "AlegreyaSans-ThinItalic.ttf"; path = "../assets/fonts/AlegreyaSans-ThinItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5927DB9BFF8C4A738FDEEE94 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; name = "Lobster-Regular.ttf"; path = "../assets/fonts/Lobster-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -555,7 +554,6 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = solarNews_App;
@@ -1212,7 +1210,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				99DCBF97F5864D76BBA4E15F /* Entypo.ttf in Resources */,
 				0B76304E676F4267B6678ADE /* EvilIcons.ttf in Resources */,
 				FC7B5925A5664B9B9880C73A /* Feather.ttf in Resources */,
@@ -1340,18 +1337,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = solarNews_App;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1420,6 +1405,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 8655272TZX;
@@ -1444,6 +1430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8655272TZX;
 				HEADER_SEARCH_PATHS = (

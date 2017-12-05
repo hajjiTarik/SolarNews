@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux';
 import { isEmpty, values } from 'lodash';
 
 import ArchivedArticleItem from '../../components/ArchivedArticleItem';
-import appConstants from '../../../config/appConstants';
-import { setInCache, showCheckbox } from '../../../store/actions';
+import appConstants from '../../config/appConstants';
+import { setInCache, showCheckbox } from '../../store/actions';
 import { getFromStorage, removeDataFromStorage } from '../../utils/cacheManager';
 import SavedHeader from './components/SavedHeader';
 

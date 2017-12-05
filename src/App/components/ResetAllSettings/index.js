@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 import { removeDataFromStorage } from '../../utils/cacheManager';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setDefaultSettings } from '../../../store/actions';
+import { setDefaultSettings } from '../../store/actions';
 
 class ResetAllSettings extends Component {
 

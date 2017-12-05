@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { fetchApi, setType } from '../../../store/actions';
-import config from '../../../config/apiConfig';
+import { fetchApi, setType } from '../../store/actions';
+import config from '../../config/apiConfig';
 
 export class Type extends Component {
 

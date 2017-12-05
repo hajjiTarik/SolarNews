@@ -6,13 +6,12 @@ import { StyleSheet, ScrollView } from 'react-native';
 import Sites from './components/Sites';
 import FontSize from './components/FontSize';
 import NotificationAlarm from './components/NotificationAlarm';
-import DeleteAllSettings from './components/DeleteAllSettings';
 
-import { persist } from '../../../store/actions';
+import { persist } from '../../store/actions';
 
-import { setActiveSite, setNotificationDate, setFontSize, setDefaultSettings } from '../../../store/actions';
+import { setActiveSite, setNotificationDate, setFontSize, setDefaultSettings } from '../../store/actions';
 import { getFromStorage } from '../../utils/cacheManager';
-import constants  from '../../../config/appConstants';
+import constants  from '../../config/appConstants';
 
 class Settings extends Component {
 

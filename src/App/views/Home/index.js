@@ -5,7 +5,7 @@ import { ActivityIndicator, Button, FlatList, RefreshControl, StyleSheet, View }
 import LinearGradient from 'react-native-linear-gradient';
 
 import ArchivedArticleItem from './../../components/ArchivedArticleItem';
-import { fetchApi, setPage } from '../../../store/actions';
+import { fetchApi, setPage } from '../../store/actions';
 import ArticleCarousel from '../../components/ArticleCarousel';
 import InfoMessage from '../../components/InfoMessage';
 import ArticleItem from '../../components/ArticleItem';
