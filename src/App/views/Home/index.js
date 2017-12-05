@@ -26,40 +26,38 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchApi(this.props.activeSite, this.props.type, this.props.page);
-    this.props.setPage(this.props.page);
+    this.handleLoadMore();
   }
 
   handleLoadMore = () => {
-    this.props.setPage(this.props.page);
     this.props.fetchApi(this.props.activeSite, this.props.type, this.props.page);
+    this.props.setPage(this.props.page);
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.activeSite !== this.props.activeSite) {
       this._onRefresh();
-      this.setState({
-        messageType: 'WARN',
-        messageShow: true,
-        messageContent: 'Your Settings has changed please refresh'
-      });
     }
   }
 
   _onRefresh = () => {
     this.setState({
       refreshing: true
+    }, () => {
+      this.props.fetchApi(this.props.activeSite, this.props.type, 1, true).then(() => {
+        this.setState({ refreshing: false });
+      });
     });
-    this.props.fetchApi(this.props.activeSite, this.props.type, 1, true).then(() => {
-      this.setState({ refreshing: false });
-    });
-    setTimeout(()=>{
-      this.setState({ refreshing: false });
-    },1000);
   };
 
   onReadMore(item) {
     this.props.navigation.navigate('ArticleDetails', item);
+  }
+
+  renderArticleList (item) {
+      return this.props.typeOfArticle
+        ? <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
+        : <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
   }
 
   renderItems = () => {
@@ -69,17 +67,10 @@ class Home extends Component {
       </View>);
     }
 
-    console.log(this.state.refreshing);
     return (
       <FlatList
         data={this.props.result}
-        renderItem={({ item }) => {
-          if (this.props.typeOfArticle) {
-            return <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
-          } else {
-            return <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
-          }
-        }}
+        renderItem={({ item }) => this.renderArticleList(item)}
         onEndReached={this.handleLoadMore}
         onEndThreshold={0}
         keyExtractor={(item, index) => index}

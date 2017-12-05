@@ -12,6 +12,8 @@ import ArticleType from '../components/ArticleType';
 import OrderType from '../components/OrderType';
 import AddToFav from '../components/AddToFav';
 import Header from '../components/Header';
+import ResetAllSettings from '../components/ResetAllSettings';
+import constants from '../../config/appConstants';
 
 export const HomeStack = StackNavigator({
   Home: {
@@ -39,8 +41,9 @@ export const HomeStack = StackNavigator({
       title: 'Details',
       headerTintColor: '#fff',
       headerRight: <AddToFav params={navigation} />,
+
       headerStyle: {
-        backgroundColor: colors.clearColor,
+        backgroundColor: '#6d3cc6',
         borderBottomWidth: 0,
       },
 
@@ -84,8 +87,9 @@ export const SavedStack = StackNavigator({
       title: 'Details',
       headerTintColor: '#fff',
       headerRight: <AddToFav params={navigation} />,
+
       headerStyle: {
-        backgroundColor: colors.clearColor,
+        backgroundColor: '#6d3cc6',
         borderBottomWidth: 0,
       },
 
@@ -106,11 +110,16 @@ export const SavedStack = StackNavigator({
 export const SettingsStack = StackNavigator({
   Settings: {
     screen: Settings,
-    navigationOptions:{
+    navigationOptions: () => ({
       title: 'Settings',
       headerTintColor: '#fff',
+      headerRight: <ResetAllSettings keys={[
+          constants.FONT_SIZE,
+          constants.NOTIFICATION_DATE,
+          constants.SITES
+        ]} />,
       headerStyle: {
-        backgroundColor: colors.clearColor,
+        backgroundColor: '#6d3cc6',
         borderBottomWidth: 0,
       },
 
@@ -118,7 +127,7 @@ export const SettingsStack = StackNavigator({
         fontSize: 20,
         fontFamily: 'Lobster-Regular'
       },
-    },
+    }),
   },
 },{
   stackBarOptions: {

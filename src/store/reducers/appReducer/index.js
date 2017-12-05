@@ -13,7 +13,7 @@ export default (state = {
                   activeSite: 'behance',
                   notificationDate: new Date(),
                   fontSize: 14,
-                  showCarousel: true,
+                  showCarousel: false,
                   typeOfArticle: false
                 }, action) => {
   switch (action.type) {

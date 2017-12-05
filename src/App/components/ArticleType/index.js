@@ -40,10 +40,13 @@ const styles = StyleSheet.create({
   activeType: {
     color: '#fff',
     fontWeight: 'bold',
-    padding: 8,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 10,
+    paddingRight: 10,
     backgroundColor: '#421372',
     opacity: 0.8,
-    fontSize:12
+    fontSize: 12
   }
 });
 
@@ -53,13 +56,13 @@ const mapStateToProps = (state) => {
     activeSite: state.appReducer.activeSite,
     page: state.apiReducer.page
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setType: bindActionCreators(setType, dispatch),
     fetchApi: bindActionCreators(fetchApi, dispatch),
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Type);

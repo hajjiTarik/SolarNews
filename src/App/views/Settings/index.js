@@ -20,7 +20,7 @@ class Settings extends Component {
     super(props);
   }
 
-  async componentDidMount () {
+  async componentWillMount () {
     const fontSizeCached = await getFromStorage(constants.FONT_SIZE);
     const notificationDateCached = await getFromStorage(constants.NOTIFICATION_DATE);
     const sitesCached = await getFromStorage(constants.SITES);
@@ -48,10 +48,6 @@ class Settings extends Component {
           notificationDate={this.props.notificationDate}
           setNotificationDate={this.props.setNotificationDate}
           persist={this.props.persist}
-        />
-        <DeleteAllSettings
-          setDefaultSettings={this.props.setDefaultSettings}
-          keys={[constants.FONT_SIZE, constants.NOTIFICATION_DATE, constants.SITES]}
         />
       </ScrollView>
     )

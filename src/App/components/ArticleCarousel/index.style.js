@@ -8,11 +8,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 20,
   },
   carouselTopTitleContainer: {
-
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   slide: {
     width: width - 20,
@@ -21,10 +21,11 @@ export default StyleSheet.create({
     shadowOffset: { width: 2, height: 10 },
     shadowOpacity: 0.3,
     shadowRadius: 20,
-    elevation: 1
+    elevation: 1,
   },
   title: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    fontFamily: ''
   },
   paginationContainer: {
     paddingVertical: 8
@@ -34,20 +35,21 @@ export default StyleSheet.create({
     height: 8,
     borderRadius: 4,
     marginHorizontal: 1,
-    marginTop: 15
+    marginTop: 3
   },
   carouselTitle: {
     backgroundColor:'transparent',
     color: '#fff',
     fontWeight: 'bold',
     paddingLeft: 10,
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    fontFamily: 'AlegreyaSans-Medium'
   },
   badgeContainer: {
-    backgroundColor: '#000',
-    alignSelf: 'flex-end',
-    opacity: 0.4,
-    width: 70,
-    margin: 10
+    backgroundColor: '#421372',
+    alignSelf: 'flex-start',
+    width: 60,
+    margin: 6,
+    opacity: 0.8,
   }
 });

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import colors from '../../../design';
 
 import SubListArticle from '../SubListArticle';
 import { articleSelector } from '../../selectors';
+import styles from './index.style';
+
+const { width } = Dimensions.get('window');
 
 export default class extends Component {
 
@@ -50,8 +52,16 @@ export default class extends Component {
             <View style={{ width: this.props.checkboxVisibility ? width - 160 : width - 110 }}>
               <Text style={styles.descriptionTitle}>{title}</Text>
               <Text style={styles.authorName}>{source.authorName}</Text>
-              <Text style={styles.source}>{source.name}</Text>
-              <SubListArticle source={source}/>
+              <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginTop: 17
+              }}>
+
+                <SubListArticle source={source}/>
+                <Text style={styles.source}>{source.name}</Text>
+              </View>
             </View>
             <View style={styles.articleImage}>
               <Image
@@ -69,52 +79,3 @@ export default class extends Component {
 
   }
 }
-
-const { width } = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  articleContainer: {
-    backgroundColor: '#f8f9fa',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ecedee',
-    flexDirection: 'row',
-    flex: 1,
-  },
-  removeContainer: {
-    opacity: 1,
-    alignSelf: 'flex-start',
-    width: 50,
-  },
-  savedCheckBox: {
-    backgroundColor: 'transparent',
-    padding: 10
-  },
-  descriptionTitle: {
-    color: '#2c3137',
-    fontSize: 19,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    fontFamily: 'AlegreyaSans-Medium'
-  },
-  description: {
-    padding: 10,
-    flexDirection: 'row',
-    alignSelf: 'flex-end',
-    width: width - 50
-  },
-  source: {
-    color: colors.clearColor,
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginTop: 5,
-  },
-  articleImage: {
-    padding: 10,
-    alignSelf: 'flex-start'
-  },
-  authorName: {
-    fontStyle: 'italic',
-    fontSize: 11,
-    color: '#5e5e5e'
-  }
-});

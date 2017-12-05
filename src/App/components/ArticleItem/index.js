@@ -22,7 +22,7 @@ export default class ArticleItem extends Component {
         <TouchableOpacity onPress={this.props.onReadMore}>
           <Image
             resizeMode='cover'
-            style={{ height: 120 }}
+            style={{ height: 100 }}
             source={{ uri: image.normal }}
           />
           <View style={styles.description}>

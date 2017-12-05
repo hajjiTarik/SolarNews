@@ -6,9 +6,6 @@ import LinearGradient from 'react-native-linear-gradient';
 export default class extends Component {
   constructor (props) {
     super(props);
-    this.state = {
-      searchVisibility: true,
-    };
   }
 
   handleSearchVisibility = () => {
@@ -18,11 +15,15 @@ export default class extends Component {
   };
 
   renderSearchBlock = () => {
-    if (this.state.searchVisibility) return;
     return (
       <View>
         <SearchBar
-          DarkTheme
+          lightTheme
+          round
+          noIcon={true}
+          containerStyle = {{backgroundColor:'#8049df', borderTopWidth: 0}}
+          inputStyle= {{ backgroundColor: '#9B4CFD', fontSize: 13, color:'#fff'}}
+          placeholderTextColor='#fff'
           onChangeText={this.props.setSearchText}
           placeholder='Search...'/>
       </View>

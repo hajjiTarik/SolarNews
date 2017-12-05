@@ -23,18 +23,17 @@ const renderMessage = (type, message) => {
 };
 
 export default ({show, message, type}) => {
-    if(show) return null;
+    if(!show) return null;
 
     return renderMessage(type, message);
 }
 
 const styles = StyleSheet.create({
   mainContainer : {
-    marginBottom: 10,
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     flexDirection:'row',
-    padding: 10,
+    padding: 3,
   },
   errorMessage: {
     color: '#fff',

@@ -77,21 +77,24 @@ class ArticleCarousel extends Component {
   }
 
   render() {
-
     return (
       <View>
         <View style={styles.carouselTopTitleContainer}>
-          <Badge
-            value={this.props.toggle ? 'Hide' : 'Show'}
-            containerStyle={styles.badgeContainer}
-            textStyle={{ color: '#ffffff' }}
-            onPress={() => {
-              this.props.setToggleCarousel(this.props.toggle)
-            }}
-          />
-          <Text style={styles.carouselTitle}>
-            Top 5 Articles from {this.state.currentSite.name}
-          </Text>
+          <View>
+            <Text style={styles.carouselTitle}>
+              Top 5 Articles from {this.state.currentSite.name}
+            </Text>
+          </View>
+          <View>
+            <Badge
+              value={this.props.toggle ? 'Hide' : 'Show'}
+              containerStyle={styles.badgeContainer}
+              textStyle={{ color: '#ffffff', fontSize: 11, fontWeight:'bold', opacity:0.9 }}
+              onPress={() => {
+                this.props.setToggleCarousel(this.props.toggle)
+              }}
+            />
+          </View>
         </View>
         {this.renderCarousel()}
       </View>

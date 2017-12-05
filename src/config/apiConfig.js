@@ -10,12 +10,12 @@ export default {
       name: "Dribbble"
     },
     {
-      id: "behance",
-      name: "Behance"
-    },
-    {
       id: "hackerNews",
       name: "Hacker News"
+    },
+    {
+      id: "behance",
+      name: "Behance"
     },
     {
       id: "lobsters",
@@ -28,10 +28,6 @@ export default {
     {
       id: "echojs",
       name: "Echo JS"
-    },
-    {
-      id: "jobs",
-      name: "Job Board"
     },
     {
       id: "productHunt",

@@ -17,12 +17,18 @@ class OrderType extends Component {
     return (
       <View style={{padding:10}}>
         <TouchableOpacity onPress={this.props.changeArticleDisposition}>
-          <Icon name='clone' type='font-awesome' color='#fff' size={20}/>
+          <Icon name={this.props.typeOfArticle ? 'align-justify' : 'th-list'} type='font-awesome' color='#fff' size={20}/>
         </TouchableOpacity>
       </View>
     );
   }
 }
+
+const mapStateToProps = ({ appReducer }) => {
+  return {
+    typeOfArticle: appReducer.typeOfArticle
+  }
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -30,4 +36,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(null, mapDispatchToProps)(OrderType)
+export default connect(mapStateToProps, mapDispatchToProps)(OrderType)

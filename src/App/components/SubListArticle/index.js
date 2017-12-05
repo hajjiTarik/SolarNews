@@ -70,15 +70,15 @@ const styles = StyleSheet.create({
   listArticle: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 0,
     paddingTop: 10,
   },
   iconContainer: {
     flexDirection: 'row',
-    marginRight: 10
+    marginRight: 5
   },
   textListArticle: {
-    paddingLeft: 5,
+    paddingLeft: 1,
     fontSize: 11,
     alignItems: 'baseline',
     paddingTop: 4,
