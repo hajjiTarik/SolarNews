@@ -9,6 +9,7 @@ import { fetchApi, setPage } from '../../store/actions';
 import ArticleCarousel from '../../components/ArticleCarousel';
 import InfoMessage from '../../components/InfoMessage';
 import ArticleItem from '../../components/ArticleItem';
+import colors from '../../../design/index';
 
 class Home extends Component {
 
@@ -90,7 +91,7 @@ class Home extends Component {
   get gradient() {
     return (
       <LinearGradient
-        colors={['#6d3cc6', '#63a4cc']}
+        colors={[colors.mainColor, colors.lightMainColor]}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={styles.gradient}

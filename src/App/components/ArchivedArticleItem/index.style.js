@@ -14,7 +14,7 @@ export default StyleSheet.create({
   removeContainer: {
     opacity: 1,
     alignSelf: 'flex-start',
-    width: 50,
+    width: 40,
   },
   savedCheckBox: {
     backgroundColor: 'transparent',
@@ -34,7 +34,7 @@ export default StyleSheet.create({
     paddingRight: 10,
     flexDirection: 'row',
     alignSelf: 'flex-end',
-    width: width - 50
+    width: width - 40
   },
   source: {
     color: colors.iconColor,

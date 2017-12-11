@@ -43,13 +43,13 @@ export default class extends Component {
       image,
       source
     } = articleSelector(this.props.article);
-
+    const margeWidth = this.props.checkboxVisibility ? 150 : 160;
     return (
       <View style={styles.articleContainer}>
         {this.renderCheckboxBlock()}
         <TouchableOpacity onPress={this.props.onReadMore}>
           <View style={styles.description}>
-            <View style={{ width: this.props.checkboxVisibility ? width - 160 : width - 110 }}>
+            <View style={{ width: this.props.checkboxVisibility ? width - margeWidth : width - 110 }}>
               <Text style={styles.descriptionTitle}>{title}</Text>
               <Text style={styles.authorName}>{source.authorName}</Text>
               <View style={{

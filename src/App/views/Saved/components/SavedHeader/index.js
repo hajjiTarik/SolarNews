@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Icon, SearchBar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import colors from '../../../../../design/index';
+
+const { width } = Dimensions.get('window');
 
 export default class extends Component {
   constructor (props) {
@@ -33,7 +36,7 @@ export default class extends Component {
   get gradient() {
     return (
       <LinearGradient
-        colors={['#6d3cc6', '#9649ff']}
+        colors={[colors.mainColor, colors.light1MainColor]}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={styles.gradient}
@@ -46,13 +49,8 @@ export default class extends Component {
       <View>
         {this.gradient}
         <View style={styles.optionMenu}>
-          <TouchableOpacity onPress={this.handleSearchVisibility}>
-            <Icon style={styles.searchContainer} name="search" type='evilicon'
-                  size={35} color='#fff'/>
-          </TouchableOpacity>
-
           <TouchableOpacity onPress={this.props.handleCheckboxVisibility}>
-            <Text style={styles.selectArticle}>Select All</Text>
+            <Text style={styles.selectArticle}>Select</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={this.props.removeAllArticlesHandler} >
@@ -68,29 +66,26 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   optionMenu: {
-    padding: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
     backgroundColor: 'transparent',
     flexDirection: 'row',
   },
   removeAll: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    width: 70,
-    borderLeftWidth: 1,
-    borderLeftColor: '#fff',
+    width: 40,
     paddingLeft: 10
   },
   selectArticle: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    width: 80,
     color: '#fff',
     paddingTop: 6,
-    fontWeight: 'bold'
-  },
-  searchContainer: {
-    flexDirection: 'row', alignItems: 'flex-start',
-    width: 230
+    fontWeight: 'bold',
+    alignItems: 'flex-start',
+    width: width-60
   },
   gradient: {
     ...StyleSheet.absoluteFillObject
