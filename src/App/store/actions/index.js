@@ -121,11 +121,10 @@ export const setToggleCarousel = showCarousel => ({
   showCarousel
 });
 
-/**
- */
 export const changeArticleDisposition = () => ({
   type: CHANGE_ARTICLE_DISPOSITION,
 });
+
 
 /**
  * @param site
@@ -135,7 +134,13 @@ export const changeArticleDisposition = () => ({
  * @param action callback Action
  * @returns {function(*)}
  */
-export const fetchApi = (site, typeOfResult, pageNumber, render = false, action = false) => {
+export const fetchApi = (
+  site,
+  typeOfResult,
+  pageNumber,
+  render = false,
+  action = false
+) => {
   return (dispatch) => {
     if (render) {
       dispatch(setPage(1));
