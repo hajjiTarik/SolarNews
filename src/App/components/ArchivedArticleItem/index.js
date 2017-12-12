@@ -15,24 +15,22 @@ export default class extends Component {
     this.state = {
       checked: false
     };
-
-    this.removeFromCacheHandler = this.removeFromCacheHandler.bind(this);
   }
 
-  removeFromCacheHandler() {
-    this.setState(() => ({
-      checked: !this.state.checked
-    }));
-  }
 
-  renderCheckboxBlock = () => {
+  renderCheckboxBlock = (id) => {
     if (!this.props.checkboxVisibility) return;
 
     return (<View style={styles.removeContainer}>
       <CheckBox
         style={styles.savedCheckBox}
-        onPress={() => this.removeFromCacheHandler()}
-        checked={this.state.checked}
+        onPress={() => {
+          this.props.addToTMPList(id);
+          this.setState({
+            checked: !this.state.checked
+          })
+        }}
+        checked={this.props.isChecked()}
       />
     </View>);
   };
@@ -41,12 +39,13 @@ export default class extends Component {
     const {
       title,
       image,
-      source
+      source,
+      id
     } = articleSelector(this.props.article);
     const margeWidth = this.props.checkboxVisibility ? 150 : 160;
     return (
       <View style={styles.articleContainer}>
-        {this.renderCheckboxBlock()}
+        {this.renderCheckboxBlock(id)}
         <TouchableOpacity onPress={this.props.onReadMore}>
           <View style={styles.description}>
             <View style={{ width: this.props.checkboxVisibility ? width - margeWidth : width - 110 }}>

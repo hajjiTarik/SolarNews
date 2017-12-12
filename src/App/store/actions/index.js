@@ -13,7 +13,8 @@ import {
   SUCCESS_API,
   TRIGGER_PERSISTENCE,
   TOGGLE_CAROUSEL,
-  CHANGE_ARTICLE_DISPOSITION
+  CHANGE_ARTICLE_DISPOSITION,
+  ADD_TO_TMP_LIST
 } from '../constants';
 import request from '../../config/api';
 
@@ -123,6 +124,11 @@ export const setToggleCarousel = showCarousel => ({
 
 export const changeArticleDisposition = () => ({
   type: CHANGE_ARTICLE_DISPOSITION,
+});
+
+export const addToTMPList = id => ({
+  type: ADD_TO_TMP_LIST,
+  id
 });
 
 

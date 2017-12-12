@@ -5,7 +5,8 @@ import {
   SET_FONT_SIZE,
   SET_NOTIFICATION_DATE,
   TOGGLE_CAROUSEL,
-  CHANGE_ARTICLE_DISPOSITION
+  CHANGE_ARTICLE_DISPOSITION,
+  ADD_TO_TMP_LIST
 } from '../../constants';
 
 export default (state = {
@@ -14,7 +15,8 @@ export default (state = {
                   notificationDate: new Date(),
                   fontSize: 14,
                   showCarousel: false,
-                  typeOfArticle: false
+                  typeOfArticle: false,
+                  tmpArticle: []
                 }, action) => {
   switch (action.type) {
     case SET_CHECKBOX_VISIBILITY :
@@ -50,10 +52,14 @@ export default (state = {
         notificationDate: new Date()
       };
     case CHANGE_ARTICLE_DISPOSITION :
-      console.log(!state.typeOfArticle);
       return {
         ...state,
         typeOfArticle: !state.typeOfArticle
+      };
+    case ADD_TO_TMP_LIST :
+      return {
+        ...state,
+        tmpArticle: [...new Set([...state.tmpArticle, action.id].map(id => id))]
       };
     default :
       return state;

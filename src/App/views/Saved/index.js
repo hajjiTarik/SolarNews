@@ -53,13 +53,13 @@ class Saved extends Component {
         blockRefresh: true
       });
 
-      let filtredResult = result.filter((article) => {
+      let filterResult = result.filter((article) => {
         return article.title.toLowerCase().includes(text.toLowerCase());
       });
 
-      if (filtredResult.length) {
+      if (filterResult.length) {
         this.setState({
-          articles: filtredResult
+          articles: filterResult
         });
       }
     } else {
@@ -81,6 +81,14 @@ class Saved extends Component {
     })
   };
 
+  addToTMPList = (id) => {
+    console.log(id);
+  };
+
+  isChecked = (id) => {
+
+  };
+
   render() {
     const convertedData = values(this.state.articles).reverse();
     return (
@@ -98,6 +106,7 @@ class Saved extends Component {
               checkboxVisibility={this.state.checkboxVisibility}
               onReadMore={() => this.onReadMore(item)}
               article={item}
+              addToTMPList={this.addToTMPList}
             />
           }}
           refreshing={this.state.refreshing}
@@ -119,9 +128,9 @@ const mapStateToProps = ({ appContentReducer, appReducer }) => ({
   checkboxVisibility: appReducer.visible
 });
 
-const mapDispatchToProps = disptach => ({
-  setInCache: bindActionCreators(setInCache, disptach),
-  showCheckbox: bindActionCreators(showCheckbox, disptach)
+const mapDispatchToProps = dispatch => ({
+  setInCache: bindActionCreators(setInCache, dispatch),
+  showCheckbox: bindActionCreators(showCheckbox, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Saved);
