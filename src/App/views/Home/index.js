@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActivityIndicator, Button, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import isEmpty from 'lodash/isEmpty';
 
 import ArchivedArticleItem from './../../components/ArchivedArticleItem';
 import { fetchApi, setPage } from '../../store/actions';
@@ -10,6 +11,7 @@ import ArticleCarousel from '../../components/ArticleCarousel';
 import InfoMessage from '../../components/InfoMessage';
 import ArticleItem from '../../components/ArticleItem';
 import colors from '../../../design/index';
+import Error404 from '../../components/Error404';
 
 class Home extends Component {
 
@@ -62,10 +64,8 @@ class Home extends Component {
   }
 
   renderItems = () => {
-    if (!this.props.result || !this.props.result.length) {
-      return (<View>
-        <Button onPress={() => this._onRefresh()} title={"Refresh"}/>
-      </View>);
+    if (isEmpty(this.props.result)) {
+      return (<Error404 onRefresh={this._onRefresh} />);
     }
 
     return (
@@ -117,7 +117,7 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    backgroundColor: '#f8f9fa',
+    backgroundColor: colors.mainColor,
     flex: 1,
     padding: 0
   },
