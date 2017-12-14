@@ -44,6 +44,10 @@ export default class extends Component {
     );
   }
 
+  removeSelectedArticles () {
+    console.log(this.props);
+  }
+
   render () {
     return (
       <View>
@@ -51,6 +55,9 @@ export default class extends Component {
         <View style={styles.optionMenu}>
           <TouchableOpacity onPress={this.props.handleCheckboxVisibility}>
             <Text style={styles.selectArticle}>Select</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.removeSelectedArticles}>
+            <Text>Remove</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={this.props.removeAllArticlesHandler} >

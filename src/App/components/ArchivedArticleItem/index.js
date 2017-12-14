@@ -19,6 +19,7 @@ export default class extends Component {
 
 
   renderCheckboxBlock = (id) => {
+    const tmpArticle = this.props.tmpArticle || [];
     if (!this.props.checkboxVisibility) return;
 
     return (<View style={styles.removeContainer}>
@@ -26,11 +27,8 @@ export default class extends Component {
         style={styles.savedCheckBox}
         onPress={() => {
           this.props.addToTMPList(id);
-          this.setState({
-            checked: !this.state.checked
-          })
         }}
-        checked={this.props.isChecked()}
+        checked={tmpArticle.includes(id)}
       />
     </View>);
   };

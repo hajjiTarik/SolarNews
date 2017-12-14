@@ -6,7 +6,7 @@ import { isEmpty, values } from 'lodash';
 
 import ArchivedArticleItem from '../../components/ArchivedArticleItem';
 import appConstants from '../../config/appConstants';
-import { setInCache, showCheckbox } from '../../store/actions';
+import { setInCache, showCheckbox, addToTMPList } from '../../store/actions';
 import { getFromStorage, removeDataFromStorage } from '../../utils/cacheManager';
 import SavedHeader from './components/SavedHeader';
 
@@ -82,11 +82,7 @@ class Saved extends Component {
   };
 
   addToTMPList = (id) => {
-    console.log(id);
-  };
-
-  isChecked = (id) => {
-
+    this.props.addToTMPList(id);
   };
 
   render() {
@@ -98,6 +94,7 @@ class Saved extends Component {
           handleCheckboxVisibility={this.handleCheckboxVisibility}
           handleSearchVisibility={this.handleSearchVisibility}
           setSearchText={this.setSearchText}
+          tmpArticle={this.props.tmpArticle}
         />
         <FlatList
           data={convertedData}
@@ -107,6 +104,7 @@ class Saved extends Component {
               onReadMore={() => this.onReadMore(item)}
               article={item}
               addToTMPList={this.addToTMPList}
+              tmpArticle={this.props.tmpArticle}
             />
           }}
           refreshing={this.state.refreshing}
@@ -125,12 +123,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({ appContentReducer, appReducer }) => ({
   articlesFromLocalStore: appContentReducer.articles,
-  checkboxVisibility: appReducer.visible
+  checkboxVisibility: appReducer.visible,
+  tmpArticle: appReducer.tmpArticle
 });
 
 const mapDispatchToProps = dispatch => ({
   setInCache: bindActionCreators(setInCache, dispatch),
-  showCheckbox: bindActionCreators(showCheckbox, dispatch)
+  showCheckbox: bindActionCreators(showCheckbox, dispatch),
+  addToTMPList: bindActionCreators(addToTMPList, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Saved);
