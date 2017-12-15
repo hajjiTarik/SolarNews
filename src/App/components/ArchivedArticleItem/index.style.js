@@ -51,5 +51,11 @@ export default StyleSheet.create({
     fontStyle: 'italic',
     fontSize: 11,
     color: '#5e5e5e'
+  },
+  sourceContainer :{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 17
   }
 });

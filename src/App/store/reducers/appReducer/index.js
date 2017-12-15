@@ -57,10 +57,16 @@ export default (state = {
         typeOfArticle: !state.typeOfArticle
       };
     case ADD_TO_TMP_LIST :
-      return {
-        ...state,
-        tmpArticle: [...new Set([...state.tmpArticle, action.id].map(id => id))]
-      };
+      if(!state.tmpArticle.includes(action.id)){
+        return {
+          ...state,
+          tmpArticle: [...state.tmpArticle, action.id]
+        };
+      }else {
+        console.log(state.tmpArticle);
+        return null //state.tmpArticle.filter(id => id !== action.id)
+      }
+
     default :
       return state;
   }

@@ -49,13 +49,7 @@ export default class extends Component {
             <View style={{ width: this.props.checkboxVisibility ? width - margeWidth : width - 110 }}>
               <Text style={styles.descriptionTitle}>{title}</Text>
               <Text style={styles.authorName}>{source.authorName}</Text>
-              <View style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginTop: 17
-              }}>
-
+              <View style={styles.sourceContainer}>
                 <SubListArticle source={source}/>
                 <Text style={styles.source}>{source.name}</Text>
               </View>
@@ -73,6 +67,5 @@ export default class extends Component {
         </TouchableOpacity>
       </View>
     )
-
   }
 }

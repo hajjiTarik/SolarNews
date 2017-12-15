@@ -44,9 +44,9 @@ export default class extends Component {
     );
   }
 
-  removeSelectedArticles () {
+  removeSelectedArticles =  () => {
     console.log(this.props);
-  }
+  };
 
   render () {
     return (
