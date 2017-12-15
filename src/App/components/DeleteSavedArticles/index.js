@@ -13,9 +13,9 @@ export class DeleteSavedArticles extends Component {
     await this.getArticleFromCache();
   }
 
-  render (){
+  render() {
     return (
-      <TouchableOpacity onPress={this.removeAllArticles} >
+      <TouchableOpacity onPress={this.removeAllArticles}>
         <Icon style={styles.removeAll} name="trash" type='evilicon'
               size={35} color='#fff'/>
       </TouchableOpacity>

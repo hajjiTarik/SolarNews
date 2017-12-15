@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 
 import SubListArticle from '../SubListArticle';
@@ -16,7 +16,6 @@ export default class extends Component {
       checked: false
     };
   }
-
 
   renderCheckboxBlock = (id) => {
     const tmpArticle = this.props.tmpArticle || [];

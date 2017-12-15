@@ -1,4 +1,6 @@
 import {
+  ADD_TO_TMP_LIST,
+  CHANGE_ARTICLE_DISPOSITION,
   ERROR_API,
   REQUEST_API,
   RESET_ALL_SETTINGS,
@@ -11,10 +13,8 @@ import {
   SET_TOP_ARTICLE,
   SET_TYPE,
   SUCCESS_API,
-  TRIGGER_PERSISTENCE,
   TOGGLE_CAROUSEL,
-  CHANGE_ARTICLE_DISPOSITION,
-  ADD_TO_TMP_LIST
+  TRIGGER_PERSISTENCE
 } from '../constants';
 import request from '../../config/api';
 
@@ -148,6 +148,7 @@ export const fetchApi = (
   action = false
 ) => {
   return (dispatch) => {
+
     if (render) {
       dispatch(setPage(1));
     }

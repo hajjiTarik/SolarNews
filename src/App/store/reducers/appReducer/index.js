@@ -1,12 +1,12 @@
 import {
+  ADD_TO_TMP_LIST,
+  CHANGE_ARTICLE_DISPOSITION,
   RESET_ALL_SETTINGS,
   SET_ACTIVE_SITE,
   SET_CHECKBOX_VISIBILITY,
   SET_FONT_SIZE,
   SET_NOTIFICATION_DATE,
-  TOGGLE_CAROUSEL,
-  CHANGE_ARTICLE_DISPOSITION,
-  ADD_TO_TMP_LIST
+  TOGGLE_CAROUSEL
 } from '../../constants';
 
 export default (state = {
@@ -57,16 +57,12 @@ export default (state = {
         typeOfArticle: !state.typeOfArticle
       };
     case ADD_TO_TMP_LIST :
-      if(!state.tmpArticle.includes(action.id)){
-        return {
-          ...state,
-          tmpArticle: [...state.tmpArticle, action.id]
-        };
-      }else {
-        console.log(state.tmpArticle);
-        return null //state.tmpArticle.filter(id => id !== action.id)
-      }
-
+      return {
+        ...state,
+        tmpArticle: state.tmpArticle.includes(action.id)
+          ? [...state.tmpArticle.filter(id => id !== action.id)]
+          : [...state.tmpArticle, action.id]
+      };
     default :
       return state;
   }

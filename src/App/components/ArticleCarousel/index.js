@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { Text, View, Dimensions} from 'react-native';
+import { Dimensions, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Badge } from 'react-native-elements';
 
 import ArticleItem from '../ArticleItem/index';
 import { bindActionCreators } from 'redux';
-import { fetchApi, setTopArticle, setToggleCarousel} from '../../store/actions';
+import { fetchApi, setToggleCarousel, setTopArticle } from '../../store/actions';
 import config from '../../config/apiConfig';
 import styles from './index.style';
 
@@ -42,7 +42,7 @@ class ArticleCarousel extends Component {
   }
 
   renderCarousel() {
-    if(!this.props.toggle) return null;
+    if (!this.props.toggle) return null;
 
     const articles = this.props.topArticle.filter((item, index) => index < 5);
     return (
@@ -89,7 +89,7 @@ class ArticleCarousel extends Component {
             <Badge
               value={this.props.toggle ? 'Hide' : 'Show'}
               containerStyle={styles.badgeContainer}
-              textStyle={{ color: '#ffffff', fontSize: 11, fontWeight:'bold', opacity:0.9 }}
+              textStyle={{ color: '#ffffff', fontSize: 11, fontWeight: 'bold', opacity: 0.9 }}
               onPress={() => {
                 this.props.setToggleCarousel(this.props.toggle)
               }}

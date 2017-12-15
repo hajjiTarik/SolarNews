@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import colors from '../../../design';
 
 const { width } = Dimensions.get('window');
@@ -52,7 +52,7 @@ export default StyleSheet.create({
     fontSize: 11,
     color: '#5e5e5e'
   },
-  sourceContainer :{
+  sourceContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

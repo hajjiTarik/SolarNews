@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Icon, SearchBar } from 'react-native-elements';
+import { isEmpty, omit } from 'lodash';
 import LinearGradient from 'react-native-linear-gradient';
+import { getFromStorage } from '../../../../utils/cacheManager';
 import colors from '../../../../../design/index';
+import CONSTANTS from '../../../../config/appConstants';
 
 const { width } = Dimensions.get('window');
 
 export default class extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
@@ -24,8 +27,8 @@ export default class extends Component {
           lightTheme
           round
           noIcon={true}
-          containerStyle = {{backgroundColor:'#8049df', borderTopWidth: 0}}
-          inputStyle= {{ backgroundColor: '#9B4CFD', fontSize: 13, color:'#fff'}}
+          containerStyle={{ backgroundColor: '#8049df', borderTopWidth: 0 }}
+          inputStyle={{ backgroundColor: '#9B4CFD', fontSize: 13, color: '#fff' }}
           placeholderTextColor='#fff'
           onChangeText={this.props.setSearchText}
           placeholder='Search...'/>
@@ -44,11 +47,25 @@ export default class extends Component {
     );
   }
 
-  removeSelectedArticles =  () => {
-    console.log(this.props);
+  renderRemoveButton = () => {
+    console.log(this.props.tmpArticle);
+    if (isEmpty(this.props.tmpArticle)) return null;
+
+    return (
+      <TouchableOpacity onPress={this.removeSelectedArticles}>
+        <Text>Remove</Text>
+      </TouchableOpacity>
+    )
   };
 
-  render () {
+  removeSelectedArticles = async () => {
+    const cachedArticle = await getFromStorage(CONSTANTS.ARTICLE_STORAGE);
+    const newCachedArticle = omit(cachedArticle[CONSTANTS.ARTICLE_STORAGE], this.props.tmpArticle);
+
+    this.props.persist(CONSTANTS.ARTICLE_STORAGE, newCachedArticle);
+  };
+
+  render() {
     return (
       <View>
         {this.gradient}
@@ -56,11 +73,10 @@ export default class extends Component {
           <TouchableOpacity onPress={this.props.handleCheckboxVisibility}>
             <Text style={styles.selectArticle}>Select</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.removeSelectedArticles}>
-            <Text>Remove</Text>
-          </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.props.removeAllArticlesHandler} >
+          {this.renderRemoveButton()}
+
+          <TouchableOpacity onPress={this.props.removeAllArticlesHandler}>
             <Icon style={styles.removeAll} name="trash" type='evilicon'
                   size={35} color='#fff'/>
           </TouchableOpacity>
@@ -92,7 +108,7 @@ const styles = StyleSheet.create({
     paddingTop: 6,
     fontWeight: 'bold',
     alignItems: 'flex-start',
-    width: width-60
+    width: width - 60
   },
   gradient: {
     ...StyleSheet.absoluteFillObject

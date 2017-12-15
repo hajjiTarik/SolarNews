@@ -6,7 +6,7 @@ import { isEmpty, values } from 'lodash';
 
 import ArchivedArticleItem from '../../components/ArchivedArticleItem';
 import appConstants from '../../config/appConstants';
-import { setInCache, showCheckbox, addToTMPList } from '../../store/actions';
+import { addToTMPList, persist, setInCache, showCheckbox } from '../../store/actions';
 import { getFromStorage, removeDataFromStorage } from '../../utils/cacheManager';
 import SavedHeader from './components/SavedHeader';
 
@@ -46,7 +46,7 @@ class Saved extends Component {
   };
 
   setSearchText = text => {
-    let result = !isEmpty(this.state.articles) ? values(this.state.articles): [];
+    let result = !isEmpty(this.state.articles) ? values(this.state.articles) : [];
 
     if (text) {
       this.setState({
@@ -95,6 +95,7 @@ class Saved extends Component {
           handleSearchVisibility={this.handleSearchVisibility}
           setSearchText={this.setSearchText}
           tmpArticle={this.props.tmpArticle}
+          persist={this.props.persist}
         />
         <FlatList
           data={convertedData}
@@ -130,7 +131,8 @@ const mapStateToProps = ({ appContentReducer, appReducer }) => ({
 const mapDispatchToProps = dispatch => ({
   setInCache: bindActionCreators(setInCache, dispatch),
   showCheckbox: bindActionCreators(showCheckbox, dispatch),
-  addToTMPList: bindActionCreators(addToTMPList, dispatch)
+  addToTMPList: bindActionCreators(addToTMPList, dispatch),
+  persist: bindActionCreators(persist, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Saved);

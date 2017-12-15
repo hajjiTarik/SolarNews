@@ -57,15 +57,15 @@ class Home extends Component {
     this.props.navigation.navigate('ArticleDetails', item);
   }
 
-  renderArticleList (item) {
-      return this.props.typeOfArticle
-        ? <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
-        : <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
+  renderArticleList(item) {
+    return this.props.typeOfArticle
+      ? <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
+      : <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
   }
 
   renderItems = () => {
     if (isEmpty(this.props.result)) {
-      return (<Error404 onRefresh={this._onRefresh} />);
+      return (<Error404 onRefresh={this._onRefresh}/>);
     }
 
     return (

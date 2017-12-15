@@ -1,11 +1,4 @@
-import {
-  ERROR_API,
-  REQUEST_API,
-  SET_PAGE,
-  SET_TOP_ARTICLE,
-  SET_TYPE,
-  SUCCESS_API
-} from '../../constants';
+import { ERROR_API, REQUEST_API, SET_PAGE, SET_TOP_ARTICLE, SET_TYPE, SUCCESS_API } from '../../constants';
 
 export default (state = {
                   isFetching: false,
@@ -34,11 +27,9 @@ export default (state = {
         type: action.articleType
       };
     case SET_PAGE :
-      const current = ++action.page;
-
       return {
         ...state,
-        page: current
+        page: ++action.page
       };
     case SET_TOP_ARTICLE :
       return {

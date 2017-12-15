@@ -1,5 +1,5 @@
 export const articleSelector = state => {
-  if(!state) return false;
+  if (!state) return false;
 
   return {
     id: state._id,
@@ -10,7 +10,7 @@ export const articleSelector = state => {
 };
 
 export const sourceSelector = ({ source }) => {
-  if(!source) return false;
+  if (!source) return false;
 
   return {
     name: source.name,

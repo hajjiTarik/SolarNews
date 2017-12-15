@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { StyleSheet, Text, View } from 'react-native';
 import { removeDataFromStorage } from '../../utils/cacheManager';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,12 +7,12 @@ import { setDefaultSettings } from '../../store/actions';
 
 class ResetAllSettings extends Component {
 
-  constructor (props){
+  constructor(props) {
     super(props);
   }
 
   deleteAllSettingsHandler = () => {
-    if(!this.props.keys.length) return;
+    if (!this.props.keys.length) return;
 
     this.props.keys.map(async (key) => {
       await removeDataFromStorage(false, key);
@@ -22,7 +21,7 @@ class ResetAllSettings extends Component {
     this.props.setDefaultSettings();
   };
 
-  render () {
+  render() {
 
     return (
       <View>
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ appReducer })=> {
+const mapStateToProps = ({ appReducer }) => {
   return {
     activeSite: appReducer.activeSite,
     notificationDate: appReducer.notificationDate,

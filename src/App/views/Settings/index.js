@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { StyleSheet, ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import Sites from './components/Sites';
 import FontSize from './components/FontSize';
 import NotificationAlarm from './components/NotificationAlarm';
 
-import { persist } from '../../store/actions';
-
-import { setActiveSite, setNotificationDate, setFontSize, setDefaultSettings } from '../../store/actions';
+import { persist, setActiveSite, setDefaultSettings, setFontSize, setNotificationDate } from '../../store/actions';
 import { getFromStorage } from '../../utils/cacheManager';
-import constants  from '../../config/appConstants';
+import constants from '../../config/appConstants';
 
 class Settings extends Component {
 
@@ -19,12 +17,12 @@ class Settings extends Component {
     super(props);
   }
 
-  async componentWillMount () {
+  async componentWillMount() {
     const fontSizeCached = await getFromStorage(constants.FONT_SIZE);
     const notificationDateCached = await getFromStorage(constants.NOTIFICATION_DATE);
     const sitesCached = await getFromStorage(constants.SITES);
 
-    this.props.setActiveSite(sitesCached[constants.SITES] || this.props.activeSite);
+    this.props.setActiveSite(sitesCached[constants.SITES] || this.props.activeSite);
     this.props.setFontSize(fontSizeCached[constants.FONT_SIZE] || this.props.fontSize);
     this.props.setNotificationDate(notificationDateCached[constants.NOTIFICATION_DATE] || this.props.notificationDate);
   }
@@ -60,7 +58,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ appReducer })=> {
+const mapStateToProps = ({ appReducer }) => {
 
   return {
     activeSite: appReducer.activeSite,

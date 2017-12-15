@@ -1,9 +1,9 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 const renderMessage = (type, message) => {
-  switch (type){
+  switch (type) {
     case 'ERROR':
       return (<View style={[styles.mainContainer, styles.errorContainer]}>
         <Icon name='close-o' type='evilicon' size={32} color={'#fff'}/>
@@ -22,17 +22,17 @@ const renderMessage = (type, message) => {
   }
 };
 
-export default ({show, message, type}) => {
-    if(!show) return null;
+export default ({ show, message, type }) => {
+  if (!show) return null;
 
-    return renderMessage(type, message);
+  return renderMessage(type, message);
 }
 
 const styles = StyleSheet.create({
-  mainContainer : {
+  mainContainer: {
     flexWrap: 'wrap',
     alignItems: 'flex-start',
-    flexDirection:'row',
+    flexDirection: 'row',
     padding: 3,
   },
   errorMessage: {

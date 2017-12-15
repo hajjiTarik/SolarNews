@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { WebView,StyleSheet,Dimensions, ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View, WebView } from 'react-native';
 
 
 class ArticleDetails extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = { visible: true };
   }
@@ -18,21 +18,21 @@ class ArticleDetails extends Component {
     this.setState({ visible: false });
   }
 
-  render(){
+  render() {
     const {
       source
     } = this.props.navigation.state.params;
 
     return (
-        <View style={{backgroundColor: '#000', flex:1}}>
-          <WebView
-            source={{uri: source.targetUrl}}
-            onLoadStart={() => (this.showSpinner())}
-            onLoad={() => (this.hideSpinner())}
-          />
+      <View style={{ backgroundColor: '#000', flex: 1 }}>
+        <WebView
+          source={{ uri: source.targetUrl }}
+          onLoadStart={() => (this.showSpinner())}
+          onLoad={() => (this.hideSpinner())}
+        />
 
-          <ActivityIndicator style={styles.loader} animating={this.state.visible}/>
-        </View>
+        <ActivityIndicator style={styles.loader} animating={this.state.visible}/>
+      </View>
     )
   }
 }

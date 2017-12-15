@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native';
-import { isEqual, isEmpty } from 'lodash';
+import { isEmpty, isEqual } from 'lodash';
 
 /**
  * @param key
@@ -8,7 +8,7 @@ import { isEqual, isEmpty } from 'lodash';
  */
 export async function isInCache(key, data) {
   let savedData = JSON.parse(await AsyncStorage.getItem(key)) || {};
-  return isEqual({ [key] : data }, savedData);
+  return isEqual({ [key]: data }, savedData);
 }
 
 /**
@@ -21,7 +21,7 @@ export async function setInStorage(key, data) {
     let isItemSaved = await isInCache(key, data);
     if (isItemSaved) return;
 
-    let result = { [key] : data };
+    let result = { [key]: data };
     await AsyncStorage.setItem(key, JSON.stringify(result));
     return result;
 
@@ -37,12 +37,8 @@ export async function setInStorage(key, data) {
 export async function getFromStorage(key) {
   try {
     let savedData = await AsyncStorage.getItem(key);
-    if (!isEmpty(savedData)) {
-      savedData = JSON.parse(savedData);
-    } else {
-      savedData = {};
-    }
-    return savedData;
+
+    return !isEmpty(savedData) ? JSON.parse(savedData) : {};
 
   } catch (e) {
     console.log(e);

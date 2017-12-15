@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { CheckBox, Divider } from 'react-native-elements';
 
 import config from '../../../../config/apiConfig';
-import constants  from '../../../../config/appConstants';
+import constants from '../../../../config/appConstants';
 
 export default class extends Component {
 
-  constructor (props){
+  constructor(props) {
     super(props);
   }
 
@@ -34,8 +34,8 @@ export default class extends Component {
     return (
       <View>
         <Text style={styles.title}>Choose source site :</Text>
-        <Divider style={{ backgroundColor: '#dedede' }} />
-        <View style={{paddingLeft:10}}>
+        <Divider style={{ backgroundColor: '#dedede' }}/>
+        <View style={{ paddingLeft: 10 }}>
           {this.renderSitesList()}
         </View>
       </View>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     paddingTop: 10,
     paddingBottom: 10,
-    padding:0,
+    padding: 0,
   },
 
   title: {

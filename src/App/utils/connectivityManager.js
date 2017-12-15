@@ -1,7 +1,7 @@
 import { NetInfo } from 'react-native';
 
 
-export default initConnection =  () => {
+export default initConnection = () => {
 
   NetInfo.getConnectionInfo().then((connectionInfo) => {
     console.log('Initial, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);

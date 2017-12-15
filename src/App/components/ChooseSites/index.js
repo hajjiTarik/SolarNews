@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { CheckBox, Divider } from 'react-native-elements';
@@ -8,14 +8,14 @@ import { setActiveSite } from '../../store/actions';
 
 class ChooseSites extends Component {
 
-  constructor (){
+  constructor() {
     super();
   }
 
   renderSitesList = () => {
     const listSource = config.sites;
     return listSource.map((source, index) => {
-      return(<CheckBox
+      return (<CheckBox
         style={styles.sitesListCheckbox}
         center
         title={source.name}
@@ -34,8 +34,8 @@ class ChooseSites extends Component {
     return (
       <View>
         <Text style={styles.title}>Choose source site :</Text>
-        <Divider style={{ backgroundColor: '#dedede' }} />
-        <View style={{paddingLeft:10}}>
+        <Divider style={{ backgroundColor: '#dedede' }}/>
+        <View style={{ paddingLeft: 10 }}>
           {this.renderSitesList()}
         </View>
       </View>
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     paddingTop: 10,
     paddingBottom: 10,
-    padding:0,
+    padding: 0,
   },
 
   title: {

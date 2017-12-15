@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -15,9 +15,10 @@ class OrderType extends Component {
 
   render() {
     return (
-      <View style={{padding:10}}>
+      <View style={{ padding: 10 }}>
         <TouchableOpacity onPress={this.props.changeArticleDisposition}>
-          <Icon name={this.props.typeOfArticle ? 'align-justify' : 'th-list'} type='font-awesome' color='#fff' size={20}/>
+          <Icon name={this.props.typeOfArticle ? 'align-justify' : 'th-list'} type='font-awesome' color='#fff'
+                size={20}/>
         </TouchableOpacity>
       </View>
     );
