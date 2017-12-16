@@ -14,7 +14,8 @@ import {
   SET_TYPE,
   SUCCESS_API,
   TOGGLE_CAROUSEL,
-  TRIGGER_PERSISTENCE
+  TRIGGER_PERSISTENCE,
+  SET_TMP_LIST
 } from '../constants';
 import request from '../../config/api';
 
@@ -131,6 +132,10 @@ export const addToTMPList = id => ({
   id
 });
 
+export const setTmpArticleList = tmpArticleList => ({
+  type: SET_TMP_LIST,
+  tmpArticleList
+});
 
 /**
  * @param site

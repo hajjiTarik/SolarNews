@@ -48,12 +48,15 @@ export default class extends Component {
   }
 
   renderRemoveButton = () => {
-    console.log(this.props.tmpArticle);
-    if (isEmpty(this.props.tmpArticle)) return null;
+    if (isEmpty(this.props.tmpArticle)) {
+      return (<TouchableOpacity onPress={this.props.handleCheckboxVisibility}>
+        <Text style={styles.selectArticle}>Select</Text>
+      </TouchableOpacity>);
+    }
 
     return (
       <TouchableOpacity onPress={this.removeSelectedArticles}>
-        <Text>Remove</Text>
+        <Text style={styles.selectArticle}>Remove</Text>
       </TouchableOpacity>
     )
   };
@@ -63,6 +66,8 @@ export default class extends Component {
     const newCachedArticle = omit(cachedArticle[CONSTANTS.ARTICLE_STORAGE], this.props.tmpArticle);
 
     this.props.persist(CONSTANTS.ARTICLE_STORAGE, newCachedArticle);
+    this.props.setTmpArticleList([]);
+    await this.props.removeHandler();
   };
 
   render() {
@@ -70,15 +75,9 @@ export default class extends Component {
       <View>
         {this.gradient}
         <View style={styles.optionMenu}>
-          <TouchableOpacity onPress={this.props.handleCheckboxVisibility}>
-            <Text style={styles.selectArticle}>Select</Text>
-          </TouchableOpacity>
-
           {this.renderRemoveButton()}
-
           <TouchableOpacity onPress={this.props.removeAllArticlesHandler}>
-            <Icon style={styles.removeAll} name="trash" type='evilicon'
-                  size={35} color='#fff'/>
+            <Text style={styles.removeAllText}>Remove All</Text>
           </TouchableOpacity>
         </View>
         {this.renderSearchBlock()}
@@ -89,7 +88,6 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
   optionMenu: {
-    paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
@@ -97,10 +95,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   removeAll: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  removeAllIcon: {
     flexDirection: 'row',
     alignItems: 'flex-end',
     width: 40,
-    paddingLeft: 10
+    paddingLeft: 0
+  },
+  removeAllText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    paddingTop: 6,
+    fontFamily: 'AlegreyaSans-Medium',
+    fontSize: 15
   },
   selectArticle: {
     flexDirection: 'row',
@@ -108,7 +117,9 @@ const styles = StyleSheet.create({
     paddingTop: 6,
     fontWeight: 'bold',
     alignItems: 'flex-start',
-    width: width - 60
+    fontFamily: 'AlegreyaSans-Medium',
+    paddingRight: 15,
+    fontSize: 15
   },
   gradient: {
     ...StyleSheet.absoluteFillObject

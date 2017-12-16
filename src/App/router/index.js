@@ -71,6 +71,7 @@ export const SavedStack = StackNavigator({
         headerStyle: {
           backgroundColor: colors.mainColor,
           borderBottomWidth: 0,
+          height: 60,
         },
 
         headerTitleStyle: {
@@ -90,6 +91,7 @@ export const SavedStack = StackNavigator({
       headerStyle: {
         backgroundColor: colors.mainColor,
         borderBottomWidth: 0,
+        height: 60,
       },
 
       headerTitleStyle: {

@@ -6,7 +6,8 @@ import {
   SET_CHECKBOX_VISIBILITY,
   SET_FONT_SIZE,
   SET_NOTIFICATION_DATE,
-  TOGGLE_CAROUSEL
+  TOGGLE_CAROUSEL,
+  SET_TMP_LIST
 } from '../../constants';
 
 export default (state = {
@@ -63,6 +64,12 @@ export default (state = {
           ? [...state.tmpArticle.filter(id => id !== action.id)]
           : [...state.tmpArticle, action.id]
       };
+    case SET_TMP_LIST :
+      return {
+        ...state,
+        tmpArticle: action.tmpArticleList
+      };
+
     default :
       return state;
   }

@@ -6,7 +6,7 @@ import { isEmpty, values } from 'lodash';
 
 import ArchivedArticleItem from '../../components/ArchivedArticleItem';
 import appConstants from '../../config/appConstants';
-import { addToTMPList, persist, setInCache, showCheckbox } from '../../store/actions';
+import { addToTMPList, persist, setInCache, showCheckbox, setTmpArticleList } from '../../store/actions';
 import { getFromStorage, removeDataFromStorage } from '../../utils/cacheManager';
 import SavedHeader from './components/SavedHeader';
 
@@ -22,12 +22,15 @@ class Saved extends Component {
       blockRefresh: false,
       checkboxVisibility: false
     };
-
-    this.getArticleFromCache();
   }
 
   onReadMore(item) {
     this.props.navigation.navigate('ArticleDetails', item);
+  }
+
+  componentDidMount() {
+    this.getArticleFromCache();
+    this.triggerRefreshHandler();
   }
 
   getArticleFromCache = async () => {
@@ -37,6 +40,7 @@ class Saved extends Component {
         ? res[appConstants.ARTICLE_STORAGE]
         : {};
       this.props.setInCache(savedArticles);
+      console.log('savedArticles', savedArticles);
       this.setState({
         articles: savedArticles
       });
@@ -81,8 +85,14 @@ class Saved extends Component {
     })
   };
 
-  addToTMPList = (id) => {
-    this.props.addToTMPList(id);
+  triggerRefreshHandler = () => {
+    this.setState({
+      articles: this.props.articlesFromLocalStore
+    });
+  };
+
+  removeHandler = async () => {
+    await this.getArticleFromCache();
   };
 
   render() {
@@ -96,6 +106,8 @@ class Saved extends Component {
           setSearchText={this.setSearchText}
           tmpArticle={this.props.tmpArticle}
           persist={this.props.persist}
+          setTmpArticleList={this.props.setTmpArticleList}
+          removeHandler={this.removeHandler}
         />
         <FlatList
           data={convertedData}
@@ -104,7 +116,7 @@ class Saved extends Component {
               checkboxVisibility={this.state.checkboxVisibility}
               onReadMore={() => this.onReadMore(item)}
               article={item}
-              addToTMPList={this.addToTMPList}
+              addToTMPList={this.props.addToTMPList}
               tmpArticle={this.props.tmpArticle}
             />
           }}
@@ -117,7 +129,7 @@ class Saved extends Component {
 }
 const styles = StyleSheet.create({
   contentContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f9fa',
     flex: 1
   },
 });
@@ -132,7 +144,8 @@ const mapDispatchToProps = dispatch => ({
   setInCache: bindActionCreators(setInCache, dispatch),
   showCheckbox: bindActionCreators(showCheckbox, dispatch),
   addToTMPList: bindActionCreators(addToTMPList, dispatch),
-  persist: bindActionCreators(persist, dispatch)
+  persist: bindActionCreators(persist, dispatch),
+  setTmpArticleList: bindActionCreators(setTmpArticleList, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Saved);

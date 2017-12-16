@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { DatePickerIOS, StyleSheet, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
 import constants from '../../../../config/appConstants';
+import colors from '../../../../../design/index';
 
 export default class extends Component {
   constructor(props) {
@@ -14,13 +15,15 @@ export default class extends Component {
   };
 
   render() {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric' };
+
     return (
       <View style={styles.block}>
         <Text style={styles.title}>Remember me to read :</Text>
         <Divider style={{ backgroundColor: '#dedede' }}/>
         <View style={{ paddingLeft: 10, paddingRight: 10 }}>
           <Text style={{ fontWeight: 'bold', fontSize: 12, paddingTop: 10, paddingBottom: 10 }}>
-            Notification on : {this.props.notificationDate.toString()}
+            Notification on : <Text style={{color: colors.mainColor}}>{(new Date(this.props.notificationDate)).toLocaleDateString("en-US", options)}</Text>
           </Text>
           <DatePickerIOS
             date={new Date(this.props.notificationDate)}
