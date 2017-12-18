@@ -16,6 +16,8 @@ class Saved extends Component {
     super(props);
     this.onReadMore = this.onReadMore.bind(this);
     this.removeAllArticlesHandler = this.removeAllArticlesHandler.bind(this);
+    this.removeHandler = this.removeHandler.bind(this);
+    this.getArticleFromCache = this.getArticleFromCache.bind(this);
     this.state = {
       articles: this.props.articlesFromLocalStore,
       refreshing: false,
@@ -33,6 +35,10 @@ class Saved extends Component {
     this.triggerRefreshHandler();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+  }
+
   getArticleFromCache = async () => {
     try {
       const res = await getFromStorage(appConstants.ARTICLE_STORAGE);
@@ -40,10 +46,9 @@ class Saved extends Component {
         ? res[appConstants.ARTICLE_STORAGE]
         : {};
       this.props.setInCache(savedArticles);
-      console.log('savedArticles', savedArticles);
-      this.setState({
+      this.setState(() => ({
         articles: savedArticles
-      });
+      }));
     } catch (error) {
       alert(error);
     }
@@ -91,8 +96,10 @@ class Saved extends Component {
     });
   };
 
-  removeHandler = async () => {
-    await this.getArticleFromCache();
+  async removeHandler (){
+    this.setState(() => ({
+      articles: this.props.articlesFromLocalStore
+    }));
   };
 
   render() {

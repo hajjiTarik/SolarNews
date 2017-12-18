@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Icon, SearchBar } from 'react-native-elements';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SearchBar } from 'react-native-elements';
 import { isEmpty, omit } from 'lodash';
 import LinearGradient from 'react-native-linear-gradient';
 import { getFromStorage } from '../../../../utils/cacheManager';
 import colors from '../../../../../design/index';
 import CONSTANTS from '../../../../config/appConstants';
-
-const { width } = Dimensions.get('window');
 
 export default class extends Component {
   constructor(props) {
