@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { isEmpty, values } from 'lodash';
 
 import ArchivedArticleItem from '../../components/ArchivedArticleItem';
+import InfoMessage from '../../components/InfoMessage';
 import appConstants from '../../config/appConstants';
 import { addToTMPList, persist, setInCache, setTmpArticleList, showCheckbox } from '../../store/actions';
 import { getFromStorage, removeDataFromStorage } from '../../utils/cacheManager';
@@ -14,29 +15,28 @@ class Saved extends Component {
 
   constructor(props) {
     super(props);
-    this.onReadMore = this.onReadMore.bind(this);
-    this.removeAllArticlesHandler = this.removeAllArticlesHandler.bind(this);
-    this.removeHandler = this.removeHandler.bind(this);
-    this.getArticleFromCache = this.getArticleFromCache.bind(this);
+
     this.state = {
       articles: this.props.articlesFromLocalStore,
       refreshing: false,
       blockRefresh: false,
       checkboxVisibility: false
     };
+
+    this.onReadMore = this.onReadMore.bind(this);
+    this.removeAllArticlesHandler = this.removeAllArticlesHandler.bind(this);
+    this.removeHandler = this.removeHandler.bind(this);
+    this.getArticleFromCache = this.getArticleFromCache.bind(this);
   }
 
   onReadMore(item) {
     this.props.navigation.navigate('ArticleDetails', item);
   }
 
-  componentDidMount() {
-    this.getArticleFromCache();
-    this.triggerRefreshHandler();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+  async componentWillReceiveProps(nextProps) {
+    if (values(nextProps.articlesFromLocalStore).length !== values(this.props.articlesFromLocalStore).length) {
+      await this.getArticleFromCache();
+    }
   }
 
   getArticleFromCache = async () => {
@@ -55,26 +55,25 @@ class Saved extends Component {
   };
 
   setSearchText = text => {
-    let result = !isEmpty(this.state.articles) ? values(this.state.articles) : [];
-
-    if (text) {
-      this.setState({
-        blockRefresh: true
-      });
-
-      let filterResult = result.filter((article) => {
-        return article.title.toLowerCase().includes(text.toLowerCase());
-      });
-
-      if (filterResult.length) {
-        this.setState({
-          articles: filterResult
-        });
-      }
-    } else {
+    if (!text) {
       this.setState(() => ({
         articles: this.props.articlesFromLocalStore,
         blockRefresh: false
+      }));
+
+      return;
+    }
+
+    const articles = !isEmpty(this.state.articles) ? values(this.state.articles) : [];
+    const filterResult = articles.filter((article) => article.title.toLowerCase().includes(text.toLowerCase()));
+
+    this.setState({
+      blockRefresh: true
+    });
+
+    if (isEmpty(filterResult)) {
+      this.setState(() => ({
+        articles: filterResult
       }));
     }
   };
@@ -90,16 +89,9 @@ class Saved extends Component {
     })
   };
 
-  triggerRefreshHandler = () => {
-    this.setState({
-      articles: this.props.articlesFromLocalStore
-    });
-  };
 
   async removeHandler (){
-    this.setState(() => ({
-      articles: this.props.articlesFromLocalStore
-    }));
+    await this.getArticleFromCache();
   };
 
   render() {
@@ -116,6 +108,7 @@ class Saved extends Component {
           setTmpArticleList={this.props.setTmpArticleList}
           removeHandler={this.removeHandler}
         />
+        <InfoMessage show={true} message="Please Pull to Refresh the list"/>
         <FlatList
           data={convertedData}
           renderItem={({ item }) => {
@@ -125,6 +118,7 @@ class Saved extends Component {
               article={item}
               addToTMPList={this.props.addToTMPList}
               tmpArticle={this.props.tmpArticle}
+              fontSize={this.props.fontSize}
             />
           }}
           refreshing={this.state.refreshing}
@@ -144,7 +138,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = ({ appContentReducer, appReducer }) => ({
   articlesFromLocalStore: appContentReducer.articles,
   checkboxVisibility: appReducer.visible,
-  tmpArticle: appReducer.tmpArticle
+  tmpArticle: appReducer.tmpArticle,
+  fontSize: appReducer.fontSize
 });
 
 const mapDispatchToProps = dispatch => ({

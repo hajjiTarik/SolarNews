@@ -6,15 +6,17 @@ import {
   SET_CHECKBOX_VISIBILITY,
   SET_FONT_SIZE,
   SET_NOTIFICATION_DATE,
-  TOGGLE_CAROUSEL,
-  SET_TMP_LIST
+  SET_TMP_LIST,
+  TOGGLE_CAROUSEL
 } from '../../constants';
+
+import CONSTANTS from '../../../config/appConstants';
 
 export default (state = {
                   visible: false,
-                  activeSite: 'behance',
+                  activeSite: CONSTANTS.ACTIVE_SITE,
                   notificationDate: new Date(),
-                  fontSize: 14,
+                  fontSize: CONSTANTS.FONT_SIZE_VALUE,
                   showCarousel: false,
                   typeOfArticle: false,
                   tmpArticle: []
@@ -48,7 +50,7 @@ export default (state = {
     case RESET_ALL_SETTINGS :
       return {
         ...state,
-        activeSite: 'behance',
+        activeSite: state.activeSite,
         fontSize: 14,
         notificationDate: new Date()
       };

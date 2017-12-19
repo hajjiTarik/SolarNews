@@ -6,18 +6,18 @@ const renderMessage = (type, message) => {
   switch (type) {
     case 'ERROR':
       return (<View style={[styles.mainContainer, styles.errorContainer]}>
-        <Icon name='close-o' type='evilicon' size={32} color={'#fff'}/>
-        <Text style={styles.errorMessage}>{message}</Text>
+        <Icon name='close-o' type='evilicon' size={25} color={'#fff'}/>
+        <Text style={styles.message}>{message}</Text>
       </View>);
     case 'WARN':
       return (<View style={[styles.mainContainer, styles.warnContainer]}>
-        <Icon name='exclamation' type='evilicon' size={32} color={'#fff'}/>
-        <Text style={styles.errorMessage}>{message}</Text>
+        <Icon name='exclamation' type='evilicon' size={25} color={'#fff'}/>
+        <Text style={styles.message}>{message}</Text>
       </View>);
     default:
       return (<View style={[styles.mainContainer, styles.infoContainer]}>
-        <Icon name='comment' type='evilicon' size={32} color={'#fff'}/>
-        <Text style={styles.errorMessage}>{message}</Text>
+        <Icon name='comment' type='evilicon' size={25} color={'#fff'}/>
+        <Text style={styles.message}>{message}</Text>
       </View>);
   }
 };
@@ -33,11 +33,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     flexDirection: 'row',
-    padding: 3,
+    padding: 5,
   },
-  errorMessage: {
+  message: {
     color: '#fff',
-    marginTop: 5
+    marginTop: 5,
+    fontSize: 11,
   },
   errorContainer: {
     backgroundColor: '#ff431e',
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
   infoContainer: {
-    backgroundColor: '#000',
+    backgroundColor: '#6d3cc6',
     opacity: 0.5,
   },
 });

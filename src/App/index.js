@@ -22,11 +22,10 @@ class App extends Component {
     if (appState === 'background' && this.props.notificationDate) {
 
       let date = this.props.notificationDate;
-      PushNotification.setApplicationIconBadgeNumber(1);
       PushNotification.localNotificationSchedule({
-        message: "New Article ",
+        message: "Its time to read some Articles",
         date
-      })
+      });
     }
   };
 
@@ -42,7 +41,7 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ appReducer }) => ({
-  notificationDate: appReducer.notificationDate
+  notificationDate: appReducer.notificationDate,
 });
 
 

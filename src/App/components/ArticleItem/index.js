@@ -26,7 +26,7 @@ export default class ArticleItem extends Component {
             source={{ uri: image.normal }}
           />
           <View style={styles.description}>
-            <Text style={styles.descriptionTitle}>{title}</Text>
+            <Text style={[styles.descriptionTitle, {fontSize: this.props.fontSize}]}>{title}</Text>
             {!this.props.noInfo ? <SubListArticle source={source}/> : null}
           </View>
         </TouchableOpacity>

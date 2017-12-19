@@ -8,7 +8,6 @@ import isEmpty from 'lodash/isEmpty';
 import ArchivedArticleItem from './../../components/ArchivedArticleItem';
 import { fetchApi, setPage } from '../../store/actions';
 import ArticleCarousel from '../../components/ArticleCarousel';
-import InfoMessage from '../../components/InfoMessage';
 import ArticleItem from '../../components/ArticleItem';
 import colors from '../../../design/index';
 import Error404 from '../../components/Error404';
@@ -19,10 +18,6 @@ class Home extends Component {
     super(props);
     this.state = {
       refreshing: false,
-      messageType: 'INFO',
-      messageShow: false,
-      messageContent: 'toto',
-      border: false,
       typeOfArticle: false
     };
     this.onReadMore = this.onReadMore.bind(this);
@@ -59,13 +54,13 @@ class Home extends Component {
 
   renderArticleList(item) {
     return this.props.typeOfArticle
-      ? <ArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
-      : <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item}/>
+      ? <ArticleItem onReadMore={() => this.onReadMore(item)} article={item} fontSize={this.props.fontSize}/>
+      : <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item} fontSize={this.props.fontSize}/>
   }
 
   renderItems = () => {
     if (isEmpty(this.props.result)) {
-      return (<Error404 onRefresh={this._onRefresh}/>);
+      return <Error404 onRefresh={this._onRefresh}/>;
     }
 
     return (
@@ -103,7 +98,6 @@ class Home extends Component {
     return (
       <View scrollEnabled={false} style={styles.contentContainer}>
         { this.gradient }
-        <InfoMessage show={this.state.messageShow} message={this.state.messageContent} type={this.state.messageType}/>
         <ArticleCarousel />
         {this.renderItems()}
         <View style={styles.loader}>
@@ -148,7 +142,8 @@ const mapStateToProps = ({ apiReducer, appReducer }) => {
     type: apiReducer.type,
     page: apiReducer.page,
     activeSite: appReducer.activeSite,
-    typeOfArticle: appReducer.typeOfArticle
+    typeOfArticle: appReducer.typeOfArticle,
+    fontSize: appReducer.fontSize
   }
 };
 

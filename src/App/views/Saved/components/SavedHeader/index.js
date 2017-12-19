@@ -25,7 +25,7 @@ export default class extends Component {
           lightTheme
           round
           noIcon={true}
-          containerStyle={{ backgroundColor: '#8049df', borderTopWidth: 0 }}
+          containerStyle={{ backgroundColor: '#8049df', borderTopWidth: 0, borderBottomWidth: 0 }}
           inputStyle={{ backgroundColor: '#9B4CFD', fontSize: 13, color: '#fff' }}
           placeholderTextColor='#fff'
           onChangeText={this.props.setSearchText}

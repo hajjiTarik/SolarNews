@@ -44,9 +44,9 @@ export default class extends Component {
       <View style={styles.articleContainer}>
         {this.renderCheckboxBlock(id)}
         <TouchableOpacity onPress={this.props.onReadMore}>
-          <View style={styles.description}>
+          <View style={[styles.description, {...this.props.customStyle}]}>
             <View style={{ width: this.props.checkboxVisibility ? width - margeWidth : width - 110 }}>
-              <Text style={styles.descriptionTitle}>{title}</Text>
+              <Text style={[styles.descriptionTitle, {fontSize: this.props.fontSize}]}>{title}</Text>
               <Text style={styles.authorName}>{source.authorName}</Text>
               <View style={styles.sourceContainer}>
                 <SubListArticle source={source}/>
