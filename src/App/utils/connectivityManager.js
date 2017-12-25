@@ -1,6 +1,8 @@
 import { NetInfo } from 'react-native';
 
-
+/**
+ * initConnection
+ */
 export default initConnection = () => {
 
   NetInfo.getConnectionInfo().then((connectionInfo) => {
@@ -15,6 +17,9 @@ export default initConnection = () => {
   return NetInfo;
 }
 
+/**
+ * @param connectionInfo
+ */
 function handleFirstConnectivityChange(connectionInfo) {
   console.log('First change, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
   NetInfo.removeEventListener(
