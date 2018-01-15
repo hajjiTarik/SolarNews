@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 10,
     fontSize: 17,
-    color: '#fff',
     fontFamily: 'AlegreyaSans-Medium',
-    backgroundColor: '#9649ff'
+    color: '#303c4a',
+    backgroundColor: '#e6deff',
   }
 });

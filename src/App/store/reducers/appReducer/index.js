@@ -53,7 +53,7 @@ export default (state = {
       return {
         ...state,
         activeSite: state.activeSite,
-        fontSize: 14,
+        fontSize: state.fontSize,
         notificationDate: new Date()
       };
     case CHANGE_ARTICLE_DISPOSITION :

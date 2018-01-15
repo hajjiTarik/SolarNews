@@ -83,7 +83,7 @@ class Home extends Component {
     )
   };
 
-  get gradient() {
+  static get gradient() {
     return (
       <LinearGradient
         colors={[colors.mainColor, colors.lightMainColor]}

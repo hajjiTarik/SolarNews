@@ -38,9 +38,9 @@ export default class extends Component {
   render() {
     return (
       <View style={styles.block}>
-        <View>
+        <View style={styles.switchContainer}>
           <Text style={styles.title}>Remember me to read :</Text>
-          <Switch style={styles.switch} onValueChange={this.props.toggleAlarmAction}
+          <Switch style={styles.switchStyle} onValueChange={this.props.toggleAlarmAction}
                   value={this.props.toggleAlarm}/>
         </View>
         <Divider style={{ backgroundColor: '#dedede' }}/>
@@ -62,11 +62,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 10,
     fontSize: 17,
-    color: '#2c3137',
     fontFamily: 'AlegreyaSans-Medium',
     alignSelf: 'flex-start',
+    color: '#303c4a'
   },
-  switch: {
-    alignSelf: 'flex-start',
+  switchStyle: {
+    alignSelf: 'flex-end',
+    marginRight: 10,
+    marginBottom: 10,
+    marginTop: 0
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#e6deff',
   }
 });

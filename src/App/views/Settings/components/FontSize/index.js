@@ -34,7 +34,7 @@ export default class extends Component {
           <ArchivedArticleItem
             checkboxVisibility={false}
             fontSize={Math.floor(this.props.fontSize)}
-            customStyle={{ paddingRight: 10, paddingLeft: 0 }}
+            customStyle={{ paddingRight: 10, paddingLeft: 0, borderBottomWidth: 0 }}
             article={{
               title: 'This just a Fake Title',
               image: {
@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 10,
     fontSize: 17,
-    color: '#2c3137',
-    fontFamily: 'AlegreyaSans-Medium'
+    fontFamily: 'AlegreyaSans-Medium',
+    color: '#303c4a',
+    backgroundColor: '#e6deff',
   }
 });
