@@ -7,7 +7,8 @@ import {
   SET_FONT_SIZE,
   SET_NOTIFICATION_DATE,
   SET_TMP_LIST,
-  TOGGLE_CAROUSEL
+  TOGGLE_CAROUSEL,
+  TOGGLE_ALARM_VISIBILITY
 } from '../../constants';
 
 import CONSTANTS from '../../../config/appConstants';
@@ -19,7 +20,8 @@ export default (state = {
                   fontSize: CONSTANTS.FONT_SIZE_VALUE,
                   showCarousel: false,
                   typeOfArticle: false,
-                  tmpArticle: []
+                  tmpArticle: [],
+                  toggleAlarm: false
                 }, action) => {
   switch (action.type) {
     case SET_CHECKBOX_VISIBILITY :
@@ -71,7 +73,11 @@ export default (state = {
         ...state,
         tmpArticle: action.tmpArticleList
       };
-
+    case TOGGLE_ALARM_VISIBILITY :
+      return {
+        ...state,
+        toggleAlarm: !state.toggleAlarm
+      };
     default :
       return state;
   }

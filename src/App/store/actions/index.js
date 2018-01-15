@@ -15,7 +15,8 @@ import {
   SUCCESS_API,
   TOGGLE_CAROUSEL,
   TRIGGER_PERSISTENCE,
-  SET_TMP_LIST
+  SET_TMP_LIST,
+  TOGGLE_ALARM_VISIBILITY
 } from '../constants';
 import request from '../../config/api';
 
@@ -135,6 +136,10 @@ export const addToTMPList = id => ({
 export const setTmpArticleList = tmpArticleList => ({
   type: SET_TMP_LIST,
   tmpArticleList
+});
+
+export const toggleAlarmAction = () => ({
+  type: TOGGLE_ALARM_VISIBILITY
 });
 
 /**

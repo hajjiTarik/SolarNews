@@ -89,10 +89,9 @@ class Saved extends Component {
     })
   };
 
-
   async removeHandler (){
     await this.getArticleFromCache();
-    await this.getArticleFromCache();
+    await this.getArticleFromCache(); // @todo to be performed
   };
 
   render() {

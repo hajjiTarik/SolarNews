@@ -39,6 +39,7 @@ export default class extends Component {
       source,
       id
     } = articleSelector(this.props.article);
+
     const margeWidth = this.props.checkboxVisibility ? 150 : 160;
     return (
       <View style={styles.articleContainer}>

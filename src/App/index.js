@@ -19,8 +19,9 @@ class App extends Component {
   }
 
   _handleAppStateChange = (appState) => {
-    if (appState === 'background' && this.props.notificationDate) {
+    if(!this.props.toggleAlarm) return;
 
+    if (appState === 'background' && this.props.notificationDate && this.props.toggleAlarm) {
       let date = this.props.notificationDate;
       PushNotification.localNotificationSchedule({
         message: "Its time to read some Articles",
@@ -42,6 +43,7 @@ class App extends Component {
 
 const mapStateToProps = ({ appReducer }) => ({
   notificationDate: appReducer.notificationDate,
+  toggleAlarm: appReducer.toggleAlarm
 });
 
 

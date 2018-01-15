@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ScrollView, StyleSheet } from 'react-native';
-
 import Sites from './components/Sites';
 import FontSize from './components/FontSize';
 import NotificationAlarm from './components/NotificationAlarm';
-
-import { persist, setActiveSite, setDefaultSettings, setFontSize, setNotificationDate } from '../../store/actions';
+import {
+  persist,
+  setActiveSite,
+  setDefaultSettings,
+  setFontSize,
+  setNotificationDate,
+  toggleAlarmAction
+} from '../../store/actions';
 import { getFromStorage } from '../../utils/cacheManager';
 import constants from '../../config/appConstants';
 
@@ -28,7 +33,6 @@ class Settings extends Component {
   }
 
   render() {
-
     return (
       <ScrollView style={styles.sitesContainer}>
         <Sites
@@ -45,6 +49,8 @@ class Settings extends Component {
           notificationDate={this.props.notificationDate}
           setNotificationDate={this.props.setNotificationDate}
           persist={this.props.persist}
+          toggleAlarm={this.props.toggleAlarm}
+          toggleAlarmAction={this.props.toggleAlarmAction}
         />
       </ScrollView>
     )
@@ -63,7 +69,8 @@ const mapStateToProps = ({ appReducer }) => {
   return {
     activeSite: appReducer.activeSite,
     notificationDate: appReducer.notificationDate,
-    fontSize: appReducer.fontSize
+    fontSize: appReducer.fontSize,
+    toggleAlarm: appReducer.toggleAlarm
   }
 };
 
@@ -73,7 +80,8 @@ const mapDispatchToProps = dispatch => {
     setNotificationDate: bindActionCreators(setNotificationDate, dispatch),
     setFontSize: bindActionCreators(setFontSize, dispatch),
     persist: bindActionCreators(persist, dispatch),
-    setDefaultSettings: bindActionCreators(setDefaultSettings, dispatch)
+    setDefaultSettings: bindActionCreators(setDefaultSettings, dispatch),
+    toggleAlarmAction: bindActionCreators(toggleAlarmAction, dispatch)
   }
 };
 
