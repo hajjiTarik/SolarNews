@@ -1,12 +1,23 @@
 # SolarNews
-🐙 React-native news app for developper
+🐙 React-native news app
 
-:clock4: 🚀 
-### - ✅ Add WebView
-### - ✅ Add Navigator
-### - ✅ Page Saved
-### - ✅ Modify API
-### - ✅ Add Easy Loading
+## Installation
+
+### Step 1
+```
+npm install
+```
+
+### Step 2
+```
+react-native run-ios
+```
+
+## Licence
+MIT
+
+## Author
+Hajji Tarik.
 
 
 ## Support on Beerpay
