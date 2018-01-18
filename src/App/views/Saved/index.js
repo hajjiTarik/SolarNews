@@ -10,6 +10,8 @@ import appConstants from '../../config/appConstants';
 import { addToTMPList, persist, setInCache, setTmpArticleList, showCheckbox } from '../../store/actions';
 import { getFromStorage, removeDataFromStorage } from '../../utils/cacheManager';
 import SavedHeader from './components/SavedHeader';
+import AdvertisementBanner from '../../components/AdvertisementBanner';
+import AdConfig from '../../config/adsConfig';
 
 class Saved extends Component {
 
@@ -124,6 +126,7 @@ class Saved extends Component {
           refreshing={this.state.refreshing}
           onRefresh={this.getArticleFromCache}
         />
+        <AdvertisementBanner adUnitID={AdConfig.banner.savedAdID} />
       </View>
     )
   }

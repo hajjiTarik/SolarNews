@@ -8,10 +8,10 @@
  */
 
 #import "AppDelegate.h"
-
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTPushNotificationManager.h>
+@import GoogleMobileAds;
 
 @implementation AppDelegate
 
@@ -30,6 +30,7 @@
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
+  [GADMobileAds configureWithApplicationID:@"ca-app-pub-6147506808396069~9360645620"];
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;

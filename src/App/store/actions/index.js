@@ -176,7 +176,7 @@ export const fetchApi = (
         }
       })
       .catch(e => {
-        alert(e);
+        console.log(e);
       })
   }
 };

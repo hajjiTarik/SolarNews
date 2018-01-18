@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ appReducer }) => {
-
   return {
     activeSite: appReducer.activeSite,
     notificationDate: appReducer.notificationDate,

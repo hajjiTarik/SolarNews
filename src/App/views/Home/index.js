@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import isEmpty from 'lodash/isEmpty';
-
-import ArchivedArticleItem from './../../components/ArchivedArticleItem';
 import { fetchApi, setPage } from '../../store/actions';
 import ArticleCarousel from '../../components/ArticleCarousel';
-import ArticleItem from '../../components/ArticleItem';
 import colors from '../../../design/index';
 import Error404 from '../../components/Error404';
+import AdvertisementBanner from '../../components/AdvertisementBanner';
+import FullArticleItem from '../../components/FullArticleItem';
+import AdConfig from '../../config/adsConfig';
 
 class Home extends Component {
 
@@ -20,7 +20,6 @@ class Home extends Component {
       refreshing: false,
       typeOfArticle: false
     };
-    this.onReadMore = this.onReadMore.bind(this);
   }
 
   componentDidMount() {
@@ -48,25 +47,14 @@ class Home extends Component {
     });
   };
 
-  onReadMore(item) {
-    this.props.navigation.navigate('ArticleDetails', item);
-  }
-
-  renderArticleList(item) {
-    return this.props.typeOfArticle
-      ? <ArticleItem onReadMore={() => this.onReadMore(item)} article={item} fontSize={this.props.fontSize}/>
-      : <ArchivedArticleItem onReadMore={() => this.onReadMore(item)} article={item} fontSize={this.props.fontSize}/>
-  }
-
   renderItems = () => {
     if (isEmpty(this.props.result)) {
       return <Error404 onRefresh={this._onRefresh}/>;
     }
-
     return (
       <FlatList
         data={this.props.result}
-        renderItem={({ item }) => this.renderArticleList(item)}
+        renderItem={({ item }) => <FullArticleItem {...this.props} article={item}/>}
         onEndReached={this.handleLoadMore}
         onEndThreshold={0}
         keyExtractor={(item, index) => index}
@@ -78,9 +66,9 @@ class Home extends Component {
           titleColor="#fff"
         />
         }
-      >
-      </FlatList>
-    )
+      />
+    );
+
   };
 
   static get gradient() {
@@ -100,6 +88,7 @@ class Home extends Component {
         { this.gradient }
         <ArticleCarousel />
         {this.renderItems()}
+        <AdvertisementBanner adUnitID={AdConfig.banner.homeAdID}/>
         <View style={styles.loader}>
           <ActivityIndicator animating={this.props.isFetching}/>
         </View>

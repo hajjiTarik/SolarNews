@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ActivityIndicator, StyleSheet, View, WebView } from 'react-native';
+import AdvertisementBanner from '../../components/AdvertisementBanner';
+import AdConfig from '../../config/adsConfig';
 
 
 class ArticleDetails extends Component {
@@ -30,8 +32,8 @@ class ArticleDetails extends Component {
           onLoadStart={() => (this.showSpinner())}
           onLoad={() => (this.hideSpinner())}
         />
-
         <ActivityIndicator style={styles.loader} animating={this.state.visible}/>
+        <AdvertisementBanner adUnitID={AdConfig.banner.detailsAdID} hide={true} />
       </View>
     )
   }
