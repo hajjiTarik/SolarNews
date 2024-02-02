@@ -19,7 +19,7 @@
     "react-native-snap-carousel": "^3.4.0",
     "react-native-tab-view": "^0.0.70",
     "react-native-vector-icons": "^4.4.0",
-    "react-navigation": "^1.0.0-beta.13",
+    "react-navigation": "^5.0.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
